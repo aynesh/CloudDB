@@ -1,0 +1,13 @@
+.idea
+bin
+out/
+*.iml
+/*.jar
+MANIFEST.mf
+*.mf
+*.MF
+*.csv
+logs
+commit*
+data
+*.dat
