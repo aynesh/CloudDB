@@ -4,4 +4,6 @@
 
 - After the deadline, your role will be changing from **Master** to **Reporter**. You will be able to pull the code but pushing commits is no more allowed.
 - you can find the milestone description [here](https://drive.google.com/file/d/0B9lCDQ83k9SbQzh4S05GcXRCUEk/view)
+- You are free to edit `.gitignore` and `README.md` in anyway that suits your project.
+- `build.xml` must remain the same. 
 

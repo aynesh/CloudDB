@@ -2,7 +2,6 @@
 bin
 out/
 *.iml
-/*.jar
 MANIFEST.mf
 *.mf
 *.MF
