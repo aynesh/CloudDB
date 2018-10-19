@@ -3,10 +3,16 @@ package ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
+
 
 public class Application {
 
+	static Logger logger = Logger.getLogger(Application.class);
+	
 	public static void main(String[] args) throws IOException {
+		logger.info("Hello World");     
 		BufferedReader cons = new BufferedReader(new
 		InputStreamReader(System.in));
 		boolean quit = false;
