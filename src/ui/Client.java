@@ -26,7 +26,7 @@ public class Client {
 			
 			byte[] recvBytes = new byte[131072];
 			in.read(recvBytes);
-			System.out.println("Server> ");
+			System.out.print("Server> ");
 			for(int i=0;recvBytes[i]!='\n';i++) {
 				System.out.print((char)recvBytes[i]);
 			}
@@ -70,14 +70,13 @@ public class Client {
 			
 			byte[] recvBytes = new byte[131072];
 			in.read(recvBytes);
-			System.out.println("Server> ");
+			System.out.print("Server> ");
 			for(int i=0;recvBytes[i]!='\n';i++) {
 				System.out.print((char)recvBytes[i]);
 			}
 			System.out.println();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		} 
 		}
 
@@ -90,10 +89,18 @@ public class Client {
 		
 	}
 	public void help() {
-		
+		System.out.println("Intended usage of available commands:");
+		System.out.println("connect <address> <port> - Tries to establish a TCP- connection to the server at <address> and <port>.");
+		System.out.println("disconnect - Tries to disconnect from server");
+		System.out.println("send <message> - Tries to send <message> to connected server");
+		System.out.println("logLevel <level> - Tries to set logger level to <level>");
+		System.out.println("quit - quits the echo client");
+		System.out.println("help - displays list of available commands");
 	}
+
 	public void invalidCommand() {
 		System.out.println("Unknown command.");
+		help();
 
 		
 	}
