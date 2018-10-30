@@ -10,3 +10,4 @@ logs
 commit*
 data
 *.dat
+.classpath
