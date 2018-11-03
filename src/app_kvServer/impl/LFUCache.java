@@ -1,108 +1,84 @@
 package app_kvServer.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+
 
 import app_kvServer.Cache;
 
 public class LFUCache implements Cache {
 	
-	   class CacheEntry
-	    {
-	        private HashMap<String,String> data;
-	        private int frequency;
+	//public class Pair {public String key; public Integer n;};
+	private HashMap<String,String> cacheItems;
+	private ArrayList<String> ordering;
+	private ArrayList<Integer> frequency;
+	int totalSize = 0;
+	
+	public LFUCache(int size) {
+		cacheItems = new HashMap<String,String>();
+		ordering = new ArrayList<String>();
+		frequency = new ArrayList<Integer>();
+		totalSize = size;
+	}
 
-	        // default constructor
-	        private CacheEntry()
-	        {}
+	@Override
+	public boolean contains(String key) {
+		if(cacheItems.containsKey(key)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public String get(String key) {
+		if(ordering.contains(key)) {
+			reorder(key);
+		}
+		return cacheItems.get(key);
+	}
 
-	        public HashMap<String,String> getData() {
-	            return data;
-	        }
-	        public void setData(HashMap<String,String> data) {
-	            this.data = data;
-	        }
-
-	        public int getFrequency() {
-	            return frequency;
-	        }
-	        public void setFrequency(int frequency) {
-	            this.frequency = frequency;
-	        }       
-
-	    }
-
-	    private static int initialCapacity = 10;
-
-	    private static LinkedHashMap<String, CacheEntry> cacheMap = new LinkedHashMap<String, CacheEntry>();
-
-	    public LFUCache(int initialCapacity)
-	    {
-	        this.initialCapacity = initialCapacity;
-	    }
-
-	    @Override
-	    public void add(String key, String value)
-	    {
-	    	HashMap<String,String> data = new HashMap<String,String>();
-	    	data.put(key, value);
-	        if(!isFull())
-	        {
-	            CacheEntry temp = new CacheEntry();
-	            temp.setData(data);
-	            temp.setFrequency(0);
-	            cacheMap.put(key, temp);
-	        }
-	        else
-	        {
-	            String entryKeyToBeRemoved = getLFUKey();
-	            cacheMap.remove(entryKeyToBeRemoved);
-
-	            CacheEntry temp = new CacheEntry();
-	            temp.setData(data);
-	            temp.setFrequency(0);
-
-	            cacheMap.put(key, temp);
-	        }
-	    }
-
-	    public String getLFUKey()
-	    {
-	        String key = "";
-	        int minFreq = Integer.MAX_VALUE;
-
-	        for(Map.Entry<String, CacheEntry> entry : cacheMap.entrySet())
-	        {
-	            if(minFreq > entry.getValue().frequency)
-	            {
-	                key = entry.getKey();
-	                minFreq = entry.getValue().frequency;
-	            }           
-	        }
-
-	        return key;
-	    }
-
-	    @Override
-	    public String get(String key)
-	    {
-	        if(cacheMap.containsKey(key))  // cache hit
-	        {
-	            CacheEntry temp = cacheMap.get(key);
-	            temp.frequency++;
-	            cacheMap.put(key, temp);
-	            return temp.data.get(key);
-	        }
-	        return null; // cache miss
-	    }
-
-	    public static boolean isFull()
-	    {
-	        if(cacheMap.size() == initialCapacity)
-	            return true;
-
-	        return false;
-	    }
+	@Override
+	public void add(String key, String value) {
+		cacheItems.put(key, value);
+		if(!ordering.contains(key)) {
+			if(totalSize == ordering.size()) {
+				cacheItems.remove(ordering.get(0));
+				ordering.remove(0);
+				frequency.remove(0);
+			}
+			ordering.add(0,key);
+			frequency.add(0,1);
+		}
+		else {
+			reorder(key);
+		}
+	}
+	
+	@Override
+	public void delete(String key) {
+		cacheItems.remove(key);
+		if(ordering.contains(key)) {
+			int index = ordering.indexOf(key);
+			ordering.remove(index);
+			frequency.remove(index);
+		}
+	}
+	
+	public void reorder(String key){
+		int index = ordering.indexOf(key);
+		int curr = frequency.get(index);
+		curr = curr+1;
+		
+		int newIndex = index + 1;
+		while(newIndex<frequency.size() && frequency.get(newIndex)<curr) {
+			newIndex++;
+		}
+		newIndex--;
+		
+		ordering.remove(index);
+		ordering.add(newIndex, key);
+		frequency.remove(index);
+		frequency.add(newIndex,curr);
+	}
 }

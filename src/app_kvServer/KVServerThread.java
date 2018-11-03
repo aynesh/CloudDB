@@ -16,7 +16,7 @@ public class KVServerThread extends Thread {
 	protected Socket socket;
 	
 	static Logger logger = Logger.getLogger(KVServerThread.class);
-
+	
     public KVServerThread(Socket clientSocket) {
     	
         this.socket = clientSocket;
@@ -47,6 +47,7 @@ public class KVServerThread extends Thread {
 					try {
 						DataManager.delete(inpMsg.getKey());
 						outMsg.setStatus(StatusType.DELETE_SUCCESS);
+						
 					} catch (Exception e) {
 			 
 						outMsg.setStatus(StatusType.DELETE_ERROR);
@@ -56,7 +57,9 @@ public class KVServerThread extends Thread {
 					
 				case GET:
 					try {
-						outMsg.setValue(DataManager.get(inpMsg.getKey()));
+						
+							outMsg.setValue(DataManager.get(inpMsg.getKey()));
+						
 						outMsg.setStatus(StatusType.GET_SUCCESS);
 					} catch (Exception e) {
 						outMsg.setStatus(StatusType.GET_ERROR);
@@ -66,6 +69,7 @@ public class KVServerThread extends Thread {
 				case PUT:
 					try {
 						outMsg.setStatus(DataManager.put(inpMsg.getKey(),inpMsg.getValue()));
+						outMsg.setValue(inpMsg.getValue());
 						
 					} catch (Exception e) {
 						outMsg.setStatus(StatusType.PUT_ERROR);
@@ -75,8 +79,8 @@ public class KVServerThread extends Thread {
 					break;
             	}
             	KVMessageManager.sendKVMessage(outMsg, out);
-                System.out.println(inpMsg.toString());
-            } catch (IOException | ClassNotFoundException e) {
+                //System.out.println(inpMsg.toString());
+            } catch (Exception e) {
                 
                 return;
             }

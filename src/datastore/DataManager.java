@@ -5,11 +5,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
+import app_kvServer.Cache;
 import common.messages.KVMessage.StatusType;
 
 public class DataManager {
+	
+	public static Cache cache;
+	
     public static StatusType put(String key, String value) throws Exception {
         String fileName = key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
@@ -22,16 +25,22 @@ public class DataManager {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 	        bufferedWriter.write(value);
 	        bufferedWriter.close();
-		    
+		    cache.add(key, value);
         return type;
     }
 
     public static String get(String key) throws Exception {
+    	if(cache.contains(key)) {
+    		System.out.println("cache hit");
+    		return cache.get(key);
+    	}
+    	
     	String fileName = key+".txt";
     	FileReader fileReader = new FileReader(fileName);
     	BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
     	bufferedReader.close();
+    	cache.add(key, value);
     	return value;
     }
     
@@ -42,6 +51,9 @@ public class DataManager {
         { 
             throw new Exception();
         } 
+    	if(cache.contains(key)) {
+    	cache.delete(key);
+    	}
     }
 
 }

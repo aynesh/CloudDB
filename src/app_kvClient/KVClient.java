@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
-import java.util.Arrays;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import client.KVStore;
 import common.messages.KVMessage;
@@ -16,6 +18,7 @@ public class KVClient {
 	 * This method lists all the possible available actions that can be performed by
 	 * a user
 	 */
+	static Logger logger = Logger.getLogger(KVClient.class);
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
 		System.out.println(
@@ -107,10 +110,13 @@ public class KVClient {
 					throw e;
 				} catch (IOException e) {
 					System.out.println("Failed to receive response.");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
 				}
+				catch (Exception e) {
+					System.out.println("GET Failed.");
+				}
+
 
 			}
 			else if (tokens[0].equals("put"))
@@ -134,15 +140,25 @@ public class KVClient {
 					throw e;
 				} catch (IOException e) {
 					System.out.println("Failed to receive response.");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} 
+				catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				}
+			    catch (Exception e) {
+			    	System.out.println("PUT Failed");
 				}
 
 			}
 			else if (tokens[0].equals("disconnect"))
 			{
-					 client.disconnect();
+					 try{
+						 client.disconnect();
+					 }
+					 
+						 catch (NullPointerException e) {
+								System.out.println("Connection not established.");
+							}
+					 
 				
 			}
 			else if (tokens[0].equals("help"))
@@ -156,7 +172,7 @@ public class KVClient {
 					help();
 				}
 				else {
-					client.setLevel(tokens[1]);
+					KVStore.setLevel(tokens[1]);
 					System.out.println("Changed log level.");
 				}
 			}
@@ -169,6 +185,5 @@ public class KVClient {
 		System.out.println("Client terminated.");
 
 	}
-
 
 }

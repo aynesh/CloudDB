@@ -1,16 +1,8 @@
 package client;
 
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -94,8 +86,9 @@ public class KVStore implements KVCommInterface {
 			
 			logger.info("Attempting to update: " + key+" : "+value);
 			KVMessageManager.sendKVMessage(msg,out);
-			return KVMessageManager.receiveKVMessage(in);
-
+			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
+			logger.info("Server response: " + recvdMsg.toString());
+			return recvdMsg;
 		}
     }
    
@@ -110,8 +103,9 @@ public class KVStore implements KVCommInterface {
 			
 			logger.info("Attempting to delete: " + key);
 			KVMessageManager.sendKVMessage(msg,out);
-			return KVMessageManager.receiveKVMessage(in);
-
+			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
+			logger.info("Server response: " + recvdMsg.toString());
+			return recvdMsg;
 		}
     }
 
@@ -126,20 +120,25 @@ public class KVStore implements KVCommInterface {
 			
 			logger.info("Attempting to retrieve: " + key);
 			KVMessageManager.sendKVMessage(msg,out);
-			return KVMessageManager.receiveKVMessage(in);
+			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
+			logger.info("Server response: " + recvdMsg.toString());
+			return recvdMsg;
 
 		}
     }
-    
+
 	/**
 	 * @param level This method sets the level of logging according to priority
 	 */
-	public void setLevel(String level) {
+	public static void setLevel(String level) {
 		Level prvLevel = logger.getLevel();
 
 		logger.setLevel(Level.toLevel(level));
 		logger.info("Changed log level from " + prvLevel + " to " + logger.getLevel());
 
 	}
+
+    
+	
 
 }

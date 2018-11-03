@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import datastore.DataManager;
+
 public class KVServer {
 
     /**
@@ -20,10 +22,11 @@ public class KVServer {
 	
 	
     public KVServer(int port, int cacheSize, String strategy) {
+    	
+    	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
+        
     	ServerSocket serverSocket = null;
         Socket socket = null;
-        
-        Cache cache = CacheManager.instantiateCache(strategy,cacheSize);
         
         try {
             serverSocket = new ServerSocket(port);

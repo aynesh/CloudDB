@@ -17,9 +17,6 @@ import org.apache.log4j.Logger;
 public class KVMessageManager {
 	
 	static Logger logger = Logger.getLogger(KVMessageManager.class);
-    
-	
-	
 	
     public static byte[] marshall(KVMessage msg) throws IOException {
     	ObjectOutput oout = null;
@@ -50,10 +47,8 @@ public class KVMessageManager {
 		try {
 			in.read(recvBytes);
 		} catch (UnsupportedEncodingException e) {
-			logger.error("Failed to decode message.");
 			throw e;
 		} catch (IOException e) {
-			logger.error("Failed to receive response.");
 			throw e;
 		}
 		return recvBytes;
@@ -64,7 +59,6 @@ public class KVMessageManager {
 			out.write(arr);
 			out.flush();
 		} catch (IOException e) {
-			logger.error("Failed to send message.");
 			throw e;
 		}
 	}
@@ -76,7 +70,6 @@ public class KVMessageManager {
 
 	public static KVMessage receiveKVMessage(InputStream in) throws IOException, ClassNotFoundException {
 		KVMessage msg = unmarshall(receive(in));
-		logger.info("Server response: " + msg.toString());
 		return msg;
 	}
 }
