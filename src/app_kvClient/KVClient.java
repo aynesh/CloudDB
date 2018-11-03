@@ -7,7 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
-import client.KVStore;;
+import client.KVStore;
+import common.messages.KVMessage;;
 
 public class KVClient {
 	/**
@@ -49,7 +50,7 @@ public class KVClient {
 		BufferedReader cons = new BufferedReader(new InputStreamReader(System.in));
 		boolean quit = false;
 
-		KVStore client; 
+		KVStore client = null; 
 
 		while (!quit)
 		{
@@ -59,6 +60,7 @@ public class KVClient {
 			if (tokens[0].equals("quit"))
 			{
 				quit = true;
+				
 			}
 			else if (tokens[0].equals("connect"))
 			{
@@ -75,6 +77,9 @@ public class KVClient {
 						System.out.println("Unknown host. Unable to establish connection.");
 					} catch (IOException e) {
 						System.out.println("Unable to establish connection.");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				
 				}
@@ -82,28 +87,22 @@ public class KVClient {
 			else if (tokens[0].equals("get"))
 			{
 				try{
-					String recd = new String(client.sendMessage(String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length))), "UTF-8").trim();
-					System.out.println("Server> " + recd);
+					KVMessage recd = client.get(tokens[1]);
+					System.out.println("Server> " + recd.getValue());
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
 					throw e;
 				} catch (IOException e) {
 					System.out.println("Failed to receive response.");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
 			}
 			else if (tokens[0].equals("disconnect"))
 			{
-				try {
-					boolean disconnect = client.disconnect();
-					if(disconnect) {
-						System.out.println("Diconnected from server.");
-					} else {
-						System.out.println("No open connection.");
-					}
-				} catch (IOException e) {
-					System.out.println("Diconnect failed.");
-				}
+					 client.disconnect();
 				
 			}
 			else if (tokens[0].equals("help"))
@@ -127,7 +126,6 @@ public class KVClient {
 			}
 		}
 
-		client.terminate();
 		System.out.println("Client terminated.");
 
 	}

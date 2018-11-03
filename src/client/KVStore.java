@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import common.messages.KVMessage;
@@ -113,6 +114,17 @@ public class KVStore implements KVCommInterface {
 		}
     }
     
+	/**
+	 * @param level This method sets the level of logging according to priority
+	 */
+	public void setLevel(String level) {
+		Level prvLevel = logger.getLevel();
+
+		logger.setLevel(Level.toLevel(level));
+		logger.info("Changed log level from " + prvLevel + " to " + logger.getLevel());
+
+	}
+
     
     public byte[] marshall(KVMessage msg) {
     	ObjectOutput oout = null;
