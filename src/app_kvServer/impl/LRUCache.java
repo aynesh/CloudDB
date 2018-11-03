@@ -1,43 +1,62 @@
 package app_kvServer.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+
 
 import app_kvServer.Cache;
 
 public class LRUCache implements Cache {
 	
-	private LinkedList<HashMap<String,String>> cacheItems;
+	private HashMap<String,String> cacheItems;
+	private ArrayList<String> ordering;
 	int totalSize = 0;
 	
-	LRUCache(int size) {
-		cacheItems = new LinkedList<HashMap<String,String>>();
+	public LRUCache(int size) {
+		cacheItems = new HashMap<String,String>();
+		ordering = new ArrayList<String>();
 		totalSize = size;
 	}
 
 	@Override
-	public String get(String key) {
-		for(HashMap<String,String> item: cacheItems) {
-			if( item.containsKey(key) ) {
-				HashMap<String,String> tempItem = item; //Its a hit !
-				cacheItems.remove(tempItem);
-				cacheItems.add(tempItem);
-				return tempItem.get(key);
-			}
+	public boolean contains(String key) {
+		if(cacheItems.containsKey(key)) {
+			return true;
 		}
-		return null;
+		return false;
+	}
+	
+	@Override
+	public String get(String key) {
+		if(ordering.contains(key)) {
+			ordering.remove(key);
+			ordering.add(key);
+		}
+		return cacheItems.get(key);
 	}
 
 	@Override
 	public void add(String key, String value) {
-		HashMap<String,String> item = new HashMap<String,String>();
-		item.put(key, value);
-		if(cacheItems.size() == totalSize) {
-			cacheItems.removeLast();
-			cacheItems.addFirst(item);
-		} else {
-			cacheItems.addFirst(item);
+		cacheItems.put(key, value);
+		if(!ordering.contains(key)) {
+			ordering.add(key);
+		}
+		else {
+			ordering.remove(key);
+			ordering.add(key);
+		}
+		if(totalSize < ordering.size()) {
+			cacheItems.remove(ordering.get(0));
+			ordering.remove(0);
 		}
 		
+	}
+	
+	@Override
+	public void delete(String key) {
+		cacheItems.remove(key);
+		if(ordering.contains(key)) {
+			ordering.remove(key);
+		}
 	}
 }

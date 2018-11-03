@@ -4,9 +4,6 @@ import app_kvServer.KVServer;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import java.io.IOException;
-
-
 public class AllTests {
 
     static {

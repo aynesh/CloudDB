@@ -1,5 +1,10 @@
 package app_kvServer;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import datastore.DataManager;
 
 public class KVServer {
 
@@ -14,7 +19,31 @@ public class KVServer {
      *                  currently not contained in the cache. Options are "FIFO", "LRU",
      *                  and "LFU".
      */
+	
+	
     public KVServer(int port, int cacheSize, String strategy) {
+    	
+    	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
+        
+    	ServerSocket serverSocket = null;
+        Socket socket = null;
+        
+        try {
+            serverSocket = new ServerSocket(port);
+        } catch (IOException e) {
+            e.printStackTrace();
 
+        }
+        while (true) {
+            try {
+                socket = serverSocket.accept();
+            } catch (IOException e) {
+                System.out.println("I/O error: " + e);
+            }
+            
+            new KVServerThread(socket).start();
+        }
     }
+    
+    
 }
