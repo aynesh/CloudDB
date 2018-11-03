@@ -8,7 +8,8 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 
 import client.KVStore;
-import common.messages.KVMessage;;
+import common.messages.KVMessage;
+import common.messages.KVMessage.StatusType;;
 
 public class KVClient {
 	/**
@@ -93,7 +94,14 @@ public class KVClient {
 				
 				try{
 					KVMessage recd = client.get(tokens[1]);
+					if(recd.getStatus()==StatusType.GET_SUCCESS) {
 					System.out.println("Server> " + recd.getValue());
+					}
+					else {
+						System.out.println("Server> Key not found");
+					}
+						
+					
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
 					throw e;

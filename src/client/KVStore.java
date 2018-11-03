@@ -106,7 +106,7 @@ public class KVStore implements KVCommInterface {
 			throw new IOException("No open connection to server.");
 		} else {
 
-			KVMessage msg = new KVMessageImpl(key,StatusType.PUT);
+			KVMessage msg = new KVMessageImpl(key,StatusType.DELETE);
 			
 			logger.info("Attempting to delete: " + key);
 			KVMessageManager.sendKVMessage(msg,out);
