@@ -13,6 +13,7 @@ public class LRUCache implements Cache {
 	int totalSize = 0;
 	
 	public LRUCache(int size) {
+
 		cacheItems = new HashMap<String,String>();
 		ordering = new ArrayList<String>();
 		totalSize = size;
