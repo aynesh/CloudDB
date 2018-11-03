@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;
+import common.messages.KVMessageManager;
 import common.messages.impl.KVMessageImpl;
 
 public class KVStore implements KVCommInterface {
@@ -31,7 +32,7 @@ public class KVStore implements KVCommInterface {
 	Socket sock;
 	InputStream in;
 	OutputStream out;
-	
+	KVMessageManager tool = new KVMessageManager();
     /**
      * Initialize KVStore with address and port of KVServer
      *
@@ -92,13 +93,15 @@ public class KVStore implements KVCommInterface {
 			KVMessage msg = new KVMessageImpl(key,value,StatusType.PUT);
 			
 			logger.info("Attempting to update: " + key+" : "+value);
-			send(marshall(msg));
-			return unmarshall(receive());
+			KVMessageManager.sendKVMessage(msg,out);
+			return KVMessageManager.receiveKVMessage(in);
 
 		}
     }
    
-    @Override
+   
+
+	@Override
     public KVMessage get(String key) throws Exception {
     	if (sock == null || sock.isClosed()) {
 			logger.warn("Attempting to connect via closed socket.");
@@ -108,8 +111,8 @@ public class KVStore implements KVCommInterface {
 			KVMessage msg = new KVMessageImpl(key,StatusType.GET);
 			
 			logger.info("Attempting to retrieve: " + key);
-			send(marshall(msg));
-			return unmarshall(receive());
+			KVMessageManager.sendKVMessage(msg,out);
+			return KVMessageManager.receiveKVMessage(in);
 
 		}
     }
@@ -123,66 +126,6 @@ public class KVStore implements KVCommInterface {
 		logger.setLevel(Level.toLevel(level));
 		logger.info("Changed log level from " + prvLevel + " to " + logger.getLevel());
 
-	}
-
-    
-    public byte[] marshall(KVMessage msg) {
-    	ObjectOutput oout = null;
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-		try {
-			oout = new ObjectOutputStream(bos);
-			oout.writeObject(msg);
-			out.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}   
-		
-		byte[] yourBytes = bos.toByteArray();
-		return yourBytes;
-    }
-    
-    public KVMessage unmarshall(byte[] arr) {
-    	ByteArrayInputStream bis = new ByteArrayInputStream(arr);
-    	ObjectInput in = null;
-    	try {
-    	  in = new ObjectInputStream(bis);
-    	  Object o = in.readObject(); 
-    	  return (KVMessage) o;
-    	} catch (IOException | ClassNotFoundException e) {
-			
-			e.printStackTrace();
-			return null;
-		} 
-    }
-
-	public byte[] receive() throws IOException {
-		byte[] recvBytes = new byte[131072];
-		try {
-			in.read(recvBytes);
-			String recd;
-
-			recd = new String(recvBytes, "UTF-8").trim();
-			logger.info("Server response: " + recd);
-		} catch (UnsupportedEncodingException e) {
-			logger.error("Failed to decode message.");
-			throw e;
-		} catch (IOException e) {
-			logger.error("Failed to receive response.");
-			throw e;
-		}
-		return recvBytes;
-	}
-	
-	public void send(byte[] arr) throws  IOException {
-		try {
-			out.write(arr);
-			out.flush();
-		} catch (IOException e) {
-			logger.error("Failed to send message.");
-			throw e;
-		}
 	}
 
 }

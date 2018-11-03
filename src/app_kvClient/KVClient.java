@@ -32,7 +32,6 @@ public class KVClient {
 	public static void invalidCommand() {
 		System.out.println("Unknown command.");
 		help();
-
 	}
 
 	/**
@@ -89,6 +88,22 @@ public class KVClient {
 				try{
 					KVMessage recd = client.get(tokens[1]);
 					System.out.println("Server> " + recd.getValue());
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			else if (tokens[0].equals("put"))
+			{
+				try{
+					KVMessage recd = client.put(tokens[1], tokens[2]);
+					System.out.println("Server> " + recd.getStatus());
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
 					throw e;
