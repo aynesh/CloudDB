@@ -37,7 +37,7 @@ public class KVServer {
             } catch (IOException e) {
                 System.out.println("I/O error: " + e);
             }
-            // new thread for a client
+            
             new KVServerThread(socket).start();
         }
     }

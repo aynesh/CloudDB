@@ -99,7 +99,21 @@ public class KVStore implements KVCommInterface {
 		}
     }
    
-   
+    
+    public KVMessage delete(String key) throws Exception {
+    	if (sock == null || sock.isClosed()) {
+			logger.warn("Attempting to connect via closed socket.");
+			throw new IOException("No open connection to server.");
+		} else {
+
+			KVMessage msg = new KVMessageImpl(key,StatusType.PUT);
+			
+			logger.info("Attempting to delete: " + key);
+			KVMessageManager.sendKVMessage(msg,out);
+			return KVMessageManager.receiveKVMessage(in);
+
+		}
+    }
 
 	@Override
     public KVMessage get(String key) throws Exception {

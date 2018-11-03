@@ -85,6 +85,12 @@ public class KVClient {
 			}
 			else if (tokens[0].equals("get"))
 			{
+				if(tokens.length<2) {
+					System.out.println("Incorrect usage of command.");
+					help();
+				}
+				
+				
 				try{
 					KVMessage recd = client.get(tokens[1]);
 					System.out.println("Server> " + recd.getValue());
@@ -101,8 +107,19 @@ public class KVClient {
 			}
 			else if (tokens[0].equals("put"))
 			{
+				if(tokens.length<2) {
+					System.out.println("Incorrect usage of command.");
+					help();
+				}
+				KVMessage recd;
 				try{
-					KVMessage recd = client.put(tokens[1], tokens[2]);
+					if(tokens.length<3) {
+						recd = client.delete(tokens[1]);
+					}
+					else {
+						recd = client.put(tokens[1], tokens[2]);
+					}
+					
 					System.out.println("Server> " + recd.getStatus());
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
