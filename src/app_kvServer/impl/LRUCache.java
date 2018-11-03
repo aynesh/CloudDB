@@ -10,7 +10,7 @@ public class LRUCache implements Cache {
 	private LinkedList<HashMap<String,String>> cacheItems;
 	int totalSize = 0;
 	
-	LRUCache(int size) {
+	public LRUCache(int size) {
 		cacheItems = new LinkedList<HashMap<String,String>>();
 		totalSize = size;
 	}

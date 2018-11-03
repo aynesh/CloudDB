@@ -10,7 +10,7 @@ public class FIFOCache implements Cache {
 	private LinkedList<HashMap<String,String>> cacheItems;
 	int totalSize = 0;
 	
-	FIFOCache(int size) {
+	public FIFOCache(int size) {
 		cacheItems = new LinkedList<HashMap<String,String>>();
 		totalSize = size;
 	}
