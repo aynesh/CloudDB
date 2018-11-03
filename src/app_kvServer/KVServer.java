@@ -22,6 +22,7 @@ public class KVServer {
     public KVServer(int port, int cacheSize, String strategy) {
     	ServerSocket serverSocket = null;
         Socket socket = null;
+        
         Cache cache = CacheManager.instantiateCache(strategy,cacheSize);
         
         try {
