@@ -43,7 +43,7 @@ public class CacheTest extends TestCase {
     	assertEquals(myCahche.get("three"), "iasnbdosiab");
     	myCahche.add("four", "ubwouqb23");
     	assertEquals(myCahche.get("four"), "ubwouqb23");
-    	assertNull(myCahche.get("three"));
+    	assertNull(myCahche.get("one"));
     }
 	
 }
