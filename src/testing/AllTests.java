@@ -5,10 +5,17 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class AllTests {
-
+	
     static {
         try {
-            new KVServer(50000, 10, "FIFO");
+        	Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                	new KVServer(50000, 10, "FIFO");
+                }
+            });
+        	thread.start();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
