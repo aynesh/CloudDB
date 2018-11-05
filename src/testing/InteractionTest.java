@@ -4,9 +4,12 @@ import client.KVStore;
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;
 import junit.framework.TestCase;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InteractionTest extends TestCase {
 
     private KVStore kvClient;
@@ -26,7 +29,7 @@ public class InteractionTest extends TestCase {
 
     @Test
     public void testPut() {
-        String key = "foo";
+        String key = Long.toString(System.currentTimeMillis());
         String value = "bar";
         KVMessage response = null;
         Exception ex = null;

@@ -81,9 +81,12 @@ public class KVStore implements KVCommInterface {
 			logger.warn("Attempting to connect via closed socket.");
 			throw new IOException("No open connection to server.");
 		} else {
-
-			KVMessage msg = new KVMessageImpl(key,value,StatusType.PUT);
-			
+			KVMessage msg;
+			if(value.equals("null")){
+				msg = new KVMessageImpl(key,StatusType.DELETE);
+			} else {
+				msg = new KVMessageImpl(key,value,StatusType.PUT);
+			}
 			logger.info("Attempting to update: " + key+" : "+value);
 			KVMessageManager.sendKVMessage(msg,out);
 			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
@@ -91,23 +94,7 @@ public class KVStore implements KVCommInterface {
 			return recvdMsg;
 		}
     }
-   
-    
-    public KVMessage delete(String key) throws Exception {
-    	if (sock == null || sock.isClosed()) {
-			logger.warn("Attempting to connect via closed socket.");
-			throw new IOException("No open connection to server.");
-		} else {
 
-			KVMessage msg = new KVMessageImpl(key,StatusType.DELETE);
-			
-			logger.info("Attempting to delete: " + key);
-			KVMessageManager.sendKVMessage(msg,out);
-			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
-			logger.info("Server response: " + recvdMsg.toString());
-			return recvdMsg;
-		}
-    }
 
 	@Override
     public KVMessage get(String key) throws Exception {

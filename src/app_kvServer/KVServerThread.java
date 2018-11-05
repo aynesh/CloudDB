@@ -41,7 +41,6 @@ public class KVServerThread extends Thread {
             	KVMessage inpMsg = KVMessageManager.receiveKVMessage(inp);
             	KVMessage outMsg = new KVMessageImpl(); 
             	outMsg.setKey(inpMsg.getKey());
-            	
             	switch(inpMsg.getStatus()) {
 				case DELETE:
 					try {
