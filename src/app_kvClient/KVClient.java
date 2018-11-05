@@ -128,7 +128,7 @@ public class KVClient {
 				KVMessage recd;
 				try{
 					if(tokens.length<3) {
-						recd = client.delete(tokens[1]);
+						recd = client.put(tokens[1],"null");
 					}
 					else {
 						recd = client.put(tokens[1], tokens[2]);

@@ -1,13 +1,15 @@
 package testing;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import app_kvServer.Cache;
 import app_kvServer.impl.FIFOCache;
 import app_kvServer.impl.LFUCache;
 import app_kvServer.impl.LRUCache;
 import junit.framework.TestCase;
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CacheTest extends TestCase {
 	@Test
     public void testFIFOCache() {

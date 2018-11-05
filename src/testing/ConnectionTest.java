@@ -5,7 +5,10 @@ import junit.framework.TestCase;
 
 import java.net.UnknownHostException;
 
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConnectionTest extends TestCase {
 
 

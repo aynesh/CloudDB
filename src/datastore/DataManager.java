@@ -6,12 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import org.apache.log4j.Logger;
+
 import app_kvServer.Cache;
 import common.messages.KVMessage.StatusType;
 
 public class DataManager {
 	
 	public static Cache cache;
+	
 	
     /**
      * @param key
@@ -42,7 +45,6 @@ public class DataManager {
      */
     public static String get(String key) throws Exception {
     	if(cache.contains(key)) {
-    		System.out.println("cache hit");
     		return cache.get(key);
     	}
     	
@@ -60,6 +62,7 @@ public class DataManager {
     	File file = new File(fileName);
     	if(!file.delete()) 
         { 
+    		System.out.println("Delete Exception ");
             throw new Exception();
         } 
     	if(cache.contains(key)) {
