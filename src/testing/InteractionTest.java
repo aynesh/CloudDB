@@ -36,7 +36,9 @@ public class InteractionTest extends TestCase {
         } catch (Exception e) {
             ex = e;
         }
-
+        System.out.println("testPut: ");
+        System.out.println("status: "+response.getStatus());
+        System.out.println(response.getStatus());
         assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
     }
 
@@ -92,7 +94,9 @@ public class InteractionTest extends TestCase {
         } catch (Exception e) {
             ex = e;
         }
-
+        System.out.println("testDelete test..");
+        System.out.println("response.getStatus()" + response.getStatus());
+        System.out.println(response.getStatus() == StatusType.DELETE_SUCCESS);
         assertTrue(ex == null && response.getStatus() == StatusType.DELETE_SUCCESS);
     }
 

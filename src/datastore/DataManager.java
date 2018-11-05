@@ -13,6 +13,12 @@ public class DataManager {
 	
 	public static Cache cache;
 	
+    /**
+     * @param key
+     * @param value
+     * @return
+     * @throws Exception
+     */
     public static StatusType put(String key, String value) throws Exception {
         String fileName = key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
@@ -29,6 +35,11 @@ public class DataManager {
         return type;
     }
 
+    /**
+     * @param key
+     * @return
+     * @throws Exception
+     */
     public static String get(String key) throws Exception {
     	if(cache.contains(key)) {
     		System.out.println("cache hit");

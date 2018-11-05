@@ -18,6 +18,11 @@ public class KVMessageManager {
 	
 	static Logger logger = Logger.getLogger(KVMessageManager.class);
 	
+    /**
+     * @param msg
+     * @return
+     * @throws IOException
+     */
     public static byte[] marshall(KVMessage msg) throws IOException {
     	ObjectOutput oout = null;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -32,6 +37,12 @@ public class KVMessageManager {
 		return yourBytes;
     }
     
+    /**
+     * @param arr
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static KVMessage unmarshall(byte[] arr) throws IOException, ClassNotFoundException {
     	ByteArrayInputStream bis = new ByteArrayInputStream(arr);
     	ObjectInput in = null;
@@ -42,6 +53,11 @@ public class KVMessageManager {
     	
     }
 
+	/**
+	 * @param in
+	 * @return
+	 * @throws IOException
+	 */
 	public static byte[] receive(InputStream in) throws IOException {
 		byte[] recvBytes = new byte[131072];
 		try {
@@ -54,6 +70,11 @@ public class KVMessageManager {
 		return recvBytes;
 	}
 	
+	/**
+	 * @param arr
+	 * @param out
+	 * @throws IOException
+	 */
 	public static void send(byte[] arr, OutputStream out) throws  IOException {
 		try {
 			out.write(arr);
@@ -63,11 +84,22 @@ public class KVMessageManager {
 		}
 	}
 
+	/**
+	 * @param msg
+	 * @param out
+	 * @throws IOException
+	 */
 	public static void sendKVMessage(KVMessage msg, OutputStream out) throws IOException {
 		send(marshall(msg),out);
 		
 	}
 
+	/**
+	 * @param in
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static KVMessage receiveKVMessage(InputStream in) throws IOException, ClassNotFoundException {
 		KVMessage msg = unmarshall(receive(in));
 		return msg;
