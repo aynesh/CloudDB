@@ -45,5 +45,10 @@ public class KVServer {
         }
     }
     
+	public static void main(String[] args) throws IOException
+	{
+		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]); 	
+	}
+    
     
 }
