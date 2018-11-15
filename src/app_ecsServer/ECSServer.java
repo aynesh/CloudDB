@@ -15,7 +15,7 @@ public class ECSServer {
 
 	        String host="aynesh@127.0.0.1";
 	        String user=host.substring(0, host.indexOf('@'));
-	        String privateKey="C:\\Users\\aynesh\\.ssh\\id_rsa";
+	        String privateKey="/home/aynesh/.ssh/id_rsa";
 	        host=host.substring(host.indexOf('@')+1);
 	        
 	        Session session=jsch.getSession(user, host, 22);
@@ -36,7 +36,7 @@ public class ECSServer {
 	        // username and password will be given via UserInfo interface.
 	        session.connect();
 
-	        String command="dir";
+	        String command="ls";
 
 	        Channel channel=session.openChannel("exec");
 	        ((ChannelExec)channel).setCommand(command);
