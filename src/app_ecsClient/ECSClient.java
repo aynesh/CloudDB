@@ -122,6 +122,36 @@ public class ECSClient {
 				}
 
 
+			} 
+			else if (tokens[0].equals("start"))
+			{
+				
+				
+				try{
+					KVAdminMessageImpl msg = new KVAdminMessageImpl();
+					msg.setCommand(KVAdminMessage.Command.START);
+					KVAdminMessage recd= client.sendMessage(msg);
+					if(recd.getCommand()==Command.START_SUCCESS) {
+						System.out.println("Server> Start Sent");
+					}
+					else {
+						System.out.println("Server> Error");
+					}
+						
+					
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				}
+				catch (Exception e) {
+					System.out.println("Error.");
+				}
+
+
 			}
 			else if (tokens[0].equals("disconnect"))
 			{

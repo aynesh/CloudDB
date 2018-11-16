@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,11 @@ import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+
+import app_ecsClient.ECSServerCommunicator;
+import common.messages.KVAdminMessage;
+import common.messages.KVAdminMessage.Command;
+import common.messages.impl.KVAdminMessageImpl;
 
 public class ECSServerLibrary {
 	
@@ -97,6 +103,29 @@ public class ECSServerLibrary {
 			e.printStackTrace();
 		}
 		return serverConfig;
+	}
+	
+	public static void sendStart() {
+		try {
+			ECSServerCommunicator client = null; 
+			client = new ECSServerCommunicator("127.0.0.1", 3000);
+			client.connect();
+			KVAdminMessageImpl msg = new KVAdminMessageImpl();
+			msg.setCommand(KVAdminMessage.Command.START);
+			KVAdminMessage recd= client.sendMessage(msg);
+			if(recd.getCommand()==Command.START_SUCCESS) {
+				System.out.println("Sent to KV Server");
+			}
+			
+			client.disconnect();
+		} catch (UnknownHostException e) {
+			System.out.println("Unknown host. Unable to establish connection.");
+		} catch (IOException e) {
+			System.out.println("Unable to establish connection.");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

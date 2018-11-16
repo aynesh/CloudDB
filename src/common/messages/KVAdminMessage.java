@@ -11,7 +11,8 @@ public interface KVAdminMessage {
         INIT_SERVICE,
         ADD_NODE,
         REMOVE_NODE,
-        INIT_SERVICE_SUCCESS
+        INIT_SERVICE_SUCCESS,
+        START_SUCCESS
     }
     
     public int getNumberOfNodes();

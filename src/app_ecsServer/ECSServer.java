@@ -60,7 +60,13 @@ public class ECSServer {
     						
     					}
     					break;
-    					
+    				case START:
+    					try {
+    						ECSServerLibrary.sendStart();
+    						outMsg.setCommand(Command.START_SUCCESS);
+    					} catch (Exception e) {
+    						
+    					}
     				default:
     					break;
                 	}

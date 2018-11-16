@@ -23,6 +23,8 @@ public class KVServer {
 	
     public KVServer(int port, int cacheSize, String strategy) {
     	
+		new KVServerAdminThread(3000).start();
+    	
     	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
         
     	ServerSocket serverSocket = null;
@@ -47,7 +49,7 @@ public class KVServer {
     
 	public static void main(String[] args) throws IOException
 	{
-		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]); 	
+		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]); 
 	}
     
     
