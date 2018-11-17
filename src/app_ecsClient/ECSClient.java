@@ -153,6 +153,67 @@ public class ECSClient {
 
 
 			}
+			else if (tokens[0].equals("stop"))
+			{
+				
+				
+				try{
+					KVAdminMessageImpl msg = new KVAdminMessageImpl();
+					msg.setCommand(KVAdminMessage.Command.STOP);
+					KVAdminMessage recd= client.sendMessage(msg);
+					if(recd.getCommand()==Command.STOP_SUCCESS) {
+						System.out.println("Server> Stop Sent");
+					}
+					else {
+						System.out.println("Server> Error");
+					}
+						
+					
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				}
+				catch (Exception e) {
+					System.out.println("Error.");
+				}
+
+
+			}
+			
+			else if (tokens[0].equals("shutdown"))
+			{
+				
+				
+				try{
+					KVAdminMessageImpl msg = new KVAdminMessageImpl();
+					msg.setCommand(KVAdminMessage.Command.SHUTDOWN);
+					KVAdminMessage recd= client.sendMessage(msg);
+					if(recd.getCommand()==Command.SHUTDOWN_SUCCESS) {
+						System.out.println("Server> Shutdown initiated");
+					}
+					else {
+						System.out.println("Server> Error");
+					}
+						
+					
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				}
+				catch (Exception e) {
+					System.out.println("Error.");
+				}
+
+
+			}
 			else if (tokens[0].equals("disconnect"))
 			{
 					 try{

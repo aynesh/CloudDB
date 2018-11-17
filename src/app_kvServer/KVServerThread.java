@@ -41,42 +41,47 @@ public class KVServerThread extends Thread {
             	KVMessage inpMsg = KVMessageManager.receiveKVMessage(inp);
             	KVMessage outMsg = new KVMessageImpl(); 
             	outMsg.setKey(inpMsg.getKey());
-            	switch(inpMsg.getStatus()) {
-				case DELETE:
-					try {
-						DataManager.delete(inpMsg.getKey());
-						outMsg.setStatus(StatusType.DELETE_SUCCESS);
-						
-					} catch (Exception e) {
-			 
-						outMsg.setStatus(StatusType.DELETE_ERROR);
-						
-					}
-					break;
-					
-				case GET:
-					try {
-						
-							outMsg.setValue(DataManager.get(inpMsg.getKey()));
-						
-						outMsg.setStatus(StatusType.GET_SUCCESS);
-					} catch (Exception e) {
-						outMsg.setStatus(StatusType.GET_ERROR);
-					}
-					break;
+            	if(!KVServer.serveClients ) {
+            		outMsg.setStatus(StatusType.SERVER_STOPPED);
+            	} else {
+                	switch(inpMsg.getStatus()) {
+    				case DELETE:
+    					try {
+    						DataManager.delete(inpMsg.getKey());
+    						outMsg.setStatus(StatusType.DELETE_SUCCESS);
+    						
+    					} catch (Exception e) {
+    			 
+    						outMsg.setStatus(StatusType.DELETE_ERROR);
+    						
+    					}
+    					break;
+    					
+    				case GET:
+    					try {
+    						
+    							outMsg.setValue(DataManager.get(inpMsg.getKey()));
+    						
+    						outMsg.setStatus(StatusType.GET_SUCCESS);
+    					} catch (Exception e) {
+    						outMsg.setStatus(StatusType.GET_ERROR);
+    					}
+    					break;
 
-				case PUT:
-					try {
-						outMsg.setStatus(DataManager.put(inpMsg.getKey(),inpMsg.getValue()));
-						outMsg.setValue(inpMsg.getValue());
-						
-					} catch (Exception e) {
-						outMsg.setStatus(StatusType.PUT_ERROR);
-					}
-					
-				default:
-					break;
+    				case PUT:
+    					try {
+    						outMsg.setStatus(DataManager.put(inpMsg.getKey(),inpMsg.getValue()));
+    						outMsg.setValue(inpMsg.getValue());
+    						
+    					} catch (Exception e) {
+    						outMsg.setStatus(StatusType.PUT_ERROR);
+    					}
+    					
+    				default:
+    					break;
+                	}
             	}
+
             	KVMessageManager.sendKVMessage(outMsg, out);
                 //System.out.println(inpMsg.toString());
             } catch (Exception e) {

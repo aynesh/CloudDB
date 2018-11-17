@@ -105,17 +105,13 @@ public class ECSServerLibrary {
 		return serverConfig;
 	}
 	
-	public static void sendStart() {
+	public static void sendMessage(KVAdminMessage msg,String ipAddress, int port) {
 		try {
 			ECSServerCommunicator client = null; 
-			client = new ECSServerCommunicator("127.0.0.1", 3000);
+			client = new ECSServerCommunicator(ipAddress, port);
 			client.connect();
-			KVAdminMessageImpl msg = new KVAdminMessageImpl();
-			msg.setCommand(KVAdminMessage.Command.START);
 			KVAdminMessage recd= client.sendMessage(msg);
-			if(recd.getCommand()==Command.START_SUCCESS) {
-				System.out.println("Sent to KV Server");
-			}
+			System.out.println("Status from KV Server: "+recd.getCommand());
 			
 			client.disconnect();
 		} catch (UnknownHostException e) {

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import app_kvServer.KVServer;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
 import common.messages.KVAdminMessageManager;
@@ -55,6 +56,15 @@ public class ECSServer {
                 	switch(inpMsg.getCommand()) {
     				case INIT_SERVICE:
     					try {
+    						new Thread(new Runnable() {
+    						     @Override
+    						     public void run() {
+    						    	 //Please configure SSH  keys for ur system and set the path in ECSServerLibaray for now
+    						    	 ECSServerLibrary.launchProcess("localhost", "50000");
+    						    	 // Else comment the above code and uncomment the below code.
+    						    	 //new KVServer(50000, 10, "LFU")
+    						     }
+    						}).start();
     						outMsg.setCommand(Command.INIT_SERVICE_SUCCESS);
     					} catch (Exception e) {
     						
@@ -62,11 +72,34 @@ public class ECSServer {
     					break;
     				case START:
     					try {
-    						ECSServerLibrary.sendStart();
+    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
+    						msg.setCommand(KVAdminMessage.Command.START);
+    						ECSServerLibrary.sendMessage(msg, "127.0.0.1", 3000);
     						outMsg.setCommand(Command.START_SUCCESS);
     					} catch (Exception e) {
     						
     					}
+    					break;
+       				case STOP:
+    					try {
+    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
+    						msg.setCommand(KVAdminMessage.Command.STOP);
+    						ECSServerLibrary.sendMessage(msg, "127.0.0.1", 3000);
+    						outMsg.setCommand(Command.STOP_SUCCESS);
+    					} catch (Exception e) {
+    						
+    					}
+    					break;
+       				case SHUTDOWN:
+    					try {
+    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
+    						msg.setCommand(KVAdminMessage.Command.SHUTDOWN);
+    						ECSServerLibrary.sendMessage(msg, "127.0.0.1", 3000);
+    						outMsg.setCommand(Command.SHUTDOWN_SUCCESS);
+    					} catch (Exception e) {
+    						
+    					}
+    					break;
     				default:
     					break;
                 	}

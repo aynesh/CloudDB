@@ -20,6 +20,7 @@ public class KVServer {
      *                  and "LFU".
      */
 	
+    public static volatile boolean serveClients=false;
 	
     public KVServer(int port, int cacheSize, String strategy) {
     	

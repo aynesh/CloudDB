@@ -101,7 +101,7 @@ public class KVClient {
 					System.out.println("Server> " + recd.getValue());
 					}
 					else {
-						System.out.println("Server> Key not found");
+						System.out.println("Server> Key not found ... "+StatusType.SERVER_STOPPED);
 					}
 						
 					

@@ -59,17 +59,40 @@ public class KVServerAdminThread extends Thread {
 					switch (inpMsg.getCommand()) {
 					case START:
 						try {
+							KVServer.serveClients = true;
 							outMsg.setCommand(Command.START_SUCCESS);
 						} catch (Exception e) {
 
 						}
+						System.out.println("Started Accepting commands");
+						break;
+					case STOP:
+						try {
+							KVServer.serveClients = false;
+							outMsg.setCommand(Command.STOP_SUCCESS);
+						} catch (Exception e) {
+
+						}
+						System.out.println("Stopped Accepting commands");
+						break;
+					case SHUTDOWN:
+						try {
+							KVServer.serveClients = false;
+							outMsg.setCommand(Command.SHUTDOWN_SUCCESS);
+						} catch (Exception e) {
+
+						}
+						System.out.println("Shutdown initiated !");
 						break;
 
 					default:
 						break;
 					}
 					KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
-					System.out.println("Started Accepting commands");
+					if(inpMsg.getCommand()==Command.SHUTDOWN) {
+						System.out.println("Shutdown In Progress !");
+						System.exit(0);
+					}
 				} catch (Exception e) {
 					break;
 				}
