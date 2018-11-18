@@ -23,13 +23,13 @@ public class ECSServerLibrary {
 	
 	
 	
-	public static void launchProcess(String ipAddress, String port) {
+	public static void launchProcess(String ipAddress, String userName, String location, String port, String adminPort, int cacheSize, String cacheStrategy) {
 	    try{
 	        JSch jsch=new JSch();  
 
-	        String host="aynesh@"+ipAddress;
+	        String host=userName+"@"+ipAddress;
 	        String user=host.substring(0, host.indexOf('@'));
-	        String privateKey="/home/aynesh/.ssh/id_rsa";
+	        String privateKey="/home/"+userName+"/.ssh/id_rsa";
 	        host=host.substring(host.indexOf('@')+1);
 	        
 	        Session session=jsch.getSession(user, host, 22);
@@ -39,7 +39,7 @@ public class ECSServerLibrary {
 	        session.setConfig(config);
 	        session.connect();
 
-	        String command="java -jar /home/aynesh/Desktop/Praktikum/gr6/ms2-server.jar "+port+" 3 LFU";
+	        String command="java -jar "+location+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy;
 
 	        Channel channel=session.openChannel("exec");
 	        ((ChannelExec)channel).setCommand(command);
@@ -90,7 +90,7 @@ public class ECSServerLibrary {
 		    String readLine = bufferedReader.readLine();
 		    while(readLine != null) {
 		    	String values[] = readLine.split(" ");
-		    	Node node = new Node(values[0], values[1], values[2]);
+		    	Node node = new Node(values[0], values[1],  values[2], values[3], values[4], values[5]);
 		    	serverConfig.put(values[0], node);
 		    	readLine = bufferedReader.readLine();
 		    }

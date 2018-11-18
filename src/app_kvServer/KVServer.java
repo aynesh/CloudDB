@@ -22,9 +22,9 @@ public class KVServer {
 	
     public static volatile boolean serveClients=false;
 	
-    public KVServer(int port, int cacheSize, String strategy) {
+    public KVServer(int port, int adminPort, int cacheSize, String strategy) {
     	
-		new KVServerAdminThread(3000).start();
+		new KVServerAdminThread(adminPort).start();
     	
     	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
         
@@ -50,7 +50,7 @@ public class KVServer {
     
 	public static void main(String[] args) throws IOException
 	{
-		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]); 
+		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]),  Integer.parseInt(args[2]), args[3]); 
 	}
     
     

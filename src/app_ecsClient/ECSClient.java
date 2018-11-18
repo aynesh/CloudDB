@@ -25,7 +25,7 @@ public class ECSClient {
 		System.out.println(
 				"connect <address> <port> - Tries to establish a TCP- connection to the ECS server at <address> and <port>.");
 		System.out.println("disconnect - Tries to disconnect from ECS server");
-		System.out.println("initService <number of nodes> - Initialize n number of servers");
+		System.out.println("initService <number of nodes> <Cache Size> <Cache Strategy> - Initialize n number of servers");
 		System.out.println("start - Start Receiving client calls");
 		System.out.println("stop - Stop receiving client calls");
 		System.out.println("shutdown - Shutdown all servers");
@@ -90,7 +90,7 @@ public class ECSClient {
 			}
 			else if (tokens[0].equals("initService"))
 			{
-				if(tokens.length<2) {
+				if(tokens.length<4) {
 					System.out.println("Incorrect usage of command.");
 					help();
 				}
@@ -100,6 +100,8 @@ public class ECSClient {
 					KVAdminMessageImpl msg = new KVAdminMessageImpl();
 					msg.setCommand(KVAdminMessage.Command.INIT_SERVICE);
 					msg.setNumberOfNodes(Integer.parseInt(tokens[1]));
+					msg.setCacheSize(Integer.parseInt(tokens[2]));
+					msg.setCacheType(tokens[3]);
 					KVAdminMessage recd= client.sendMessage(msg);
 					if(recd.getCommand()==Command.INIT_SERVICE_SUCCESS) {
 						System.out.println("Server> Initialized");

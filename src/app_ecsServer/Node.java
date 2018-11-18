@@ -11,6 +11,9 @@ public class Node {
 	private String ipAddress;
 	private String startRange;
 	private String endRange;
+	private String location;
+	private String adminPort;
+	private String userName;
 	public Node() {
 		
 	}
@@ -19,6 +22,15 @@ public class Node {
 		this.name = name;
 		this.port = port;
 		this.ipAddress = ipAddress;
+	}
+	public Node(String name, String userName, String ipAddress, String port, String adminPort, String location) {
+		super();
+		this.name = name;
+		this.port = port;
+		this.ipAddress = ipAddress;
+		this.location = location;
+		this.adminPort = adminPort;
+		this.userName = userName;
 	}
 	public String getEndRange() {
 		return endRange;
@@ -52,5 +64,23 @@ public class Node {
 	}
 	public void setStartRange(String startRange) {
 		this.startRange = startRange;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getAdminPort() {
+		return adminPort;
+	}
+	public void setAdminPort(String adminPort) {
+		this.adminPort = adminPort;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

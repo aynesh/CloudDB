@@ -12,6 +12,7 @@ public interface KVAdminMessage {
         ADD_NODE,
         REMOVE_NODE,
         INIT_SERVICE_SUCCESS,
+        INIT_SERVICE_FAIL,
         START_SUCCESS,
         STOP_SUCCESS,
         ADD_NODE_SUCCESS,

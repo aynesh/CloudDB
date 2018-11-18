@@ -7,17 +7,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
 
-import app_kvServer.KVServer;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
 import common.messages.KVAdminMessageManager;
 import common.messages.impl.KVAdminMessageImpl;
 
 public class ECSServer {
+	
+	public static void launchServers(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy) {
+		for (Map.Entry<String, Node> item : serverConfig.entrySet())
+		{
+		    //System.out.println(entry.getKey() + "/" + entry.getValue());
+			new Thread(new Runnable() {
+			     @Override
+			     public void run() {
+			    	 //Please configure SSH  keys for ur system and set the path in ECSServerLibaray for now
+			    	 Node node = item.getValue();
+			    	 ECSServerLibrary.launchProcess(node.getIpAddress(), node.getUserName(), node.getLocation(), node.getPort(), node.getAdminPort(), cacheSize, cacheStrategy );
+			    	 // Else comment the above code and uncomment the below code.
+			    	 //new KVServer(50000, 10, "LFU")
+			     }
+			}).start();
+			
+		}
+
+	}
 
 	
 	public static void main(String[] args) {
+		
+		final Map<String, Node> serverConfig = ECSServerLibrary.readConfigFile();
 
 	  	ServerSocket serverSocket = null;
         Socket socket = null;
@@ -56,15 +77,12 @@ public class ECSServer {
                 	switch(inpMsg.getCommand()) {
     				case INIT_SERVICE:
     					try {
-    						new Thread(new Runnable() {
-    						     @Override
-    						     public void run() {
-    						    	 //Please configure SSH  keys for ur system and set the path in ECSServerLibaray for now
-    						    	 ECSServerLibrary.launchProcess("localhost", "50000");
-    						    	 // Else comment the above code and uncomment the below code.
-    						    	 //new KVServer(50000, 10, "LFU")
-    						     }
-    						}).start();
+    						if(inpMsg.getNumberOfNodes() > serverConfig.size()) {
+    							outMsg.setCommand(Command.INIT_SERVICE_FAIL);
+    						} else {
+    							ECSServer.launchServers(serverConfig, inpMsg.getCacheSize(), inpMsg.getCacheType());
+    						}
+
     						outMsg.setCommand(Command.INIT_SERVICE_SUCCESS);
     					} catch (Exception e) {
     						
