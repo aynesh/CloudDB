@@ -34,6 +34,18 @@ public class HashRing {
 		}
 	}
 	
+	public void removeAll() {
+		map.clear();
+	}
+	
+	public void clearAndSetMetaData(Node[] metaData) {
+		map.clear();
+		for(Node node: metaData) {
+			BigInteger bi = new BigInteger(node.getEndRange(), 16);
+			map.put(bi, node);
+		}
+	}
+	
 	public Node getNode(String key) throws NoSuchAlgorithmException {
 		String keyHash = HashRing.getMD5Hash(key);
 		BigInteger bi = new BigInteger(keyHash, 16);
@@ -71,6 +83,12 @@ public class HashRing {
 			nodes[0].setStartRange(nodes[map.size()-1].getEndRange());
 		}
 		return nodes;
+	}
+	
+	public static void printMetaData(Node nodes[]) {
+		for(Node node:nodes) {
+			System.out.println(node.toString());
+		}
 	}
 	
 	public static String getMD5Hash(String input) throws NoSuchAlgorithmException {

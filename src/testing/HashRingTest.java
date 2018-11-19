@@ -44,6 +44,18 @@ public class HashRingTest extends TestCase {
 		hashRing1.addNode(node1);
 		System.out.println(hashRing1.getMetaData()[0].toString());
 	}
+	
+	@Test
+	public void testFIFOCache2() throws NoSuchAlgorithmException {
+		Node node1 = new Node("node2", "127.0.0.1", "50001");
+		HashRing hashRing = new HashRing();
+		hashRing.addNode(node1);
+		System.out.println("----------------");
+		System.out.println(hashRing.getNode("hello"));;
+		HashRing hashRing2 = new HashRing();
+		hashRing2.clearAndSetMetaData(hashRing.getMetaData());
+		System.out.println(hashRing2.getNode("hello"));;
+	}
 
 }
 	

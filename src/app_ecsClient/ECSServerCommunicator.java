@@ -42,9 +42,11 @@ public class ECSServerCommunicator {
 
 		} catch (UnknownHostException e) {
 			logger.error("Unknown host. Unable to establish connection.");
+			System.out.println(e);
 			throw e;
 		} catch (IOException e) {
-			logger.error("Unable to establish connection.");
+			System.out.println(e);
+			logger.error("Unable to establish connection. -> "+e.getMessage());
 			throw e;
 
 		}

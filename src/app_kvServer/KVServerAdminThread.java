@@ -16,11 +16,12 @@ import common.messages.impl.KVAdminMessageImpl;
 public class KVServerAdminThread extends Thread {
 	
 	private int port = 3000;
+	private String nodeName = "";
 
-	public KVServerAdminThread(int port) {
+	public KVServerAdminThread(int port, String nodeName) {
 		
 		this.port = port;
-
+		this.nodeName = nodeName;
 	}
 	
 	public void run() {
@@ -60,6 +61,7 @@ public class KVServerAdminThread extends Thread {
 					case START:
 						try {
 							KVServer.serveClients = true;
+							KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 							outMsg.setCommand(Command.START_SUCCESS);
 						} catch (Exception e) {
 

@@ -1,6 +1,11 @@
 package app_ecsServer;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
 		return "Node [name=" + name + ", port=" + port + ", ipAddress=" + ipAddress + ", startRange=" + startRange

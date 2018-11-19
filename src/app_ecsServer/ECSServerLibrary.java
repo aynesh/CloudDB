@@ -23,7 +23,7 @@ public class ECSServerLibrary {
 	
 	
 	
-	public static void launchProcess(String ipAddress, String userName, String location, String port, String adminPort, int cacheSize, String cacheStrategy) {
+	public static void launchProcess(String nodeIdentifier, String ipAddress, String userName, String location, String port, String adminPort, int cacheSize, String cacheStrategy) {
 	    try{
 	        JSch jsch=new JSch();  
 
@@ -39,8 +39,10 @@ public class ECSServerLibrary {
 	        session.setConfig(config);
 	        session.connect();
 
-	        String command="java -jar "+location+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy;
+	        String command="java -jar "+location+" "+nodeIdentifier+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy;
 
+	        System.out.println(command);
+	        
 	        Channel channel=session.openChannel("exec");
 	        ((ChannelExec)channel).setCommand(command);
 
@@ -107,6 +109,7 @@ public class ECSServerLibrary {
 	
 	public static void sendMessage(KVAdminMessage msg,String ipAddress, int port) {
 		try {
+			System.out.println("Sending admin message: "+ipAddress+":"+port);
 			ECSServerCommunicator client = null; 
 			client = new ECSServerCommunicator(ipAddress, port);
 			client.connect();
@@ -117,7 +120,7 @@ public class ECSServerLibrary {
 		} catch (UnknownHostException e) {
 			System.out.println("Unknown host. Unable to establish connection.");
 		} catch (IOException e) {
-			System.out.println("Unable to establish connection.");
+			System.out.println("ECSServerLibrary: sendMessage: Unable to establish connection.");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

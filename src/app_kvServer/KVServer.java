@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import app_ecsServer.HashRing;
 import datastore.DataManager;
 
 public class KVServer {
 
     /**
      * Start KV Server at given port
+     * @param nodeName: Node identifier
      *
      * @param port      given port for storage server to operate
+     * @param adminPort Port using which admin messages are communicated.
      * @param cacheSize specifies how many key-value pairs the server is allowed
      *                  to keep in-memory
      * @param strategy  specifies the cache replacement strategy in case the cache
@@ -21,10 +24,13 @@ public class KVServer {
      */
 	
     public static volatile boolean serveClients=false;
+    
+    public static HashRing metaData=new HashRing();
+    
 	
-    public KVServer(int port, int adminPort, int cacheSize, String strategy) {
+    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy) {
     	
-		new KVServerAdminThread(adminPort).start();
+		new KVServerAdminThread(adminPort, nodeName).start();
     	
     	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
         
@@ -44,13 +50,13 @@ public class KVServer {
                 System.out.println("I/O error: " + e);
             }
             
-            new KVServerThread(socket).start();
+            new KVServerThread(socket, nodeName).start();
         }
     }
     
 	public static void main(String[] args) throws IOException
 	{
-		new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]),  Integer.parseInt(args[2]), args[3]); 
+		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4]); 
 	}
     
     
