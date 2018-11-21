@@ -5,8 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
-import org.apache.log4j.Logger;
+import java.io.FilenameFilter;
 
 import app_kvServer.Cache;
 import common.messages.KVMessage.StatusType;
@@ -22,8 +21,8 @@ public class DataManager {
      * @return
      * @throws Exception
      */
-    public static StatusType put(String key, String value) throws Exception {
-        String fileName = key+".txt";
+    public static StatusType put(String key, String value, String nodeName) throws Exception {
+        String fileName = nodeName+"_"+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
         File file = new File(fileName);
@@ -37,18 +36,29 @@ public class DataManager {
 		    cache.add(key, value);
         return type;
     }
+    
+    
+    public static File[] getAllTextFiles(String nodeName) {
+    	File dir = new File(".");
+        return dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().startsWith(nodeName) && name.toLowerCase().endsWith(".txt");
+            }
+        });
+    }
 
     /**
      * @param key
      * @return
      * @throws Exception
      */
-    public static String get(String key) throws Exception {
+    public static String get(String key, String nodeName) throws Exception {
     	if(cache.contains(key)) {
     		return cache.get(key);
     	}
     	
-    	String fileName = key+".txt";
+    	String fileName = nodeName+"_"+key+".txt";
     	FileReader fileReader = new FileReader(fileName);
     	BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
@@ -57,8 +67,8 @@ public class DataManager {
     	return value;
     }
     
-    public static void delete(String key) throws Exception {
-    	String fileName = key+".txt";
+    public static void delete(String key,String nodeName) throws Exception {
+    	String fileName = nodeName+"_"+key+".txt";
     	File file = new File(fileName);
     	if(!file.delete()) 
         { 

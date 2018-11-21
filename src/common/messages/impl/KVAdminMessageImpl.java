@@ -14,6 +14,9 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private String cacheType;
 	private Node server;
 	private Node metaData[];
+	private String transferStartKey;
+	private String transferEndKey;
+	private Node transferServer;
 	public Command getCommand() {
 		return command;
 	}
@@ -55,6 +58,24 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 		return "KVAdminMessageImpl [command=" + command + ", numberOfNodes=" + numberOfNodes + ", cacheSize="
 				+ cacheSize + ", cacheType=" + cacheType + ", server=" + server + ", metaData="
 				+ Arrays.toString(metaData) + "]";
+	}
+	public String getTransferStartKey() {
+		return transferStartKey;
+	}
+	public void setTransferStartKey(String transferStartKey) {
+		this.transferStartKey = transferStartKey;
+	}
+	public String getTransferEndKey() {
+		return transferEndKey;
+	}
+	public void setTransferEndKey(String transferEndKey) {
+		this.transferEndKey = transferEndKey;
+	}
+	public Node getTransferServer() {
+		return transferServer;
+	}
+	public void setTransferServer(Node transferServer) {
+		this.transferServer = transferServer;
 	}
 
 

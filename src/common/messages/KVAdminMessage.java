@@ -18,6 +18,10 @@ public interface KVAdminMessage {
         ADD_NODE_SUCCESS,
         REMOVE_NODE_SUCCESS,
         SHUTDOWN_SUCCESS,
+        SERVER_WRITE_LOCK,
+        SERVER_WRITE_UNLOCK, 
+        TRANSFER,
+        TRANSFER_SUCCESS
     }
     
     public int getNumberOfNodes();
@@ -27,6 +31,12 @@ public interface KVAdminMessage {
     public String getCacheType();
     
     public Node getServer();
+    
+    public Node getTransferServer();
+    
+    public String getTransferStartKey();
+    
+    public String getTransferEndKey();
     
     public Command getCommand();
     

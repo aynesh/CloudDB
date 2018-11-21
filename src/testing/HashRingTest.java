@@ -1,5 +1,6 @@
 package testing;
 
+import java.io.File;
 import java.security.NoSuchAlgorithmException;
 
 import org.junit.FixMethodOrder;
@@ -8,6 +9,7 @@ import org.junit.runners.MethodSorters;
 
 import app_ecsServer.HashRing;
 import app_ecsServer.Node;
+import datastore.DataManager;
 import junit.framework.TestCase;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -56,6 +58,17 @@ public class HashRingTest extends TestCase {
 		hashRing2.clearAndSetMetaData(hashRing.getMetaData());
 		System.out.println(hashRing2.getNode("hello"));;
 	}
+	
+	@Test
+	public void testHashRing() {
+		System.out.println("------ List Files ------");
+		File files[] = DataManager.getAllTextFiles("node1");
+		for(int i=0;i<files.length;i++) {
+			System.out.println("inside loop : "+files[i].getName());
+		}
+		System.out.println("------ End of Files ------");
+	}
+	
 
 }
 	

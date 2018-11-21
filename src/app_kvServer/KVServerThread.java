@@ -56,7 +56,7 @@ public class KVServerThread extends Thread {
 					case DELETE:
 						try {
 							if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								DataManager.delete(inpMsg.getKey());
+								DataManager.delete(inpMsg.getKey(), this.nodeName);
 								outMsg.setStatus(StatusType.DELETE_SUCCESS);
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
@@ -73,7 +73,7 @@ public class KVServerThread extends Thread {
 					case GET:
 						try {
 							if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								outMsg.setValue(DataManager.get(inpMsg.getKey()));
+								outMsg.setValue(DataManager.get(inpMsg.getKey(), this.nodeName));
 								outMsg.setStatus(StatusType.GET_SUCCESS);
 
 							} else {
@@ -87,8 +87,10 @@ public class KVServerThread extends Thread {
 
 					case PUT:
 						try {
-							if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								outMsg.setStatus(DataManager.put(inpMsg.getKey(), inpMsg.getValue()));
+							if(KVServer.writeLock) {
+								outMsg.setStatus(StatusType.SERVER_WRITE_LOCK);
+							} else if (!this.checkIfServerResponsible(inpMsg.getKey())) {
+								outMsg.setStatus(DataManager.put(inpMsg.getKey(), inpMsg.getValue(), this.nodeName));
 								outMsg.setValue(inpMsg.getValue());
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());

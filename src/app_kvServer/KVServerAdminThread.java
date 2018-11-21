@@ -2,16 +2,26 @@ package app_kvServer;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
+import app_ecsServer.ECSServerLibrary;
+import app_ecsServer.HashRing;
+import app_ecsServer.Node;
+import client.KVStore;
 import common.messages.KVAdminMessage;
-import common.messages.KVAdminMessageManager;
 import common.messages.KVAdminMessage.Command;
+import common.messages.KVMessage.StatusType;
+import common.messages.KVAdminMessageManager;
+import common.messages.KVMessage;
 import common.messages.impl.KVAdminMessageImpl;
+import datastore.DataManager;
 
 public class KVServerAdminThread extends Thread {
 	
@@ -22,6 +32,31 @@ public class KVServerAdminThread extends Thread {
 		
 		this.port = port;
 		this.nodeName = nodeName;
+	}
+	
+	public static void transferData(String nodeName, Node toNode, String keyStartRange, String keyEndRange) {
+		File files[] = DataManager.getAllTextFiles(nodeName);
+		for(File file: files) {
+			String name = file.getName();
+			String key = name.split(".txt")[0].split(nodeName)[1];
+			if(HashRing.checkKeyRange(key, keyStartRange, keyEndRange)) {
+				try {
+					String data=DataManager.get(key, nodeName);
+					KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
+					kvClient.connect();
+					KVMessage msg = kvClient.transfer(key, data);
+					if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
+						DataManager.delete(key, nodeName);
+					}
+					kvClient.disconnect();
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 	
 	public void run() {
@@ -86,7 +121,27 @@ public class KVServerAdminThread extends Thread {
 						}
 						System.out.println("Shutdown initiated !");
 						break;
-
+					case SERVER_WRITE_LOCK:
+						KVServer.writeLock = true;
+						outMsg.setCommand(Command.SERVER_WRITE_LOCK);
+						break;
+					case SERVER_WRITE_UNLOCK:
+						KVServer.writeLock = false;
+						outMsg.setCommand(Command.SERVER_WRITE_UNLOCK);
+						break;
+					case TRANSFER:
+						new Thread(new Runnable() {
+						     @Override
+						     public void run() {
+						    	 KVServerAdminThread.transferData(
+						    			 nodeName, 
+						    			 inpMsg.getTransferServer(), 
+						    			 inpMsg.getTransferStartKey(),
+						    			 inpMsg.getTransferEndKey());
+						     }
+						}).start();
+						outMsg.setCommand(Command.TRANSFER_SUCCESS);
+						break;
 					default:
 						break;
 					}

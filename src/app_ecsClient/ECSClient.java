@@ -8,6 +8,8 @@ import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 
+import app_ecsServer.HashRing;
+import app_ecsServer.Node;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
 import common.messages.impl.KVAdminMessageImpl;
@@ -15,10 +17,15 @@ import common.messages.impl.KVAdminMessageImpl;
 public class ECSClient {
 	
 	
+	
+	
 	/**
 	 * This method lists all the possible available actions that can be performed by
 	 * a user
 	 */
+	
+
+	
 	static Logger logger = Logger.getLogger(ECSClient.class);
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
@@ -31,6 +38,7 @@ public class ECSClient {
 		System.out.println("shutdown - Shutdown all servers");
 		System.out.println("addNode cacheSize cacheType - Add a new server at arbitrary position");
 		System.out.println("removeNode - Remove a Server");
+		System.out.println("printData");
 	}
 
 	/**
@@ -53,7 +61,7 @@ public class ECSClient {
 	public static void main(String args[]) throws IOException {
 		BufferedReader cons = new BufferedReader(new InputStreamReader(System.in));
 		boolean quit = false;
-
+		Node[] metaData= new Node[0];
 		ECSServerCommunicator client = null; 
 
 		while (!quit)
@@ -103,11 +111,14 @@ public class ECSClient {
 					msg.setCacheSize(Integer.parseInt(tokens[2]));
 					msg.setCacheType(tokens[3]);
 					KVAdminMessage recd= client.sendMessage(msg);
+					
 					if(recd.getCommand()==Command.INIT_SERVICE_SUCCESS) {
+						metaData = recd.getMetaData();
 						System.out.println("Server> Initialized");
+						//HashRing.printMetaData(metaData);
 					}
 					else {
-						System.out.println("Server> Error");
+						System.out.println("Server> Error --- "+recd.getCommand());
 					}
 						
 					
@@ -133,7 +144,9 @@ public class ECSClient {
 					KVAdminMessageImpl msg = new KVAdminMessageImpl();
 					msg.setCommand(KVAdminMessage.Command.START);
 					KVAdminMessage recd= client.sendMessage(msg);
+					
 					if(recd.getCommand()==Command.START_SUCCESS) {
+						metaData=recd.getMetaData();
 						System.out.println("Server> Start Sent");
 					}
 					else {
@@ -227,6 +240,80 @@ public class ECSClient {
 							}
 					 
 				
+			} 
+			else if (tokens[0].equals("addNode"))
+			{
+				if(tokens.length<3) {
+					System.out.println("Incorrect usage of command.");
+					help();
+				} else {
+					try{
+						KVAdminMessageImpl msg = new KVAdminMessageImpl();
+						msg.setCommand(KVAdminMessage.Command.ADD_NODE);
+						msg.setCacheSize(Integer.parseInt(tokens[1]));
+						msg.setCacheType(tokens[2]);
+						
+						KVAdminMessage recd= client.sendMessage(msg);
+						
+						if(recd.getCommand()==Command.ADD_NODE_SUCCESS) {
+							System.out.println("Server> Add Node Success.");
+							metaData=recd.getMetaData();
+							HashRing.printMetaData(metaData);
+						}
+						else {
+							System.out.println("Server> Error");
+						}
+							
+						
+					} catch (UnsupportedEncodingException e) {
+						System.out.println("Failed to decode message.");
+						throw e;
+					} catch (IOException e) {
+						System.out.println("Failed to receive response.");
+					} catch (NullPointerException e) {
+						System.out.println("Connection not established.");
+					}
+					catch (Exception e) {
+						System.out.println("Error.");
+					}
+				}
+
+			}
+			else if (tokens[0].equals("removeNode"))
+			{
+				
+				
+				try{
+					KVAdminMessageImpl msg = new KVAdminMessageImpl();
+					msg.setCommand(KVAdminMessage.Command.REMOVE_NODE);
+					KVAdminMessage recd= client.sendMessage(msg);
+					if(recd.getCommand()==Command.REMOVE_NODE_SUCCESS) {
+						System.out.println("Server> Remove Node Success.");
+						metaData=recd.getMetaData();
+						HashRing.printMetaData(metaData);
+					}
+					else {
+						System.out.println("Server> Error");
+					}
+						
+					
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				}
+				catch (Exception e) {
+					System.out.println("Error.");
+				}
+
+
+			}
+			else if (tokens[0].equals("printData"))
+			{
+				HashRing.printMetaData(metaData);
 			}
 			else if (tokens[0].equals("help"))
 			{

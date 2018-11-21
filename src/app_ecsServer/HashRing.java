@@ -46,6 +46,53 @@ public class HashRing {
 		}
 	}
 	
+	
+	public static boolean checkKeyRange(String key, String startKey, String endKey) {
+		String keyHash=null;
+		try {
+			keyHash = HashRing.getMD5Hash(key);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(keyHash==null) {
+			return false;
+		}
+		BigInteger keyBi = new BigInteger(keyHash, 16);
+		BigInteger startKeyBi = new BigInteger(startKey, 16);
+		BigInteger endKeyBi = new BigInteger(endKey, 16);
+		
+		if(keyBi.compareTo(startKeyBi) == 1 && keyBi.compareTo(endKeyBi) == -1) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public Node getPrevNode(Node node) {
+		Node nodes[]=this.getMetaData();
+		int location=0;
+		for(int i=0;i<nodes.length;i++) {
+			if(node.getName().equals(nodes[i])) {
+				location = i;
+				break;
+			}
+		}
+		return nodes.length > 0 ?  nodes[(location-1)%nodes.length]: null ;
+	}
+	
+	public Node getNextNode(Node node) {
+		Node nodes[]=this.getMetaData();
+		int location=0;
+		for(int i=0;i<nodes.length;i++) {
+			if(node.getName().equals(nodes[i])) {
+				location = i;
+				break;
+			}
+		}
+		return nodes.length > 0 ?  nodes[(location+1)%nodes.length]: null ;
+	}
+	
 	public Node getNode(String key) throws NoSuchAlgorithmException {
 		String keyHash = HashRing.getMD5Hash(key);
 		BigInteger bi = new BigInteger(keyHash, 16);

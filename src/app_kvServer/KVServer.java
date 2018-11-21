@@ -27,6 +27,7 @@ public class KVServer {
     
     public static HashRing metaData=new HashRing();
     
+	public static volatile boolean writeLock=false;
 	
     public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy) {
     	

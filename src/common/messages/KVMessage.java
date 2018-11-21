@@ -16,7 +16,10 @@ public interface KVMessage {
         DELETE_SUCCESS, /* Delete - request successful */
         DELETE_ERROR, 	/* Delete - request successful */
         SERVER_STOPPED,
-        SERVER_NOT_RESPONSIBLE
+        SERVER_NOT_RESPONSIBLE,
+        SERVER_WRITE_LOCK,
+        TRANSFER, 
+        TRANSFER_SUCCESS
     }
 
     /**
