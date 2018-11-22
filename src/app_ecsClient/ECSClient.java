@@ -38,7 +38,7 @@ public class ECSClient {
 		System.out.println("shutdown - Shutdown all servers");
 		System.out.println("addNode cacheSize cacheType - Add a new server at arbitrary position");
 		System.out.println("removeNode - Remove a Server");
-		System.out.println("printData");
+		System.out.println("metaData");
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class ECSClient {
 							HashRing.printMetaData(metaData);
 						}
 						else {
-							System.out.println("Server> Error");
+							System.out.println("Server> Error "+recd.getCommand());
 						}
 							
 						
@@ -293,7 +293,7 @@ public class ECSClient {
 						HashRing.printMetaData(metaData);
 					}
 					else {
-						System.out.println("Server> Error");
+						System.out.println("Server> Error "+recd.getCommand());
 					}
 						
 					
@@ -311,9 +311,18 @@ public class ECSClient {
 
 
 			}
-			else if (tokens[0].equals("printData"))
+			else if (tokens[0].equals("metaData"))
 			{
-				HashRing.printMetaData(metaData);
+				KVAdminMessageImpl msg = new KVAdminMessageImpl();
+				msg.setCommand(KVAdminMessage.Command.GET_META_DATA);
+				try {
+					KVAdminMessage recd= client.sendMessage(msg);
+					HashRing.printMetaData(recd.getMetaData());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Server>Error");
+				}
+				
 			}
 			else if (tokens[0].equals("help"))
 			{

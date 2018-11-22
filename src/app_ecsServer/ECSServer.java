@@ -32,7 +32,7 @@ public class ECSServer {
 			     public void run() {
 			    	 //Please configure SSH  keys for ur system and set the path in ECSServerLibaray for now
 			    	 Node node = item.getValue();
-			    	 ECSServerLibrary.launchProcess(node.getName(), node.getIpAddress(), node.getUserName(), node.getLocation(), node.getPort(), node.getAdminPort(), cacheSize, cacheStrategy );
+			    	 ECSServerLibrary.launchProcess(node.getName(), node.getIpAddress(), node.getUserName(), node.getLocation(), node.getPort(), node.getAdminPort(), cacheSize, cacheStrategy, node.getStoragePath() );
 			    	 
 			    	 // Else comment the above code and uncomment the below code.
 			    	 //new KVServer(50000, 10, "LFU")
@@ -63,12 +63,8 @@ public class ECSServer {
 			new Thread(new Runnable() {
 			     @Override
 			     public void run() {
-			    	 //Please configure SSH  keys for ur system and set the path in ECSServerLibaray for now
 			    	 Node node = item.getValue();
-			    	 ECSServerLibrary.launchProcess(node.getName(), node.getIpAddress(), node.getUserName(), node.getLocation(), node.getPort(), node.getAdminPort(), cacheSize, cacheStrategy );
-			    	 
-			    	 // Else comment the above code and uncomment the below code.
-			    	 //new KVServer(50000, 10, "LFU")
+			    	 ECSServerLibrary.launchProcess(node.getName(), node.getIpAddress(), node.getUserName(), node.getLocation(), node.getPort(), node.getAdminPort(), cacheSize, cacheStrategy , node.getStoragePath());
 			     }
 			}).start();
 			
@@ -83,11 +79,14 @@ public class ECSServer {
 			
 			initiateTransferFiles(item.getValue(), prevNode, nextNode);
 			
+			updateMetaData(item.getValue());
+			updateMetaData(prevNode);
+			updateMetaData(nextNode);
+			
 			writeLockUnlockServers(item.getValue(), prevNode, false);
 			writeLockUnlockServers(item.getValue(), nextNode, false);
 			
 			//Transfer Keys
-			
 			i++;
 		}
 		serverConfig.remove(keyToRemove);
@@ -95,37 +94,45 @@ public class ECSServer {
 	}
 	
 	
+	public static void updateMetaData(Node targetNode) {
+		KVAdminMessageImpl msg = new KVAdminMessageImpl();
+		msg.setCommand(Command.META_DATA_UPDATE);
+		msg.setMetaData(activeServers.getMetaData());
+		notifySingleServer(msg, targetNode);
+	}
+	
 	public static void removeNode(Map<String, Node> serverConfig) {
-		int i=1;
-		String keyToRemove=null;
-		for (Map.Entry<String, Node> item : serverConfig.entrySet())
-		{
-			if(i>1)
-				break;
-			
-			Node nextNode = activeServers.getNextNode(item.getValue());
-			Node prevNode = activeServers.getPrevNode(item.getValue());
-			keyToRemove = item.getKey();
-			writeLockUnlockServers(item.getValue(), item.getValue(), true);
-			writeLockUnlockServers(item.getValue(), nextNode, true);
-			
-			initiateTransferFilesForRemove(item.getValue(),prevNode, nextNode);
-			
-			writeLockUnlockServers(item.getValue(), item.getValue(), false);
-			writeLockUnlockServers(item.getValue(), nextNode, false);
-			
-			//Transfer Keys
-			activeServers.removeNode(item.getValue());
-			serverConfig.put(item.getKey(), item.getValue());
-			
-			i++;
+		String key=null;
+		Node selectedNode=null;
+		Node nodes[]=activeServers.getMetaData();
+		
+		if(nodes.length == 0 ) {
+			return;
 		}
-		serverConfig.remove(keyToRemove);
+		selectedNode = nodes[0];
+			
+		Node nextNode = activeServers.getNextNode(selectedNode);
+		Node prevNode = activeServers.getPrevNode(selectedNode);
+		
+		writeLockUnlockServers(selectedNode, selectedNode, true);
+		writeLockUnlockServers(selectedNode, nextNode, true);
+			
+		initiateTransferFilesForRemove(selectedNode, prevNode, nextNode);
+		
+		updateMetaData(nextNode);
+			
+		//writeLockUnlockServers(item.getValue(), item.getValue(), false); // Server Shutdown Not needed
+		writeLockUnlockServers(selectedNode, nextNode, false);
+			
+		//Transfer Keys
+		activeServers.removeNode(selectedNode);
+		//Shutdwon is implmeneted at the KV Server itself
+		serverConfig.put(selectedNode.getName(), selectedNode);
 	}
 	
 	public static void writeLockUnlockServers(Node referenceNode, Node targetNode, boolean lock) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
-		msg.setCommand(lock ? KVAdminMessage.Command.SERVER_WRITE_LOCK : KVAdminMessage.Command.SERVER_WRITE_UNLOCK);		
+		msg.setCommand(lock ? KVAdminMessage.Command.SERVER_WRITE_LOCK : KVAdminMessage.Command.SERVER_WRITE_UNLOCK);
 		if( !targetNode.getName().equals(referenceNode.getName())) {
 			notifySingleServer(msg, targetNode);
 		}
@@ -134,7 +141,7 @@ public class ECSServer {
 	//Repeated can be optimized
 	public static void initiateTransferFilesForRemove(Node currentNode, Node prevNode, Node nextNode) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
-		msg.setCommand(Command.TRANSFER); // Below is a blocking operation !
+		msg.setCommand(Command.TRANSFER_AND_SHUTDOWN); // Below is a blocking operation !
 		if( !nextNode.getName().equals(currentNode.getName())) {
 			msg.setTransferStartKey(prevNode.getEndRange());
 			msg.setTransferEndKey(currentNode.getEndRange());
@@ -224,10 +231,10 @@ public class ECSServer {
     					break;
     				case START:
     					try {
-    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
-    						msg.setCommand(KVAdminMessage.Command.START);
-    						outMsg.setMetaData(ECSServer.activeServers.getMetaData());
-    						ECSServer.notifyAllServers(msg);
+    						KVAdminMessageImpl adminMsg = new KVAdminMessageImpl();
+    						adminMsg.setCommand(KVAdminMessage.Command.START);
+    						adminMsg.setMetaData(ECSServer.activeServers.getMetaData());
+    						ECSServer.notifyAllServers(adminMsg);
     						outMsg.setCommand(Command.START_SUCCESS);
     					} catch (Exception e) {
     						
@@ -235,9 +242,9 @@ public class ECSServer {
     					break;
        				case STOP:
     					try {
-    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
-    						msg.setCommand(KVAdminMessage.Command.STOP);
-    						ECSServer.notifyAllServers(msg);
+    						KVAdminMessageImpl adminMsg = new KVAdminMessageImpl();
+    						adminMsg.setCommand(KVAdminMessage.Command.STOP);
+    						ECSServer.notifyAllServers(adminMsg);
     						outMsg.setCommand(Command.STOP_SUCCESS);
     					} catch (Exception e) {
     						
@@ -245,9 +252,9 @@ public class ECSServer {
     					break;
        				case SHUTDOWN:
     					try {
-    						KVAdminMessageImpl msg = new KVAdminMessageImpl();
-    						msg.setCommand(KVAdminMessage.Command.SHUTDOWN);
-    						ECSServer.notifyAllServers(msg);
+    						KVAdminMessageImpl adminMsg = new KVAdminMessageImpl();
+    						adminMsg.setCommand(KVAdminMessage.Command.SHUTDOWN);
+    						ECSServer.notifyAllServers(adminMsg);
     						ECSServer.activeServers.removeAll();
     						outMsg.setCommand(Command.SHUTDOWN_SUCCESS);
     						serverConfig = ECSServerLibrary.readConfigFile(); // Reinitalize Server Config
@@ -263,7 +270,7 @@ public class ECSServer {
     						outMsg.setMetaData(ECSServer.activeServers.getMetaData());
     						outMsg.setCommand(Command.ADD_NODE_SUCCESS);
     					} catch (Exception e) {
-    						
+    						outMsg.setCommand(Command.EXCEPTION);
     					}
        					break;
        				case REMOVE_NODE:
@@ -272,9 +279,13 @@ public class ECSServer {
     						outMsg.setMetaData(activeServers.getMetaData());
     						outMsg.setCommand(Command.REMOVE_NODE_SUCCESS);
     					} catch (Exception e) {
-    						
+    						outMsg.setCommand(Command.EXCEPTION);
     					}
        					break;
+       				case GET_META_DATA:
+       					outMsg.setMetaData(activeServers.getMetaData());
+       					break;
+       					
     				default:
     					break;
                 	}

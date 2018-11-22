@@ -46,7 +46,11 @@ public class KVClient {
 		} else if (msg.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
 			System.out.println("Server> Server Not Responsible");
 			HashRing.printMetaData(msg.getMetaData());
+		}else {
+			System.out.println("Server> Error. "+msg.getStatus());
+			System.out.println("Error> "+msg.getValue());
 		}
+		
 	}
 
 	/**

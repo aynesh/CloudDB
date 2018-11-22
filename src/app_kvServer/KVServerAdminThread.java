@@ -34,19 +34,19 @@ public class KVServerAdminThread extends Thread {
 		this.nodeName = nodeName;
 	}
 	
-	public static void transferData(String nodeName, Node toNode, String keyStartRange, String keyEndRange) {
-		File files[] = DataManager.getAllTextFiles(nodeName);
+	public static void transferData(String nodeName, Node toNode, String keyStartRange, String keyEndRange, boolean shutdownFlag) {
+		File files[] = DataManager.getAllTextFiles();
 		for(File file: files) {
 			String name = file.getName();
-			String key = name.split(".txt")[0].split(nodeName)[1];
+			String key = name.split(".txt")[0];
 			if(HashRing.checkKeyRange(key, keyStartRange, keyEndRange)) {
 				try {
-					String data=DataManager.get(key, nodeName);
+					String data=DataManager.get(key);
 					KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
 					kvClient.connect();
 					KVMessage msg = kvClient.transfer(key, data);
 					if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
-						DataManager.delete(key, nodeName);
+						DataManager.delete(key);
 					}
 					kvClient.disconnect();
 					
@@ -56,7 +56,9 @@ public class KVServerAdminThread extends Thread {
 				}
 			}
 		}
-		
+		if(shutdownFlag) {
+			System.exit(0);
+		}
 	}
 	
 	public void run() {
@@ -99,7 +101,7 @@ public class KVServerAdminThread extends Thread {
 							KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 							outMsg.setCommand(Command.START_SUCCESS);
 						} catch (Exception e) {
-
+							outMsg.setCommand(Command.EXCEPTION);
 						}
 						System.out.println("Started Accepting commands");
 						break;
@@ -108,7 +110,7 @@ public class KVServerAdminThread extends Thread {
 							KVServer.serveClients = false;
 							outMsg.setCommand(Command.STOP_SUCCESS);
 						} catch (Exception e) {
-
+							outMsg.setCommand(Command.EXCEPTION);
 						}
 						System.out.println("Stopped Accepting commands");
 						break;
@@ -117,7 +119,7 @@ public class KVServerAdminThread extends Thread {
 							KVServer.serveClients = false;
 							outMsg.setCommand(Command.SHUTDOWN_SUCCESS);
 						} catch (Exception e) {
-
+							outMsg.setCommand(Command.EXCEPTION);
 						}
 						System.out.println("Shutdown initiated !");
 						break;
@@ -130,6 +132,13 @@ public class KVServerAdminThread extends Thread {
 						outMsg.setCommand(Command.SERVER_WRITE_UNLOCK);
 						break;
 					case TRANSFER:
+					case TRANSFER_AND_SHUTDOWN:
+						final boolean shutdownFlag;
+						if(inpMsg.getCommand()==Command.TRANSFER_AND_SHUTDOWN) {
+							shutdownFlag=true;
+						} else {
+							shutdownFlag=false;
+						}
 						new Thread(new Runnable() {
 						     @Override
 						     public void run() {
@@ -137,10 +146,15 @@ public class KVServerAdminThread extends Thread {
 						    			 nodeName, 
 						    			 inpMsg.getTransferServer(), 
 						    			 inpMsg.getTransferStartKey(),
-						    			 inpMsg.getTransferEndKey());
+						    			 inpMsg.getTransferEndKey(),
+						    			 shutdownFlag);
 						     }
 						}).start();
 						outMsg.setCommand(Command.TRANSFER_SUCCESS);
+						break;
+					case META_DATA_UPDATE:
+						KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
+						outMsg.setCommand(Command.META_DATA_UPDATE_SUCCESS);
 						break;
 					default:
 						break;

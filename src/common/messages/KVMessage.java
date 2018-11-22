@@ -19,7 +19,8 @@ public interface KVMessage {
         SERVER_NOT_RESPONSIBLE,
         SERVER_WRITE_LOCK,
         TRANSFER, 
-        TRANSFER_SUCCESS
+        TRANSFER_SUCCESS,
+        TRANSFER_ERROR
     }
 
     /**

@@ -27,7 +27,7 @@ public class KVServerThread extends Thread {
 	}
 
 	public boolean checkIfServerResponsible(String key) throws NoSuchAlgorithmException {
-		return KVServer.metaData.getNode(key).getName() == this.nodeName ? true : false;
+		return KVServer.metaData.getNode(key).getName().equals(this.nodeName) ? true : false;
 	}
 
 	public void run() {
@@ -55,8 +55,8 @@ public class KVServerThread extends Thread {
 					switch (inpMsg.getStatus()) {
 					case DELETE:
 						try {
-							if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								DataManager.delete(inpMsg.getKey(), this.nodeName);
+							if (this.checkIfServerResponsible(inpMsg.getKey())) {
+								DataManager.delete(inpMsg.getKey());
 								outMsg.setStatus(StatusType.DELETE_SUCCESS);
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
@@ -72,8 +72,8 @@ public class KVServerThread extends Thread {
 
 					case GET:
 						try {
-							if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								outMsg.setValue(DataManager.get(inpMsg.getKey(), this.nodeName));
+							if (this.checkIfServerResponsible(inpMsg.getKey())) {
+								outMsg.setValue(DataManager.get(inpMsg.getKey()));
 								outMsg.setStatus(StatusType.GET_SUCCESS);
 
 							} else {
@@ -81,6 +81,7 @@ public class KVServerThread extends Thread {
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
 							}
 						} catch (Exception e) {
+							outMsg.setValue(e.getMessage());
 							outMsg.setStatus(StatusType.GET_ERROR);
 						}
 						break;
@@ -89,8 +90,8 @@ public class KVServerThread extends Thread {
 						try {
 							if(KVServer.writeLock) {
 								outMsg.setStatus(StatusType.SERVER_WRITE_LOCK);
-							} else if (!this.checkIfServerResponsible(inpMsg.getKey())) {
-								outMsg.setStatus(DataManager.put(inpMsg.getKey(), inpMsg.getValue(), this.nodeName));
+							} else if (this.checkIfServerResponsible(inpMsg.getKey())) {
+								outMsg.setStatus(DataManager.put(inpMsg.getKey(), inpMsg.getValue()));
 								outMsg.setValue(inpMsg.getValue());
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
@@ -98,7 +99,16 @@ public class KVServerThread extends Thread {
 							}
 
 						} catch (Exception e) {
+							outMsg.setValue(e.getMessage());
 							outMsg.setStatus(StatusType.PUT_ERROR);
+						}
+						break;
+					case TRANSFER:
+						try {
+							outMsg.setStatus(StatusType.TRANSFER_SUCCESS);
+							DataManager.put(inpMsg.getKey(), inpMsg.getValue());
+						} catch(Exception ex) {
+							outMsg.setStatus(StatusType.TRANSFER_ERROR);
 						}
 
 					default:

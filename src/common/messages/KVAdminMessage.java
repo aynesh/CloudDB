@@ -21,7 +21,12 @@ public interface KVAdminMessage {
         SERVER_WRITE_LOCK,
         SERVER_WRITE_UNLOCK, 
         TRANSFER,
-        TRANSFER_SUCCESS
+        TRANSFER_AND_SHUTDOWN,
+        TRANSFER_SUCCESS,
+        EXCEPTION,
+        GET_META_DATA,
+        META_DATA_UPDATE,
+        META_DATA_UPDATE_SUCCESS
     }
     
     public int getNumberOfNodes();

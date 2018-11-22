@@ -25,11 +25,15 @@ public class KVServer {
 	
     public static volatile boolean serveClients=false;
     
-    public static HashRing metaData=new HashRing();
+    public static volatile HashRing metaData=new HashRing();
     
 	public static volatile boolean writeLock=false;
 	
-    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy) {
+	public static volatile String storagePath="./";
+	
+    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
+    	
+    	KVServer.storagePath = path;
     	
 		new KVServerAdminThread(adminPort, nodeName).start();
     	
@@ -57,7 +61,7 @@ public class KVServer {
     
 	public static void main(String[] args) throws IOException
 	{
-		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4]); 
+		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5]); 
 	}
     
     

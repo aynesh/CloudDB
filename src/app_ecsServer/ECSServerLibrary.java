@@ -23,7 +23,7 @@ public class ECSServerLibrary {
 	
 	
 	
-	public static void launchProcess(String nodeIdentifier, String ipAddress, String userName, String location, String port, String adminPort, int cacheSize, String cacheStrategy) {
+	public static void launchProcess(String nodeIdentifier, String ipAddress, String userName, String location, String port, String adminPort, int cacheSize, String cacheStrategy, String storagePath) {
 	    try{
 	        JSch jsch=new JSch();  
 
@@ -38,8 +38,14 @@ public class ECSServerLibrary {
 	        config.put("StrictHostKeyChecking", "no");
 	        session.setConfig(config);
 	        session.connect();
-
-	        String command="java -jar "+location+" "+nodeIdentifier+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy;
+	        //
+	        String command;
+	       // if(nodeIdentifier.equals("node4")) {
+	        //	command="java -agentlib:jdwp=transport=dt_socket,address="+(Integer.parseInt(adminPort)+5000)+",server=y -jar "+location+" "+nodeIdentifier+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy;
+	        //} else {
+	        	command="java -jar "+location+" "+nodeIdentifier+" "+port+" "+adminPort+" "+cacheSize+" "+cacheStrategy+" "+storagePath;
+	       // }
+	        
 
 	        System.out.println(command);
 	        
@@ -92,7 +98,7 @@ public class ECSServerLibrary {
 		    String readLine = bufferedReader.readLine();
 		    while(readLine != null) {
 		    	String values[] = readLine.split(" ");
-		    	Node node = new Node(values[0], values[1],  values[2], values[3], values[4], values[5]);
+		    	Node node = new Node(values[0], values[1],  values[2], values[3], values[4], values[5], values[6]);
 		    	serverConfig.put(values[0], node);
 		    	readLine = bufferedReader.readLine();
 		    }

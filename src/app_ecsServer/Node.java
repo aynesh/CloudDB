@@ -19,6 +19,7 @@ public class Node implements Serializable {
 	private String location;
 	private String adminPort;
 	private String userName;
+	private String storagePath;
 	public Node() {
 		
 	}
@@ -28,7 +29,7 @@ public class Node implements Serializable {
 		this.port = port;
 		this.ipAddress = ipAddress;
 	}
-	public Node(String name, String userName, String ipAddress, String port, String adminPort, String location) {
+	public Node(String name, String userName, String ipAddress, String port, String adminPort, String location, String storagePath) {
 		super();
 		this.name = name;
 		this.port = port;
@@ -36,6 +37,7 @@ public class Node implements Serializable {
 		this.location = location;
 		this.adminPort = adminPort;
 		this.userName = userName;
+		this.storagePath = storagePath;
 	}
 	public String getEndRange() {
 		return endRange;
@@ -87,5 +89,11 @@ public class Node implements Serializable {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getStoragePath() {
+		return storagePath;
+	}
+	public void setStoragePath(String storagePath) {
+		this.storagePath = storagePath;
 	}
 }

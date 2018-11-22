@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 
 import app_kvServer.Cache;
+import app_kvServer.KVServer;
 import common.messages.KVMessage.StatusType;
 
 public class DataManager {
@@ -21,8 +22,8 @@ public class DataManager {
      * @return
      * @throws Exception
      */
-    public static StatusType put(String key, String value, String nodeName) throws Exception {
-        String fileName = nodeName+"_"+key+".txt";
+    public static StatusType put(String key, String value) throws Exception {
+        String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
         File file = new File(fileName);
@@ -38,12 +39,12 @@ public class DataManager {
     }
     
     
-    public static File[] getAllTextFiles(String nodeName) {
-    	File dir = new File(".");
+    public static File[] getAllTextFiles() {
+    	File dir = new File(KVServer.storagePath);
         return dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().startsWith(nodeName) && name.toLowerCase().endsWith(".txt");
+                return name.toLowerCase().endsWith(".txt");
             }
         });
     }
@@ -53,12 +54,12 @@ public class DataManager {
      * @return
      * @throws Exception
      */
-    public static String get(String key, String nodeName) throws Exception {
+    public static String get(String key) throws Exception {
     	if(cache.contains(key)) {
     		return cache.get(key);
     	}
     	
-    	String fileName = nodeName+"_"+key+".txt";
+    	String fileName = KVServer.storagePath+key+".txt";
     	FileReader fileReader = new FileReader(fileName);
     	BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
@@ -67,8 +68,8 @@ public class DataManager {
     	return value;
     }
     
-    public static void delete(String key,String nodeName) throws Exception {
-    	String fileName = nodeName+"_"+key+".txt";
+    public static void delete(String key) throws Exception {
+    	String fileName = KVServer.storagePath+key+".txt";
     	File file = new File(fileName);
     	if(!file.delete()) 
         { 
@@ -76,7 +77,7 @@ public class DataManager {
             throw new Exception();
         } 
     	if(cache.contains(key)) {
-    	cache.delete(key);
+    		cache.delete(key);
     	}
     }
 

@@ -25,8 +25,17 @@ public class HashRing {
 	
 	public void removeNode(Node node) {
 		try {
-			String key = HashRing.getMD5Hash(node.getIpAndPort());
+			System.out.println("node");
+			System.out.println(node);
+			String key = HashRing.getMD5Hash(node.getIpAndPort()); // Problem here
 			BigInteger bi = new BigInteger(key, 16);
+			printMetaData(getMetaData());
+			System.out.println("bi");
+			System.out.println(bi);
+			System.out.println("key");
+			System.out.println(key);
+			System.out.println("map");
+			System.out.println(map);
 			map.remove(bi);
 		} catch (NoSuchAlgorithmException e) {
 
@@ -70,27 +79,35 @@ public class HashRing {
 	}
 	
 	public Node getPrevNode(Node node) {
-		Node nodes[]=this.getMetaData();
-		int location=0;
-		for(int i=0;i<nodes.length;i++) {
-			if(node.getName().equals(nodes[i])) {
-				location = i;
-				break;
+		int i=0;
+		Node prevNode=null;
+		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
+			if(i!=0 && entry.getValue().getName() == node.getName()) {
+				return prevNode;
 			}
+			prevNode = entry.getValue();
+			i++;
 		}
-		return nodes.length > 0 ?  nodes[(location-1)%nodes.length]: null ;
+		return prevNode; 
 	}
 	
 	public Node getNextNode(Node node) {
-		Node nodes[]=this.getMetaData();
-		int location=0;
-		for(int i=0;i<nodes.length;i++) {
-			if(node.getName().equals(nodes[i])) {
-				location = i;
-				break;
+		int i=0;
+		Node nextNode=null;
+		boolean nextNodeFlag = false;
+		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
+			if(i==0) {
+				nextNode = entry.getValue();
 			}
+			if(nextNodeFlag) {
+				return entry.getValue();
+			}
+			if(entry.getValue().getName() == node.getName()) {
+				nextNodeFlag = true;
+			}
+			i++;
 		}
-		return nodes.length > 0 ?  nodes[(location+1)%nodes.length]: null ;
+		return nextNode;
 	}
 	
 	public Node getNode(String key) throws NoSuchAlgorithmException {

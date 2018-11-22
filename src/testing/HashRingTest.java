@@ -45,6 +45,12 @@ public class HashRingTest extends TestCase {
 		HashRing hashRing1 = new HashRing();
 		hashRing1.addNode(node1);
 		System.out.println(hashRing1.getMetaData()[0].toString());
+		System.out.println("------Other Cases ----------");
+		System.out.println(hashRing.getMetaData());
+		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[0].getStartRange(),  hashRing.getMetaData()[0].getEndRange()));
+		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[1].getStartRange(),  hashRing.getMetaData()[1].getEndRange()));
+		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[2].getStartRange(),  hashRing.getMetaData()[2].getEndRange()));
+		System.out.println("------Other Cases End ------");
 	}
 	
 	@Test
@@ -62,7 +68,7 @@ public class HashRingTest extends TestCase {
 	@Test
 	public void testHashRing() {
 		System.out.println("------ List Files ------");
-		File files[] = DataManager.getAllTextFiles("node1");
+		File files[] = DataManager.getAllTextFiles();
 		for(int i=0;i<files.length;i++) {
 			System.out.println("inside loop : "+files[i].getName());
 		}
