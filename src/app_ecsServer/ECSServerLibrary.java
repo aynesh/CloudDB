@@ -113,7 +113,7 @@ public class ECSServerLibrary {
 		return serverConfig;
 	}
 	
-	public static void sendMessage(KVAdminMessage msg,String ipAddress, int port) {
+	public static KVAdminMessage sendMessage(KVAdminMessage msg,String ipAddress, int port) {
 		try {
 			System.out.println("Sending admin message: "+ipAddress+":"+port);
 			ECSServerCommunicator client = null; 
@@ -121,8 +121,8 @@ public class ECSServerLibrary {
 			client.connect();
 			KVAdminMessage recd= client.sendMessage(msg);
 			System.out.println("Status from KV Server: "+recd.getCommand());
-			
 			client.disconnect();
+			return recd;
 		} catch (UnknownHostException e) {
 			System.out.println("Unknown host. Unable to establish connection.");
 		} catch (IOException e) {
@@ -131,6 +131,7 @@ public class ECSServerLibrary {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 }

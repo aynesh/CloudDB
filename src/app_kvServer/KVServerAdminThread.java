@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
@@ -34,28 +35,41 @@ public class KVServerAdminThread extends Thread {
 		this.nodeName = nodeName;
 	}
 	
-	public static void transferData(String nodeName, Node toNode, String keyStartRange, String keyEndRange, boolean shutdownFlag) {
+	public static void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag) {
 		File files[] = DataManager.getAllTextFiles();
+		
 		for(File file: files) {
 			String name = file.getName();
+
 			String key = name.split(".txt")[0];
-			if(HashRing.checkKeyRange(key, keyStartRange, keyEndRange)) {
-				try {
-					String data=DataManager.get(key);
-					KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
-					kvClient.connect();
-					KVMessage msg = kvClient.transfer(key, data);
-					if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
-						DataManager.delete(key);
+			System.out.println("key: "+key+" Filename>"+name);
+			
+			try {
+				System.out.println("Belongs to: "+metaData.getNode(key).getName()+" Checking toNode: "+toNode.getName());
+				if(metaData.getNode(key).getName().equals(toNode.getName())) {
+					try {
+						String data=DataManager.get(key);
+						KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
+						kvClient.connect();
+						KVMessage msg = kvClient.transfer(key, data);
+						if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
+							DataManager.delete(key);
+							System.out.println("Transfered: "+key);
+						}
+						kvClient.disconnect();
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println(e);
+						e.printStackTrace();
 					}
-					kvClient.disconnect();
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+		System.out.println("Ending KV Server transfer-------");
 		if(shutdownFlag) {
 			System.exit(0);
 		}
@@ -95,6 +109,9 @@ public class KVServerAdminThread extends Thread {
 					KVAdminMessageImpl outMsg = new KVAdminMessageImpl();
 
 					switch (inpMsg.getCommand()) {
+					case PING:
+						outMsg.setCommand(Command.PING_SUCCESS);
+						break;
 					case START:
 						try {
 							KVServer.serveClients = true;
@@ -139,14 +156,14 @@ public class KVServerAdminThread extends Thread {
 						} else {
 							shutdownFlag=false;
 						}
+						KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 						new Thread(new Runnable() {
 						     @Override
 						     public void run() {
 						    	 KVServerAdminThread.transferData(
 						    			 nodeName, 
 						    			 inpMsg.getTransferServer(), 
-						    			 inpMsg.getTransferStartKey(),
-						    			 inpMsg.getTransferEndKey(),
+						    			 KVServer.metaData,
 						    			 shutdownFlag);
 						     }
 						}).start();

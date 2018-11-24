@@ -41,6 +41,7 @@ public class DataManager {
     
     public static File[] getAllTextFiles() {
     	File dir = new File(KVServer.storagePath);
+    	System.out.println("Storage Path: "+KVServer.storagePath);;
         return dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {

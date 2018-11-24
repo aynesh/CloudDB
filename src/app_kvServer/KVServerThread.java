@@ -49,7 +49,7 @@ public class KVServerThread extends Thread {
 				KVMessage inpMsg = KVMessageManager.receiveKVMessage(inp);
 				KVMessage outMsg = new KVMessageImpl();
 				outMsg.setKey(inpMsg.getKey());
-				if (!KVServer.serveClients) {
+				if (!KVServer.serveClients && (inpMsg.getStatus() != StatusType.TRANSFER)) {
 					outMsg.setStatus(StatusType.SERVER_STOPPED);
 				} else {
 					switch (inpMsg.getStatus()) {
@@ -109,6 +109,7 @@ public class KVServerThread extends Thread {
 							DataManager.put(inpMsg.getKey(), inpMsg.getValue());
 						} catch(Exception ex) {
 							outMsg.setStatus(StatusType.TRANSFER_ERROR);
+							System.out.println("Transfer Error: "+ex.toString());
 						}
 
 					default:

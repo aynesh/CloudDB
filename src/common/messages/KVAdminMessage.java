@@ -26,7 +26,9 @@ public interface KVAdminMessage {
         EXCEPTION,
         GET_META_DATA,
         META_DATA_UPDATE,
-        META_DATA_UPDATE_SUCCESS
+        META_DATA_UPDATE_SUCCESS,
+        PING,
+        PING_SUCCESS
     }
     
     public int getNumberOfNodes();

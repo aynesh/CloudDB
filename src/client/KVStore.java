@@ -105,10 +105,12 @@ public class KVStore implements KVCommInterface {
 		} else {
 			KVMessage msg;
 			msg = new KVMessageImpl(key,value,StatusType.TRANSFER);
-			logger.info("Attempting to update: " + key+" : "+value);
+			logger.info("Attempting to transgfer: " + key+" : "+value);
+			System.out.println("Attempting to transgfer: " + key+" : "+value);
 			KVMessageManager.sendKVMessage(msg,out);
 			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
 			logger.info("Server response: " + recvdMsg.toString());
+			System.out.println("Server response: " + recvdMsg.toString());
 			return recvdMsg;
 		}
     }

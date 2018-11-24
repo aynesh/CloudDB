@@ -55,6 +55,7 @@ public class ECSServer {
 	public static void addNode( Map<String, Node> serverConfig, int cacheSize, String cacheStrategy) {
 		int i=1;
 		String keyToRemove=null;
+		Node newNode=null;
 		for (Map.Entry<String, Node> item : serverConfig.entrySet())
 		{
 			if(i>1)
@@ -68,27 +69,53 @@ public class ECSServer {
 			     }
 			}).start();
 			
-			activeServers.addNode(item.getValue());
-			keyToRemove = item.getKey();
+			newNode = item.getValue();
+			i++;
 			
-			Node prevNode = activeServers.getPrevNode(item.getValue());
-			Node nextNode = activeServers.getNextNode(item.getValue());
+		}
+		
+		
+			activeServers.addNode(newNode);
+			keyToRemove = newNode.getName();
 			
-			writeLockUnlockServers(item.getValue(), prevNode, true);
-			writeLockUnlockServers(item.getValue(), nextNode, true);
+			Node prevNode = activeServers.getPrevNode(newNode);
+			Node nextNode = activeServers.getNextNode(newNode);
 			
-			initiateTransferFiles(item.getValue(), prevNode, nextNode);
+			writeLockUnlockServers(newNode, prevNode, true);
+			writeLockUnlockServers(newNode, nextNode, true);
 			
-			updateMetaData(item.getValue());
+			boolean serverOnline=false;
+			KVAdminMessageImpl pingMessage =  new KVAdminMessageImpl();
+			pingMessage.setCommand(Command.PING);
+			while(!serverOnline) {
+				KVAdminMessage reply = ECSServerLibrary.sendMessage(pingMessage, newNode.getIpAddress(), Integer.parseInt(newNode.getAdminPort()));
+				if(reply!=null) {
+					if(reply.getCommand() == Command.PING_SUCCESS) {
+						serverOnline=true;
+						System.out.println("Ping Success");
+					}
+				}
+				try {
+					System.out.println("Ping sleep");
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			initiateTransferFiles(newNode, prevNode, nextNode, activeServers.getMetaData());
+			
+			updateMetaData(newNode);
 			updateMetaData(prevNode);
 			updateMetaData(nextNode);
 			
-			writeLockUnlockServers(item.getValue(), prevNode, false);
-			writeLockUnlockServers(item.getValue(), nextNode, false);
+			writeLockUnlockServers(newNode, prevNode, false);
+			writeLockUnlockServers(newNode, nextNode, false);
 			
 			//Transfer Keys
-			i++;
-		}
+
+
 		serverConfig.remove(keyToRemove);
 
 	}
@@ -114,10 +141,12 @@ public class ECSServer {
 		Node nextNode = activeServers.getNextNode(selectedNode);
 		Node prevNode = activeServers.getPrevNode(selectedNode);
 		
+		activeServers.removeNode(selectedNode);
+		
 		writeLockUnlockServers(selectedNode, selectedNode, true);
 		writeLockUnlockServers(selectedNode, nextNode, true);
 			
-		initiateTransferFilesForRemove(selectedNode, prevNode, nextNode);
+		initiateTransferFilesForRemove(selectedNode, prevNode, nextNode, activeServers.getMetaData());
 		
 		updateMetaData(nextNode);
 			
@@ -125,7 +154,7 @@ public class ECSServer {
 		writeLockUnlockServers(selectedNode, nextNode, false);
 			
 		//Transfer Keys
-		activeServers.removeNode(selectedNode);
+		
 		//Shutdwon is implmeneted at the KV Server itself
 		serverConfig.put(selectedNode.getName(), selectedNode);
 	}
@@ -139,9 +168,10 @@ public class ECSServer {
 	}
 	
 	//Repeated can be optimized
-	public static void initiateTransferFilesForRemove(Node currentNode, Node prevNode, Node nextNode) {
+	public static void initiateTransferFilesForRemove(Node currentNode, Node prevNode, Node nextNode, Node[] metaData ) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.TRANSFER_AND_SHUTDOWN); // Below is a blocking operation !
+		msg.setMetaData(metaData);
 		if( !nextNode.getName().equals(currentNode.getName())) {
 			msg.setTransferStartKey(prevNode.getEndRange());
 			msg.setTransferEndKey(currentNode.getEndRange());
@@ -150,20 +180,17 @@ public class ECSServer {
 		}
 	}
 	
-	public static void initiateTransferFiles(Node currentNode, Node prevNode, Node nextNode) {
+	public static void initiateTransferFiles(Node newNode, Node prevNode, Node nextNode, Node[] metaData) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.TRANSFER); // Below is a blocking operation !
-		if( !prevNode.getName().equals(currentNode.getName())) {
-			msg.setTransferStartKey(prevNode.getEndRange());
-			msg.setTransferEndKey(currentNode.getEndRange());
-			msg.setTransferServer(prevNode);
-			notifySingleServer(msg, currentNode);
+		msg.setMetaData(metaData);
+		if( !prevNode.getName().equals(newNode.getName())) {
+			msg.setTransferServer(newNode);
+			notifySingleServer(msg, prevNode);
 		}
-		if( !nextNode.getName().equals(currentNode.getName())) {
-			msg.setTransferStartKey(currentNode.getEndRange());
-			msg.setTransferEndKey(nextNode.getEndRange());
-			msg.setTransferServer(nextNode);
-			notifySingleServer(msg, currentNode);
+		if( !nextNode.getName().equals(newNode.getName())) {
+			msg.setTransferServer(newNode);
+			notifySingleServer(msg, nextNode);
 		}
 	}
 	

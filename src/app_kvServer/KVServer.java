@@ -33,6 +33,8 @@ public class KVServer {
 	
     public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
     	
+    	System.out.println("Starting KV Server: "+nodeName);
+    	
     	KVServer.storagePath = path;
     	
 		new KVServerAdminThread(adminPort, nodeName).start();

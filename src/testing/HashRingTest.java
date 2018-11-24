@@ -49,7 +49,15 @@ public class HashRingTest extends TestCase {
 		System.out.println(hashRing.getMetaData());
 		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[0].getStartRange(),  hashRing.getMetaData()[0].getEndRange()));
 		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[1].getStartRange(),  hashRing.getMetaData()[1].getEndRange()));
-		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[2].getStartRange(),  hashRing.getMetaData()[2].getEndRange()));
+		System.out.println("Start Range: "+hashRing.getMetaData()[1].getStartRange());
+		System.out.println("End Range: "+hashRing.getMetaData()[1].getEndRange());
+		System.out.println(hashRing.checkKeyRange("hello", hashRing.getMetaData()[1].getStartRange(),  hashRing.getMetaData()[1].getEndRange()));
+		System.out.println(hashRing.checkKeyRange("saiudn", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
+		System.out.println(hashRing.checkKeyRange("zxasr", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
+		System.out.println(hashRing.checkKeyRange("hello", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
+		System.out.println(hashRing.checkKeyRange("asd", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
+		System.out.println(hashRing.checkKeyRange("hello2", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
+		System.out.println(hashRing.checkKeyRange("hello1", "DCEE0277EB13B76434E8DCD31A387709",  "A98109598267087DFC364FAE4CF24578"));
 		System.out.println("------Other Cases End ------");
 	}
 	

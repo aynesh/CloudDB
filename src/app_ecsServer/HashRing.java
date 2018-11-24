@@ -55,7 +55,7 @@ public class HashRing {
 		}
 	}
 	
-	
+/*	
 	public static boolean checkKeyRange(String key, String startKey, String endKey) {
 		String keyHash=null;
 		try {
@@ -67,16 +67,17 @@ public class HashRing {
 		if(keyHash==null) {
 			return false;
 		}
+		System.out.println("keyHash: "+keyHash);
 		BigInteger keyBi = new BigInteger(keyHash, 16);
 		BigInteger startKeyBi = new BigInteger(startKey, 16);
 		BigInteger endKeyBi = new BigInteger(endKey, 16);
-		
-		if(keyBi.compareTo(startKeyBi) == 1 && keyBi.compareTo(endKeyBi) == -1) {
+		System.out.println("startBi: ");
+		if(keyBi.compareTo(startKeyBi) == -1 && keyBi.compareTo(endKeyBi) == 1) {
 			return true;
 		}
 		
 		return false;
-	}
+	}*/
 	
 	public Node getPrevNode(Node node) {
 		int i=0;
