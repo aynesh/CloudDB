@@ -2,12 +2,14 @@ package common.messages.impl;
 
 import java.io.Serializable;
 
+import app.common.Node;
 import common.messages.KVMessage;
 
 public class KVMessageImpl implements KVMessage,Serializable {
 
 	String key;
 	String value;
+	Node[] metaData;
 	StatusType type;
 	
 	public KVMessageImpl() {}
@@ -57,6 +59,17 @@ public class KVMessageImpl implements KVMessage,Serializable {
 	@Override
 	public String toString() {
 		return "KVMessageImpl [key=" + key + ", value=" + value + ", type=" + type + "]";
+	}
+
+	@Override
+	public Node[] getMetaData() {
+		return metaData;
+	}
+
+	@Override
+	public void setMetaData(Node[] nodes) {
+		this.metaData = nodes;
+		
 	}
 	
 

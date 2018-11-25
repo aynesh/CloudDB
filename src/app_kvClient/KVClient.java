@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
 
-import org.apache.log4j.Level;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
+import app.common.HashRing;
+import app.common.Node;
 import client.KVStore;
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;;
@@ -19,6 +22,7 @@ public class KVClient {
 	 * a user
 	 */
 	static Logger logger = Logger.getLogger(KVClient.class);
+
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
 		System.out.println(
@@ -38,44 +42,116 @@ public class KVClient {
 		help();
 	}
 
+	public static void printError(KVMessage msg) {
+		if (msg.getStatus() == StatusType.SERVER_STOPPED) {
+			System.out.println("Server> Server Stopped");
+		} else {
+			System.out.println("Server> Error. "+msg.getStatus());
+			System.out.println("Error> "+msg.getValue());
+		}
+		
+	}
+	
+	public static void printGetOutut(KVMessage recd) {
+		if (recd.getStatus() == StatusType.GET_SUCCESS) {
+			System.out.println("Server> " + recd.getValue());
+		} else {
+			KVClient.printError(recd);
+		}
+	}
+	
+	
+	public static void printPutOutput(KVMessage recd) {
+		if(recd.getStatus()==StatusType.PUT_SUCCESS || recd.getStatus() == StatusType.PUT_UPDATE || recd.getStatus() == StatusType.DELETE_SUCCESS) {
+			System.out.println("Server> " + recd.getStatus());
+		} else {
+			KVClient.printError(recd);
+		}
+	}
+
+	
+	public static KVStore retryServerNotReponsible(KVStore kvStore, StatusType request, String key, String value, Node[] metaData) {
+		BasicConfigurator.configure();
+		HashRing hashRing=new HashRing();
+		hashRing.clearAndSetMetaData(metaData);
+		Node responsibleNode=null;
+		try {
+			responsibleNode=hashRing.getNode(key);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block|
+			e.printStackTrace();
+		} 
+		if(responsibleNode==null) {
+			System.out.println("Client> Node not found!");
+			System.out.println("Client> Please connect again !");
+			return null;
+		}
+		
+		kvStore = new KVStore(responsibleNode.getIpAddress(), Integer.parseInt(responsibleNode.getPort()));
+		try {
+			kvStore.connect();
+			System.out.println("Client> Connected to "+responsibleNode.getIpAddress()+":"+responsibleNode.getPort());
+		} catch (Exception e) {
+			System.out.println("Client> "+e.getLocalizedMessage());
+			System.out.println("Client> Please connect again !");
+			return null;
+		}
+		
+		if(request == StatusType.GET) {
+			KVMessage recd;
+			try {
+				recd = kvStore.get(key);
+				printGetOutut(recd);
+			} catch (Exception e) {
+				System.out.print("Error> "+e.getMessage());
+				kvStore.disconnect();
+			}
+
+		} else { //Its a put
+			KVMessage recd;
+			try {
+				recd = kvStore.put(key, value);
+				printPutOutput(recd);
+			} catch (Exception e) {
+				System.out.print("Error> "+e.getMessage());
+				kvStore.disconnect();
+			}
+		}
+		return kvStore;
+	}
+
 	/**
 	 * @param args Unused.
 	 * @return Nothing.
 	 * @exception IOException On input error.
-	 * @throws IOException
-	 * this main method creates an instance of Client class,
-	 * receives commands through BufferedReader as Strings
-	 * and behaves accordingly. 
+	 * @throws IOException this main method creates an instance of Client class,
+	 *                     receives commands through BufferedReader as Strings and
+	 *                     behaves accordingly.
 	 */
-	public static void main(String[] args) throws IOException
-	{
-
+	public static void main(String[] args) throws IOException {
+		
+		Node[] metaData;
+		HashRing hashRing= new HashRing();
 		BufferedReader cons = new BufferedReader(new InputStreamReader(System.in));
 		boolean quit = false;
 
-		KVStore client = null; 
-
-		while (!quit)
-		{
+		KVStore client = null;
+		while (!quit) {
 			System.out.print("Client> ");
 			String input = cons.readLine();
 			String[] tokens = input.trim().split("\\s+");
-			if (tokens[0].equals("quit"))
-			{
+			if (tokens[0].equals("quit")) {
 				quit = true;
-				
-			}
-			else if (tokens[0].equals("connect"))
-			{
-				if(tokens.length<3) {
+
+			} else if (tokens[0].equals("connect")) {
+				if (tokens.length < 3) {
 					System.out.println("Incorrect usage of command.");
 					help();
-				}
-				else {
+				} else {
 					try {
 						client = new KVStore(tokens[1], Integer.parseInt(tokens[2]));
 						client.connect();
-						
+
 					} catch (UnknownHostException e) {
 						System.out.println("Unknown host. Unable to establish connection.");
 					} catch (IOException e) {
@@ -84,26 +160,64 @@ public class KVClient {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+
 				}
-			}
-			else if (tokens[0].equals("get"))
-			{
-				if(tokens.length<2) {
+			} else if (tokens[0].equals("get")) {
+				if (tokens.length < 2) {
 					System.out.println("Incorrect usage of command.");
 					help();
 				}
-				
-				
-				try{
+
+				try {
 					KVMessage recd = client.get(tokens[1]);
-					if(recd.getStatus()==StatusType.GET_SUCCESS) {
-					System.out.println("Server> " + recd.getValue());
-					}
-					else {
-						System.out.println("Server> Key not found");
-					}
+					if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
+						System.out.println("Server> SERVER_NOT_RESPONSIBLE");
+						HashRing.printMetaData(recd.getMetaData());
+						client.disconnect();
 						
+						System.out.println("Client> Disconnected For Retrying. . .");
+						
+						client=retryServerNotReponsible(client, StatusType.GET, tokens[1], null,recd.getMetaData());
+					} else {
+						printGetOutut(recd);
+					}
+
+				} catch (UnsupportedEncodingException e) {
+					System.out.println("Failed to decode message.");
+					throw e;
+				} catch (IOException e) {
+					System.out.println("Failed to receive response.");
+				} catch (NullPointerException e) {
+					System.out.println("Connection not established.");
+				} catch (Exception e) {
+					System.out.println("GET Failed. Reconnect again.");
+				}
+
+			} else if (tokens[0].equals("put")) {
+				if (tokens.length < 2) {
+					System.out.println("Incorrect usage of command.");
+					help();
+				}
+				KVMessage recd;
+				try {
+					if (tokens.length < 3) {
+						recd = client.put(tokens[1], "null");
+					} else {
+						recd = client.put(tokens[1], tokens[2]);
+					}
+					
+					if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
+						System.out.println("Server> SERVER_NOT_RESPONSIBLE");
+						HashRing.printMetaData(recd.getMetaData());
+						client.disconnect();
+						
+						System.out.println("Client> Disconnected For Retrying. . .");
+						
+						client=retryServerNotReponsible(client, StatusType.PUT, tokens[1], tokens.length < 3 ? "null" : tokens[2] ,recd.getMetaData());
+						
+					} else {
+						KVClient.printPutOutput(recd);
+					}
 					
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
@@ -112,72 +226,30 @@ public class KVClient {
 					System.out.println("Failed to receive response.");
 				} catch (NullPointerException e) {
 					System.out.println("Connection not established.");
-				}
-				catch (Exception e) {
-					System.out.println("GET Failed.");
+				} catch (Exception e) {
+					System.out.println("PUT Failed.Reconnect again");
 				}
 
-
-			}
-			else if (tokens[0].equals("put"))
-			{
-				if(tokens.length<2) {
-					System.out.println("Incorrect usage of command.");
-					help();
+			} else if (tokens[0].equals("disconnect")) {
+				try {
+					client.disconnect();
 				}
-				KVMessage recd;
-				try{
-					if(tokens.length<3) {
-						recd = client.put(tokens[1],"null");
-					}
-					else {
-						recd = client.put(tokens[1], tokens[2]);
-					}
-					
-					System.out.println("Server> " + recd.getStatus());
-				} catch (UnsupportedEncodingException e) {
-					System.out.println("Failed to decode message.");
-					throw e;
-				} catch (IOException e) {
-					System.out.println("Failed to receive response.");
-				} 
+
 				catch (NullPointerException e) {
 					System.out.println("Connection not established.");
 				}
-			    catch (Exception e) {
-			    	System.out.println("PUT Failed");
-				}
 
-			}
-			else if (tokens[0].equals("disconnect"))
-			{
-					 try{
-						 client.disconnect();
-					 }
-					 
-						 catch (NullPointerException e) {
-								System.out.println("Connection not established.");
-							}
-					 
-				
-			}
-			else if (tokens[0].equals("help"))
-			{
+			} else if (tokens[0].equals("help")) {
 				help();
-			}
-			else if (tokens[0].equals("logLevel"))
-			{
-				if(tokens.length<2) {
+			} else if (tokens[0].equals("logLevel")) {
+				if (tokens.length < 2) {
 					System.out.println("Incorrect usage of command.");
 					help();
-				}
-				else {
+				} else {
 					KVStore.setLevel(tokens[1]);
 					System.out.println("Changed log level.");
 				}
-			}
-			else
-			{
+			} else {
 				invalidCommand();
 			}
 		}

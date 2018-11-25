@@ -26,6 +26,9 @@ public interface KVCommInterface {
      *                   KV server).
      */
     public KVMessage put(String key, String value) throws Exception;
+    
+    
+    public KVMessage transfer(String key, String value) throws Exception;
 
     /**
      * Retrieves the value for a given key from the KVServer.

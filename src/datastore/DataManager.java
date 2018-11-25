@@ -5,10 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
-import org.apache.log4j.Logger;
+import java.io.FilenameFilter;
 
 import app_kvServer.Cache;
+import app_kvServer.KVServer;
 import common.messages.KVMessage.StatusType;
 
 public class DataManager {
@@ -23,7 +23,7 @@ public class DataManager {
      * @throws Exception
      */
     public static StatusType put(String key, String value) throws Exception {
-        String fileName = key+".txt";
+        String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
         File file = new File(fileName);
@@ -37,6 +37,18 @@ public class DataManager {
 		    cache.add(key, value);
         return type;
     }
+    
+    
+    public static File[] getAllTextFiles() {
+    	File dir = new File(KVServer.storagePath);
+    	System.out.println("Storage Path: "+KVServer.storagePath);;
+        return dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(".txt");
+            }
+        });
+    }
 
     /**
      * @param key
@@ -48,7 +60,7 @@ public class DataManager {
     		return cache.get(key);
     	}
     	
-    	String fileName = key+".txt";
+    	String fileName = KVServer.storagePath+key+".txt";
     	FileReader fileReader = new FileReader(fileName);
     	BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
@@ -58,7 +70,7 @@ public class DataManager {
     }
     
     public static void delete(String key) throws Exception {
-    	String fileName = key+".txt";
+    	String fileName = KVServer.storagePath+key+".txt";
     	File file = new File(fileName);
     	if(!file.delete()) 
         { 
@@ -66,7 +78,7 @@ public class DataManager {
             throw new Exception();
         } 
     	if(cache.contains(key)) {
-    	cache.delete(key);
+    		cache.delete(key);
     	}
     }
 

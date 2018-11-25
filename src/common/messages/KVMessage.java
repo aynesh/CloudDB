@@ -1,5 +1,7 @@
 package common.messages;
 
+import app.common.Node;
+
 public interface KVMessage {
 
     public enum StatusType {
@@ -12,7 +14,13 @@ public interface KVMessage {
         PUT_ERROR, 		/* Put - request not successful */
         DELETE, 		/* Delete - request */
         DELETE_SUCCESS, /* Delete - request successful */
-        DELETE_ERROR 	/* Delete - request successful */
+        DELETE_ERROR, 	/* Delete - request successful */
+        SERVER_STOPPED,
+        SERVER_NOT_RESPONSIBLE,
+        SERVER_WRITE_LOCK,
+        TRANSFER, 
+        TRANSFER_SUCCESS,
+        TRANSFER_ERROR
     }
 
     /**
@@ -32,6 +40,10 @@ public interface KVMessage {
      * response types and error types associated to the message.
      */
     public StatusType getStatus();
+    
+    public Node[] getMetaData();
+    
+    public void setMetaData(Node nodes[]);
 
 	public void setKey(String key);
 
