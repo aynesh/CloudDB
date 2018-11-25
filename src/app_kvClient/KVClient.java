@@ -9,8 +9,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 
-import app_ecsServer.HashRing;
-import app_ecsServer.Node;
+import app.common.HashRing;
+import app.common.Node;
 import client.KVStore;
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;;

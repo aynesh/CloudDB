@@ -11,7 +11,7 @@ public class AllTests {
         	Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                	new KVServer(50000, 10, "FIFO");
+                	new KVServer("node3", 50002, 4000, 1, "FIFO","/home/aynesh/node3");
                 }
             });
         	thread.start();

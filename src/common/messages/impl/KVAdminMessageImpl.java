@@ -3,7 +3,7 @@ package common.messages.impl;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import app_ecsServer.Node;
+import app.common.Node;
 import common.messages.KVAdminMessage;
 
 public class KVAdminMessageImpl implements KVAdminMessage, Serializable {

@@ -1,4 +1,4 @@
-package app_ecsServer;
+package app.common;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

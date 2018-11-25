@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
+import app.common.HashRing;
+import app.common.Node;
 import app_ecsServer.ECSServerLibrary;
-import app_ecsServer.HashRing;
-import app_ecsServer.Node;
 import client.KVStore;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;

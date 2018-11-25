@@ -1,6 +1,6 @@
 package common.messages;
 
-import app_ecsServer.Node;
+import app.common.Node;
 
 public interface KVAdminMessage {
 	

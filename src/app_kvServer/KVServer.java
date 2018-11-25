@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import app_ecsServer.HashRing;
+import app.common.HashRing;
 import datastore.DataManager;
 
 public class KVServer {

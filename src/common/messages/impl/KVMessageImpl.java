@@ -2,7 +2,7 @@ package common.messages.impl;
 
 import java.io.Serializable;
 
-import app_ecsServer.Node;
+import app.common.Node;
 import common.messages.KVMessage;
 
 public class KVMessageImpl implements KVMessage,Serializable {
