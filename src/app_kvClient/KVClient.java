@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import app.common.HashRing;
@@ -70,6 +71,7 @@ public class KVClient {
 
 	
 	public static KVStore retryServerNotReponsible(KVStore kvStore, StatusType request, String key, String value, Node[] metaData) {
+		BasicConfigurator.configure();
 		HashRing hashRing=new HashRing();
 		hashRing.clearAndSetMetaData(metaData);
 		Node responsibleNode=null;

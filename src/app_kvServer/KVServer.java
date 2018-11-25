@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import app.common.HashRing;
 import datastore.DataManager;
 
 public class KVServer {
+	
+	static Logger logger = Logger.getLogger(KVServer.class);
 
     /**
      * Start KV Server at given port
@@ -33,7 +38,9 @@ public class KVServer {
 	
     public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
     	
-    	System.out.println("Starting KV Server: "+nodeName);
+        BasicConfigurator.configure();
+    	
+    	logger.info("Starting KV Server: "+nodeName);
     	
     	KVServer.storagePath = path;
     	
@@ -54,7 +61,7 @@ public class KVServer {
             try {
                 socket = serverSocket.accept();
             } catch (IOException e) {
-                System.out.println("I/O error: " + e);
+            	logger.error("I/O error: " + e);
             }
             
             new KVServerThread(socket, nodeName).start();

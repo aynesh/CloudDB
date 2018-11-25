@@ -1,9 +1,9 @@
 package app_ecsServer;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import app.common.HashRing;
@@ -38,6 +38,7 @@ public class ECSServer {
 
 	public static void main(String[] args) {
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
+	    BasicConfigurator.configure();
 		
 		Map<String, Node> serverConfig = ECSServerLibrary.readConfigFile(ecsConfigFileName);
 		
