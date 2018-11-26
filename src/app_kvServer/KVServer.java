@@ -13,7 +13,15 @@ import datastore.DataManager;
 public class KVServer {
 	
 	static Logger logger = Logger.getLogger(KVServer.class);
-
+	
+    public static volatile boolean serveClients=false;
+    
+    public static volatile HashRing metaData=new HashRing();
+    
+	public static volatile boolean writeLock=false;
+	
+	public static volatile String storagePath="./";
+	
     /**
      * Start KV Server at given port
      * @param nodeName: Node identifier
@@ -27,15 +35,6 @@ public class KVServer {
      *                  currently not contained in the cache. Options are "FIFO", "LRU",
      *                  and "LFU".
      */
-	
-    public static volatile boolean serveClients=false;
-    
-    public static volatile HashRing metaData=new HashRing();
-    
-	public static volatile boolean writeLock=false;
-	
-	public static volatile String storagePath="./";
-	
     public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
     	
     	logger.info("Starting KV Server: "+nodeName);
