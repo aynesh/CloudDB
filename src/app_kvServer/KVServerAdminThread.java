@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -38,6 +40,7 @@ public class KVServerAdminThread extends Thread {
 	
 	public static void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag) {
 		File files[] = DataManager.getAllTextFiles();
+		List<String> keysToBeDeleted=new ArrayList<>();
 		
 		for(File file: files) {
 			String name = file.getName();
@@ -54,7 +57,7 @@ public class KVServerAdminThread extends Thread {
 						kvClient.connect();
 						KVMessage msg = kvClient.transfer(key, data);
 						if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
-							DataManager.delete(key);
+							keysToBeDeleted.add(key);
 							logger.info("Transfered: "+key);
 						}
 						kvClient.disconnect();
@@ -69,6 +72,15 @@ public class KVServerAdminThread extends Thread {
 				e.printStackTrace();
 			}
 		}
+		logger.info("Delete Started....");
+		for(String key: keysToBeDeleted) {
+			try {
+				DataManager.delete(key);
+			} catch (Exception e) {
+				logger.error("Delete failed");
+			}
+		}
+		logger.info("Delete Completed....");
 		logger.info("Ending KV Server transfer-------");
 		if(shutdownFlag) {
 			System.exit(0);
