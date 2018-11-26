@@ -199,7 +199,11 @@ public class ECSServerLibrary {
 		boolean serverOnline = false;
 		KVAdminMessageImpl pingMessage = new KVAdminMessageImpl();
 		pingMessage.setCommand(Command.PING);
+		i=1;
 		while (!serverOnline) {
+			if(i > 100) {
+				break;
+			}
 			KVAdminMessage reply = ECSServerLibrary.sendMessage(pingMessage, newNode.getIpAddress(),
 					Integer.parseInt(newNode.getAdminPort()));
 			if (reply != null) {
@@ -209,12 +213,13 @@ public class ECSServerLibrary {
 				}
 			}
 			try {
-				logger.info("Ping sleep");
+				logger.info("Ping sleep... attempting next ping "+i);
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				logger.error(e);
 			}
+			i++;
 		}
 
 		initiateTransferFiles(newNode, prevNode, nextNode, activeServers.getMetaData());
