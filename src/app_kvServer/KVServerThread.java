@@ -58,13 +58,14 @@ public class KVServerThread extends Thread {
 							if (this.checkIfServerResponsible(inpMsg.getKey())) {
 								DataManager.delete(inpMsg.getKey());
 								outMsg.setStatus(StatusType.DELETE_SUCCESS);
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
 							}
 
 						} catch (Exception e) {
-
+							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setStatus(StatusType.DELETE_ERROR);
 
 						}
@@ -75,12 +76,14 @@ public class KVServerThread extends Thread {
 							if (this.checkIfServerResponsible(inpMsg.getKey())) {
 								outMsg.setValue(DataManager.get(inpMsg.getKey()));
 								outMsg.setStatus(StatusType.GET_SUCCESS);
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
 
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
 							}
 						} catch (Exception e) {
+							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setValue(e.getMessage());
 							outMsg.setStatus(StatusType.GET_ERROR);
 						}
@@ -93,12 +96,14 @@ public class KVServerThread extends Thread {
 							} else if (this.checkIfServerResponsible(inpMsg.getKey())) {
 								outMsg.setStatus(DataManager.put(inpMsg.getKey(), inpMsg.getValue()));
 								outMsg.setValue(inpMsg.getValue());
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
 							}
 
 						} catch (Exception e) {
+							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setValue(e.getMessage());
 							outMsg.setStatus(StatusType.PUT_ERROR);
 						}

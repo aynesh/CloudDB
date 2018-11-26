@@ -38,8 +38,6 @@ public class KVServer {
 	
     public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
     	
-        BasicConfigurator.configure();
-    	
     	logger.info("Starting KV Server: "+nodeName);
     	
     	KVServer.storagePath = path;
