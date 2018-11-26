@@ -38,6 +38,12 @@ public class KVServerAdminThread extends Thread {
 		this.nodeName = nodeName;
 	}
 	
+	/**
+	 * @param nodeName The current node.
+	 * @param toNode The node to transfer data to.
+	 * @param metaData
+	 * @param shutdownFlag true if its a removeNode command.
+	 */
 	public static void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag) {
 		File files[] = DataManager.getAllTextFiles();
 		List<String> keysToBeDeleted=new ArrayList<>();

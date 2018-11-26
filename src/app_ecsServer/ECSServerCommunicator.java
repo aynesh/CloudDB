@@ -30,6 +30,9 @@ public class ECSServerCommunicator {
     	
     }
 
+    /**
+     * @throws Exception
+     */
     public void connect() throws Exception {
         // TODO Auto-generated method stub
     	try {
@@ -66,6 +69,11 @@ public class ECSServerCommunicator {
 		}
     }
     
+    /**
+     * @param message
+     * @return
+     * @throws Exception
+     */
     public KVAdminMessage sendMessage(KVAdminMessage message) throws Exception {
     	if (sock == null || sock.isClosed()) {
 			logger.warn("Attempting to connect via closed socket.");

@@ -28,6 +28,17 @@ public class ECSServerLibrary {
 
 	static Logger logger = Logger.getLogger(ECSServerLibrary.class);
 
+	/**
+	 * @param nodeIdentifier Node Name
+	 * @param ipAddress Ip address of the node to be started.
+	 * @param userName username of the system to connect.
+	 * @param location The location of the jar file.
+	 * @param port Port to start the system.
+	 * @param adminPort Port for admin commands.
+	 * @param cacheSize 
+	 * @param cacheStrategy
+	 * @param storagePath the storage path for key value pairs.
+	 */
 	public static void launchProcess(String nodeIdentifier, String ipAddress, String userName, String location,
 			String port, String adminPort, int cacheSize, String cacheStrategy, String storagePath) {
 		try {
@@ -84,6 +95,10 @@ public class ECSServerLibrary {
 		}
 	}
 
+	/**
+	 * @param fileName
+	 * @return
+	 */
 	public static Map<String, Node> readConfigFile(String fileName) {
 		Map<String, Node> serverConfig = new HashMap();
 
@@ -131,6 +146,13 @@ public class ECSServerLibrary {
 	}
 	
 
+	/**
+	 * @param serverConfig list of configured servers.
+	 * @param cacheSize
+	 * @param cacheStrategy
+	 * @param numberOfServers number of servers to launch.
+	 * @param activeServers
+	 */
 	public static void launchServers(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy,
 			int numberOfServers, HashRing activeServers) {
 		int i = 1;
@@ -164,6 +186,12 @@ public class ECSServerLibrary {
 
 	}
 
+	/**
+	 * @param serverConfig
+	 * @param cacheSize
+	 * @param cacheStrategy
+	 * @param activeServers
+	 */
 	public static void addNode(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy,  HashRing activeServers) {
 		int i = 1;
 		String keyToRemove = null;
@@ -237,6 +265,11 @@ public class ECSServerLibrary {
 
 	}
 
+	/**
+	 * Update meta Data of a target Server.
+	 * @param targetNode
+	 * @param activeServers
+	 */
 	public static void updateMetaData(Node targetNode, HashRing activeServers) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.META_DATA_UPDATE);
@@ -244,6 +277,11 @@ public class ECSServerLibrary {
 		notifySingleServer(msg, targetNode);
 	}
 
+	/**
+	 * Remove Node.
+	 * @param serverConfig
+	 * @param activeServers
+	 */
 	public static void removeNode(Map<String, Node> serverConfig,  HashRing activeServers) {
 		String key = null;
 		Node selectedNode = null;
@@ -276,6 +314,11 @@ public class ECSServerLibrary {
 		serverConfig.put(selectedNode.getName(), selectedNode);
 	}
 
+	/**
+	 * @param referenceNode
+	 * @param targetNode
+	 * @param lock
+	 */
 	public static void writeLockUnlockServers(Node referenceNode, Node targetNode, boolean lock) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(lock ? KVAdminMessage.Command.SERVER_WRITE_LOCK : KVAdminMessage.Command.SERVER_WRITE_UNLOCK);
@@ -285,6 +328,12 @@ public class ECSServerLibrary {
 	}
 
 	// Repeated can be optimized
+	/**
+	 * @param currentNode
+	 * @param prevNode
+	 * @param nextNode
+	 * @param metaData
+	 */
 	public static void initiateTransferFilesForRemove(Node currentNode, Node prevNode, Node nextNode, Node[] metaData) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.TRANSFER_AND_SHUTDOWN); // Below is a blocking operation !
@@ -297,6 +346,12 @@ public class ECSServerLibrary {
 		}
 	}
 
+	/**
+	 * @param newNode
+	 * @param prevNode
+	 * @param nextNode
+	 * @param metaData
+	 */
 	public static void initiateTransferFiles(Node newNode, Node prevNode, Node nextNode, Node[] metaData) {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.TRANSFER); // Below is a blocking operation !
@@ -311,12 +366,20 @@ public class ECSServerLibrary {
 		}
 	}
 
+	/**
+	 * @param msg
+	 * @param activeServers
+	 */
 	public static void notifyAllServers(KVAdminMessage msg, HashRing activeServers) {
 		for (Node node : activeServers.getMetaData()) {
 			ECSServerLibrary.sendMessage(msg, node.getIpAddress(), Integer.parseInt(node.getAdminPort()));
 		}
 	}
 
+	/**
+	 * @param msg
+	 * @param node
+	 */
 	public static void notifySingleServer(KVAdminMessage msg, Node node) {
 		ECSServerLibrary.sendMessage(msg, node.getIpAddress(), Integer.parseInt(node.getAdminPort()));
 	}
