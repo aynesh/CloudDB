@@ -211,7 +211,6 @@ public class KVClient {
 
 	/**
 	 * @param args Unused.
-	 * @return Nothing.
 	 * @exception IOException On input error.
 	 * @throws IOException this main method creates an instance of Client class,
 	 *                     receives commands through BufferedReader as Strings and

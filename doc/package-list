@@ -1,3 +1,5 @@
+app.common
+app_ecsServer
 app_kvClient
 app_kvServer
 app_kvServer.impl
