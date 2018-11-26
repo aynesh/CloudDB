@@ -8,9 +8,13 @@ import java.util.TreeMap;
 
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.log4j.Logger;
+
 public class HashRing {
 	
 	private Map<BigInteger, Node> map = new TreeMap<BigInteger, Node>();
+	
+	static Logger logger = Logger.getLogger(HashRing.class);
 	
 	public void addNode(Node node) {
 		try {
@@ -25,21 +29,20 @@ public class HashRing {
 	
 	public void removeNode(Node node) {
 		try {
-			System.out.println("node");
-			System.out.println(node);
+			logger.info("node");
+			logger.info(node);
 			String key = HashRing.getMD5Hash(node.getIpAndPort()); // Problem here
 			BigInteger bi = new BigInteger(key, 16);
-			printMetaData(getMetaData());
-			System.out.println("bi");
-			System.out.println(bi);
-			System.out.println("key");
-			System.out.println(key);
-			System.out.println("map");
-			System.out.println(map);
+			logger.info(getMetaData());
+			logger.info("bi");
+			logger.info(bi);
+			logger.info("key");
+			logger.info(key);
+			logger.info("map");
+			logger.info(map);
 			map.remove(bi);
 		} catch (NoSuchAlgorithmException e) {
-
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 	

@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 
+import org.apache.log4j.Logger;
+
 import app_kvServer.Cache;
 import app_kvServer.KVServer;
 import common.messages.KVMessage.StatusType;
@@ -14,6 +16,8 @@ import common.messages.KVMessage.StatusType;
 public class DataManager {
 	
 	public static Cache cache;
+	
+	static Logger logger = Logger.getLogger(DataManager.class);
 	
 	
     /**
@@ -41,7 +45,7 @@ public class DataManager {
     
     public static File[] getAllTextFiles() {
     	File dir = new File(KVServer.storagePath);
-    	System.out.println("Storage Path: "+KVServer.storagePath);;
+    	logger.info("Storage Path: "+KVServer.storagePath);;
         return dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -74,7 +78,7 @@ public class DataManager {
     	File file = new File(fileName);
     	if(!file.delete()) 
         { 
-    		System.out.println("Delete Exception ");
+    		logger.error("Delete Exception ");
             throw new Exception();
         } 
     	if(cache.contains(key)) {

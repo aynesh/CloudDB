@@ -109,7 +109,7 @@ public class KVServerThread extends Thread {
 							DataManager.put(inpMsg.getKey(), inpMsg.getValue());
 						} catch(Exception ex) {
 							outMsg.setStatus(StatusType.TRANSFER_ERROR);
-							System.out.println("Transfer Error: "+ex.toString());
+							logger.error("Transfer Error: "+ex.toString());
 						}
 
 					default:
@@ -118,7 +118,7 @@ public class KVServerThread extends Thread {
 				}
 
 				KVMessageManager.sendKVMessage(outMsg, out);
-				// System.out.println(inpMsg.toString());
+
 			} catch (Exception e) {
 
 				return;

@@ -38,7 +38,6 @@ public class ECSServer {
 
 	public static void main(String[] args) {
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
-	    BasicConfigurator.configure();
 		
 		Map<String, Node> serverConfig = ECSServerLibrary.readConfigFile(ecsConfigFileName);
 		
