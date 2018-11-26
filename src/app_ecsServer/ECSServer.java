@@ -19,7 +19,7 @@ public class ECSServer {
 	
 	private Map<String, Node> serverConfig;
 	
-	ECSServer() {
+	public ECSServer() {
 		
 	}
 

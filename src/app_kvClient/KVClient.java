@@ -102,14 +102,14 @@ public class KVClient {
 		throw new UnknownHostException("Cannot Connect to Any Servers :(");
 	}
 	
-	public void Get(String tokens[]) throws Exception {
+	public void Get(String key) throws Exception {
 		KVMessage recd = null;
 		try {
-			recd = client.get(tokens[1]);
+			recd = client.get(key);
 			metaData=recd.getMetaData();
 		} catch(IOException ex) {
 			connectToAnyOtherServer();
-			recd = client.get(tokens[1]);
+			recd = client.get(key);
 		}
 
 		if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
@@ -120,28 +120,20 @@ public class KVClient {
 
 			System.out.println("Client> Disconnected For Retrying. . .");
 			
-			client=retryServerNotReponsible(client, StatusType.GET, tokens[1], null,recd.getMetaData());
+			client=retryServerNotReponsible(client, StatusType.GET, key, null,recd.getMetaData());
 		} else {
 			printGetOutut(recd);
 		}
 	}
 	
-	public void Put(String tokens[]) throws Exception {
+	public void Put(String key, String value) throws Exception {
 		KVMessage recd;
 		try {
-			if (tokens.length < 3) {
-				recd = client.put(tokens[1], "null");
-			} else {
-				recd = client.put(tokens[1], tokens[2]);
-			}
+			recd = client.put(key, value != null ? value: "null");
 			metaData=recd.getMetaData();
 		} catch(IOException ex) {
 			connectToAnyOtherServer();
-			if (tokens.length < 3) {
-				recd = client.put(tokens[1], "null");
-			} else {
-				recd = client.put(tokens[1], tokens[2]);
-			}
+			recd = client.put(key, value != null ? value: "null");
 		}
 		
 		if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
@@ -152,7 +144,7 @@ public class KVClient {
 			
 			System.out.println("Client> Disconnected For Retrying. . .");
 			
-			client=retryServerNotReponsible(client, StatusType.PUT, tokens[1], tokens.length < 3 ? "null" : tokens[2] ,recd.getMetaData());
+			client=retryServerNotReponsible(client, StatusType.PUT, key, value != null ? value: "null" ,recd.getMetaData());
 			
 		} else {
 			KVClient.printPutOutput(recd);
@@ -267,7 +259,7 @@ public class KVClient {
 				}
 
 				try {
-					kvClient.Get(tokens);
+					kvClient.Get(tokens[1]);
 
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
@@ -287,7 +279,7 @@ public class KVClient {
 				}
 				
 				try {
-					kvClient.Put(tokens);
+					kvClient.Put(tokens[1], tokens.length > 2 ? tokens[2]: null );
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("Failed to decode message.");
 					throw e;
