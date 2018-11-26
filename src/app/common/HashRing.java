@@ -16,6 +16,9 @@ public class HashRing {
 	
 	static Logger logger = Logger.getLogger(HashRing.class);
 	
+	/**
+	 * @param node - New Node to be added
+	 */
 	public void addNode(Node node) {
 		try {
 			String key = HashRing.getMD5Hash(node.getIpAndPort());
@@ -27,6 +30,9 @@ public class HashRing {
 		}
 	}
 	
+	/**
+	 * @param node - Node to be removed.
+	 */
 	public void removeNode(Node node) {
 		try {
 			logger.info("node");
@@ -46,10 +52,16 @@ public class HashRing {
 		}
 	}
 	
+	/**
+	 * Remove all the Nodes.
+	 */
 	public void removeAll() {
 		map.clear();
 	}
 	
+	/**
+	 * @param metaData-To clear and reinitialize using Node array
+	 */
 	public void clearAndSetMetaData(Node[] metaData) {
 		map.clear();
 		for(Node node: metaData) {
@@ -82,6 +94,10 @@ public class HashRing {
 		return false;
 	}*/
 	
+	/**
+	 * @param node The node for which previous node to be found.
+	 * @return
+	 */
 	public Node getPrevNode(Node node) {
 		int i=0;
 		Node prevNode=null;
@@ -95,6 +111,10 @@ public class HashRing {
 		return prevNode; 
 	}
 	
+	/**
+	 * @param node The node for which next node to be found.
+	 * @return
+	 */
 	public Node getNextNode(Node node) {
 		int i=0;
 		Node nextNode=null;
@@ -114,6 +134,16 @@ public class HashRing {
 		return nextNode;
 	}
 	
+	/**
+	 * @param key 
+	 * @return The node reponible for the given the key.|
+	 * @throws NoSuchAlgorithmException
+	 */
+	/**
+	 * @param key
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	public Node getNode(String key) throws NoSuchAlgorithmException {
 		String keyHash = HashRing.getMD5Hash(key);
 		BigInteger bi = new BigInteger(keyHash, 16);
@@ -122,7 +152,7 @@ public class HashRing {
 		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
 			BigInteger mapKey = entry.getKey();
 			Node node = entry.getValue();
-			if(mapKey.compareTo(bi) == 1 ) {
+			if(mapKey.compareTo(bi) == 1 || mapKey.compareTo(bi) == 0) {
 				return node;
 			}
 			if(i==0) {
@@ -133,6 +163,9 @@ public class HashRing {
 		return firstNode; //Circular 
 	}
 	
+	/**
+	 * @return Meta data in Node array form.
+	 */
 	public Node[] getMetaData() {
 		Node[] nodes = new Node[map.size()];
 		Node prevNode = null;
@@ -153,12 +186,20 @@ public class HashRing {
 		return nodes;
 	}
 	
+	/**
+	 * @param nodes Prints the meta data to console.
+	 */
 	public static void printMetaData(Node nodes[]) {
 		for(Node node:nodes) {
 			System.out.println(node.toString());
 		}
 	}
 	
+	/**
+	 * @param input
+	 * @return Returns the MD5 hash for the given string.
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static String getMD5Hash(String input) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(input.getBytes());
