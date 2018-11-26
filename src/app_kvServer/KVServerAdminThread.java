@@ -10,21 +10,22 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 
-import javax.net.ssl.SSLEngineResult.Status;
+import org.apache.log4j.Logger;
 
 import app.common.HashRing;
 import app.common.Node;
-import app_ecsServer.ECSServerLibrary;
 import client.KVStore;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
-import common.messages.KVMessage.StatusType;
 import common.messages.KVAdminMessageManager;
 import common.messages.KVMessage;
+import common.messages.KVMessage.StatusType;
 import common.messages.impl.KVAdminMessageImpl;
 import datastore.DataManager;
 
 public class KVServerAdminThread extends Thread {
+	
+	static Logger logger = Logger.getLogger(KVServerAdminThread.class);
 	
 	private int port = 3000;
 	private String nodeName = "";
@@ -42,10 +43,10 @@ public class KVServerAdminThread extends Thread {
 			String name = file.getName();
 
 			String key = name.split(".txt")[0];
-			System.out.println("key: "+key+" Filename>"+name);
+			logger.info("key: "+key+" Filename>"+name);
 			
 			try {
-				System.out.println("Belongs to: "+metaData.getNode(key).getName()+" Checking toNode: "+toNode.getName());
+				logger.info("Belongs to: "+metaData.getNode(key).getName()+" Checking toNode: "+toNode.getName());
 				if(metaData.getNode(key).getName().equals(toNode.getName())) {
 					try {
 						String data=DataManager.get(key);
@@ -54,14 +55,13 @@ public class KVServerAdminThread extends Thread {
 						KVMessage msg = kvClient.transfer(key, data);
 						if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
 							DataManager.delete(key);
-							System.out.println("Transfered: "+key);
+							logger.info("Transfered: "+key);
 						}
 						kvClient.disconnect();
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						System.out.println(e);
-						e.printStackTrace();
+						logger.error(e);
 					}
 				}
 			} catch (NoSuchAlgorithmException e) {
@@ -69,7 +69,7 @@ public class KVServerAdminThread extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Ending KV Server transfer-------");
+		logger.info("Ending KV Server transfer-------");
 		if(shutdownFlag) {
 			System.exit(0);
 		}
@@ -88,7 +88,7 @@ public class KVServerAdminThread extends Thread {
 			try {
 				socket = serverSocket.accept();
 			} catch (IOException e) {
-				System.out.println("I/O error: " + e);
+				logger.error("I/O error: " + e);
 			}
 
 			InputStream inp = null;
@@ -120,7 +120,7 @@ public class KVServerAdminThread extends Thread {
 						} catch (Exception e) {
 							outMsg.setCommand(Command.EXCEPTION);
 						}
-						System.out.println("Started Accepting commands");
+						logger.info("Started Accepting commands");
 						break;
 					case STOP:
 						try {
@@ -129,7 +129,7 @@ public class KVServerAdminThread extends Thread {
 						} catch (Exception e) {
 							outMsg.setCommand(Command.EXCEPTION);
 						}
-						System.out.println("Stopped Accepting commands");
+						logger.info("Stopped Accepting commands");
 						break;
 					case SHUTDOWN:
 						try {
@@ -138,7 +138,7 @@ public class KVServerAdminThread extends Thread {
 						} catch (Exception e) {
 							outMsg.setCommand(Command.EXCEPTION);
 						}
-						System.out.println("Shutdown initiated !");
+						logger.info("Shutdown initiated !");
 						break;
 					case SERVER_WRITE_LOCK:
 						KVServer.writeLock = true;
@@ -178,7 +178,7 @@ public class KVServerAdminThread extends Thread {
 					}
 					KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
 					if(inpMsg.getCommand()==Command.SHUTDOWN) {
-						System.out.println("Shutdown In Progress !");
+						logger.info("Shutdown In Progress !");
 						System.exit(0);
 					}
 				} catch (Exception e) {
