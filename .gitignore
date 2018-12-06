@@ -11,4 +11,4 @@ commit*
 data
 *.dat
 .classpath
-*.txt
+*.jar
