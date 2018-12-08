@@ -339,8 +339,8 @@ public class ECSServerLibrary {
 		msg.setCommand(Command.TRANSFER_AND_SHUTDOWN); // Below is a blocking operation !
 		msg.setMetaData(metaData);
 		if (!nextNode.getName().equals(currentNode.getName())) {
-			msg.setTransferStartKey(prevNode.getEndRange());
-			msg.setTransferEndKey(currentNode.getEndRange());
+			msg.setTransferStartKey(prevNode.getEndWriteRange());
+			msg.setTransferEndKey(currentNode.getEndWriteRange());
 			msg.setTransferServer(nextNode);
 			notifySingleServer(msg, currentNode);
 		}

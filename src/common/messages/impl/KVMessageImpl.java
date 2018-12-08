@@ -11,7 +11,16 @@ public class KVMessageImpl implements KVMessage,Serializable {
 	String value;
 	Node[] metaData;
 	StatusType type;
+	DataType dataType;
 	
+	public DataType getDataType() {
+		return dataType;
+	}
+
+	public void setDataType(DataType dataType) {
+		this.dataType = dataType;
+	}
+
 	public KVMessageImpl() {}
 	
 	public KVMessageImpl(String key, StatusType status) {
