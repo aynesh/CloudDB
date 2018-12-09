@@ -18,11 +18,19 @@ public interface KVMessage {
         SERVER_STOPPED,
         SERVER_NOT_RESPONSIBLE,
         SERVER_WRITE_LOCK,
-        TRANSFER, 
-        TRANSFER_SUCCESS,
-        TRANSFER_ERROR
+        COPY, 
+        COPY_SUCCESS,
+        COPY_ERROR,
+        DELETE_REPLICA_COPY, 
+        DELETE_REPLICA_COPY_SUCCESS,
+        DELETE_REPLICA_COPY_ERROR,
     }
 
+    public enum DataType {
+    	ORIGINAL,
+    	REPLICA_COPY
+    }
+    
     /**
      * @return the key that is associated with this message,
      * null if not key is associated.
@@ -50,6 +58,10 @@ public interface KVMessage {
 	public void setStatus(StatusType type);
 
 	public void setValue(String string);
+	
+	public DataType getDataType();
+	
+	public void setDataType(DataType dataType);
 
 }
 

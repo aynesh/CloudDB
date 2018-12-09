@@ -3,11 +3,15 @@ package app_kvServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import app.common.HashRing;
+import common.messages.KVMessage;
 import datastore.DataManager;
 
 public class KVServer {
@@ -21,6 +25,10 @@ public class KVServer {
 	public static volatile boolean writeLock=false;
 	
 	public static volatile String storagePath="./";
+	
+	public static volatile  ConcurrentLinkedQueue<KVMessage> queue = new ConcurrentLinkedQueue<KVMessage>();
+	
+	private final ScheduledExecutorService scheduler;
 	
     /**
      * Start KV Server at given port
@@ -54,6 +62,9 @@ public class KVServer {
             e.printStackTrace();
 
         }
+        scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new KVServerReplicationScheduler(nodeName), 1, 1, TimeUnit.MINUTES);
+        
         while (true) {
             try {
                 socket = serverSocket.accept();

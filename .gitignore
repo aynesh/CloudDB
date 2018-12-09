@@ -10,6 +10,6 @@ logs
 commit*
 data
 *.dat
-.classpath
-*.jar
+*.classpath
 *.txt
+*.log

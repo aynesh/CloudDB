@@ -39,4 +39,6 @@ public interface KVCommInterface {
      *                   KV server).
      */
     public KVMessage get(String key) throws Exception;
+
+	public KVMessage replicate(KVMessage msg) throws Exception;
 }

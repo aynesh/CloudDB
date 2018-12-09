@@ -22,7 +22,7 @@ public class HashRing {
 	public void addNode(Node node) {
 		try {
 			String key = HashRing.getMD5Hash(node.getIpAndPort());
-			node.setEndRange(key);
+			node.setEndWriteRange(key);
 			BigInteger bi = new BigInteger(key, 16);
 			map.put(bi, node);
 		} catch (NoSuchAlgorithmException e) {
@@ -65,12 +65,11 @@ public class HashRing {
 	public void clearAndSetMetaData(Node[] metaData) {
 		map.clear();
 		for(Node node: metaData) {
-			BigInteger bi = new BigInteger(node.getEndRange(), 16);
+			BigInteger bi = new BigInteger(node.getEndWriteRange(), 16);
 			map.put(bi, node);
 		}
 	}
 	
-/*	
 	public static boolean checkKeyRange(String key, String startKey, String endKey) {
 		String keyHash=null;
 		try {
@@ -82,17 +81,19 @@ public class HashRing {
 		if(keyHash==null) {
 			return false;
 		}
-		System.out.println("keyHash: "+keyHash);
 		BigInteger keyBi = new BigInteger(keyHash, 16);
 		BigInteger startKeyBi = new BigInteger(startKey, 16);
 		BigInteger endKeyBi = new BigInteger(endKey, 16);
-		System.out.println("startBi: ");
-		if(keyBi.compareTo(startKeyBi) == -1 && keyBi.compareTo(endKeyBi) == 1) {
+		System.out.println("DEBUG: Sign: keyBi: "+keyBi.signum()+" startKey: "+startKeyBi.signum()+ " endKey: "+endKeyBi.signum());
+		System.out.println(keyBi+" startKey");
+		System.out.println(startKeyBi+" startKeyBi");
+		System.out.println(endKeyBi+" endKeyBi");
+		if( (startKeyBi.compareTo(keyBi) == 1 && keyBi.compareTo(endKeyBi) == -1) || ( keyBi.compareTo(endKeyBi) == 0 ||  keyBi.compareTo(startKeyBi) == 0) ) {
 			return true;
 		}
 		
 		return false;
-	}*/
+	}
 	
 	/**
 	 * @param node The node for which previous node to be found.
@@ -102,7 +103,7 @@ public class HashRing {
 		int i=0;
 		Node prevNode=null;
 		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
-			if(i!=0 && entry.getValue().getName() == node.getName()) {
+			if(i!=0 && entry.getValue().getName().equals(node.getName())) {
 				return prevNode;
 			}
 			prevNode = entry.getValue();
@@ -112,10 +113,31 @@ public class HashRing {
 	}
 	
 	/**
+	 * @param node The node for which previous node to be found.
+	 * @return
+	 */
+	public Node getPrevNode(String nodeName) {
+		int i=0;
+		Node prevNode=null;
+		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
+			if(i!=0 && entry.getValue().getName().equals(nodeName)) {
+				return prevNode;
+			}
+			prevNode = entry.getValue();
+			i++;
+		}
+		return prevNode; 
+	}
+	
+	public Node getNextNode(Node node) {
+		return this.getNextNode(node.getName());
+	}
+	
+	/**
 	 * @param node The node for which next node to be found.
 	 * @return
 	 */
-	public Node getNextNode(Node node) {
+	public Node getNextNode(String nodeName) {
 		int i=0;
 		Node nextNode=null;
 		boolean nextNodeFlag = false;
@@ -126,7 +148,7 @@ public class HashRing {
 			if(nextNodeFlag) {
 				return entry.getValue();
 			}
-			if(entry.getValue().getName() == node.getName()) {
+			if(entry.getValue().getName().equals(nodeName)) {
 				nextNodeFlag = true;
 			}
 			i++;
@@ -174,14 +196,18 @@ public class HashRing {
 			Node node = entry.getValue();
 			
 			if(prevNode!=null) {
-				node.setStartRange(prevNode.getEndRange());
+				node.setStartWriteRange(prevNode.getEndWriteRange());
 			}
 			
 			nodes[i++] = node;
 			prevNode = node;
 		}
 		if(map.size()> 0) {
-			nodes[0].setStartRange(nodes[map.size()-1].getEndRange());
+			nodes[0].setStartWriteRange(nodes[map.size()-1].getEndWriteRange());
+		}
+		// Set read range + 2 nodes
+		for(i=0;i<nodes.length;i++) {
+			nodes[i].setStartReadRange(nodes[(i-2 >= 0 ? i-2 : (nodes.length + (i-2)) )%nodes.length].getStartWriteRange());
 		}
 		return nodes;
 	}

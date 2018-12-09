@@ -62,7 +62,7 @@ public class KVServerAdminThread extends Thread {
 						KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
 						kvClient.connect();
 						KVMessage msg = kvClient.transfer(key, data);
-						if(msg.getStatus()==StatusType.TRANSFER_SUCCESS) {
+						if(msg.getStatus()==StatusType.COPY_SUCCESS) {
 							keysToBeDeleted.add(key);
 							logger.info("Transfered: "+key);
 						}

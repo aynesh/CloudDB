@@ -8,18 +8,20 @@ public class Node implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Node [name=" + name + ", port=" + port + ", ipAddress=" + ipAddress + ", startRange=" + startRange
-				+ ", endRange=" + endRange + "]";
+		return "Node [name=" + name + ", port=" + port + ", ipAddress=" + ipAddress + ", startWriteRange=" + startWriteRange
+				+ ", endWriteRange=" + endWriteRange + ", startReadRange=" + startReadRange + "]";
 	}
 	private String name;
 	private String port;
 	private String ipAddress;
-	private String startRange;
-	private String endRange;
+	private String startWriteRange;
+	private String endWriteRange;
 	private String location;
 	private String adminPort;
 	private String userName;
 	private String storagePath;
+	private String startReadRange;
+	
 	public Node() {
 		
 	}
@@ -39,8 +41,8 @@ public class Node implements Serializable {
 		this.userName = userName;
 		this.storagePath = storagePath;
 	}
-	public String getEndRange() {
-		return endRange;
+	public String getEndWriteRange() {
+		return endWriteRange;
 	}
 	public String getIpAddress() {
 		return ipAddress;
@@ -54,11 +56,11 @@ public class Node implements Serializable {
 	public String getPort() {
 		return port;
 	}
-	public String getStartRange() {
-		return startRange;
+	public String getStartWriteRange() {
+		return startWriteRange;
 	}
-	public void setEndRange(String endRange) {
-		this.endRange = endRange;
+	public void setEndWriteRange(String endRange) {
+		this.endWriteRange = endRange;
 	}
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
@@ -69,8 +71,8 @@ public class Node implements Serializable {
 	public void setPort(String port) {
 		this.port = port;
 	}
-	public void setStartRange(String startRange) {
-		this.startRange = startRange;
+	public void setStartWriteRange(String startRange) {
+		this.startWriteRange = startRange;
 	}
 	public String getLocation() {
 		return location;
@@ -95,5 +97,11 @@ public class Node implements Serializable {
 	}
 	public void setStoragePath(String storagePath) {
 		this.storagePath = storagePath;
+	}
+	public String getStartReadRange() {
+		return startReadRange;
+	}
+	public void setStartReadRange(String startRange) {
+		this.startReadRange = startRange;
 	}
 }
