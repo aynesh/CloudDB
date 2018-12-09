@@ -129,11 +129,15 @@ public class HashRing {
 		return prevNode; 
 	}
 	
+	public Node getNextNode(Node node) {
+		return this.getNextNode(node.getName());
+	}
+	
 	/**
 	 * @param node The node for which next node to be found.
 	 * @return
 	 */
-	public Node getNextNode(Node node) {
+	public Node getNextNode(String nodeName) {
 		int i=0;
 		Node nextNode=null;
 		boolean nextNodeFlag = false;
@@ -144,7 +148,7 @@ public class HashRing {
 			if(nextNodeFlag) {
 				return entry.getValue();
 			}
-			if(entry.getValue().getName() == node.getName()) {
+			if(entry.getValue().getName().equals(nodeName)) {
 				nextNodeFlag = true;
 			}
 			i++;

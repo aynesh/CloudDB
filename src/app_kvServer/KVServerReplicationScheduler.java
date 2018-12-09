@@ -1,5 +1,7 @@
 package app_kvServer;
 
+import java.time.LocalDateTime;
+
 import org.apache.log4j.Logger;
 
 import app.common.Node;
@@ -20,11 +22,11 @@ public class KVServerReplicationScheduler extends Thread {
 	public boolean transferData(Node toNode, KVMessage msg) throws Exception {
 		KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
 		kvClient.connect();
-		KVMessage reponse = kvClient.replicate(msg);
+		KVMessage response = kvClient.replicate(msg);
+		logger.debug("Replication Response : "+response.getStatus());
 		kvClient.disconnect();
-		if(msg.getStatus()==StatusType.COPY_SUCCESS || msg.getStatus()==StatusType.DELETE_REPLICA_COPY_SUCCESS) {
-			
-			logger.info("Updated: "+reponse);
+		if(response.getStatus()==StatusType.COPY_SUCCESS || response.getStatus()==StatusType.DELETE_REPLICA_COPY_SUCCESS) {
+			logger.info("Updated: "+response);
 			return true;
 		}
 		
@@ -33,10 +35,12 @@ public class KVServerReplicationScheduler extends Thread {
 	}
 
 	public void run() {
-		Node transferNode1 = KVServer.metaData.getPrevNode(this.nodeName);
+		logger.info("Started Replication Schedule: "+LocalDateTime.now());
+		logger.info("Staring. Items in Queue "+ KVServer.queue.size());
+		Node transferNode1 = KVServer.metaData.getNextNode(this.nodeName);
 		Node transferNode2 = null;
 		if(transferNode1 != null) {
-			transferNode2 = KVServer.metaData.getPrevNode(transferNode1);
+			transferNode2 = KVServer.metaData.getNextNode(transferNode1);
 		}
 		
 		
@@ -62,6 +66,7 @@ public class KVServerReplicationScheduler extends Thread {
 			//At The end remove from the queue
 			
 		}
+		logger.info("Completed. Items Left in Queue "+ KVServer.queue.size());
 	}
 	
 	
