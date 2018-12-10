@@ -28,7 +28,11 @@ public interface KVAdminMessage {
         META_DATA_UPDATE,
         META_DATA_UPDATE_SUCCESS,
         PING,
-        PING_SUCCESS
+        PING_SUCCESS,
+        REPLICATE,
+        REPLICATE_SUCCESS,
+        DELETE_REPLICATED_FILES,
+        DELETE_REPLICATED_FILES_SUCCESS,
     }
     
     public int getNumberOfNodes();
@@ -47,6 +51,8 @@ public interface KVAdminMessage {
     
     public Command getCommand();
     
-    public Node[] getMetaData();    
+    public Node[] getMetaData(); 
+    
+    public String toString();
 
 }

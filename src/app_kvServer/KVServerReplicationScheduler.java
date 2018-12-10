@@ -34,7 +34,7 @@ public class KVServerReplicationScheduler extends Thread {
 
 	}
 
-	public void run() {
+	public synchronized void run() {
 		logger.info("Started Replication Schedule: "+LocalDateTime.now());
 		logger.info("Staring. Items in Queue "+ KVServer.queue.size());
 		Node transferNode1 = KVServer.metaData.getNextNode(this.nodeName);

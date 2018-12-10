@@ -38,16 +38,36 @@ public class KVServerAdminThread extends Thread {
 		this.nodeName = nodeName;
 	}
 	
+	public static synchronized void deleteFiles(Node ofNode,  HashRing metaData) {
+		File files[] = DataManager.getAllTextFiles();
+		
+		for(File file: files) {
+			String name = file.getName();
+
+			String key = name.split(".txt")[0];
+			logger.info("key: "+key+" Filename>"+name);
+			try {
+				if(metaData.getNode(key).getName().equals(ofNode.getName())) {
+					DataManager.delete(key);
+					logger.info("deleted : " +key);
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			}
+		}
+	}
+	
 	/**
 	 * @param nodeName The current node.
 	 * @param toNode The node to transfer data to.
 	 * @param metaData
 	 * @param shutdownFlag true if its a removeNode command.
+	 * @param replicationTransfer if true all files will be copied to target server without deleting from the server
 	 */
-	public static void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag) {
+	public static synchronized void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag, boolean replicationTransfer) {
 		File files[] = DataManager.getAllTextFiles();
 		List<String> keysToBeDeleted=new ArrayList<>();
-		
+		logger.info("Starting KV Server transfer-------");
 		for(File file: files) {
 			String name = file.getName();
 
@@ -56,13 +76,13 @@ public class KVServerAdminThread extends Thread {
 			
 			try {
 				logger.info("Belongs to: "+metaData.getNode(key).getName()+" Checking toNode: "+toNode.getName());
-				if(metaData.getNode(key).getName().equals(toNode.getName())) {
+				if(metaData.getNode(key).getName().equals(toNode.getName()) || replicationTransfer) {
 					try {
 						String data=DataManager.get(key);
 						KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
 						kvClient.connect();
 						KVMessage msg = kvClient.transfer(key, data);
-						if(msg.getStatus()==StatusType.COPY_SUCCESS) {
+						if(msg.getStatus()==StatusType.COPY_SUCCESS && !replicationTransfer) {
 							keysToBeDeleted.add(key);
 							logger.info("Transfered: "+key);
 						}
@@ -78,15 +98,20 @@ public class KVServerAdminThread extends Thread {
 				e.printStackTrace();
 			}
 		}
-		logger.info("Delete Started....");
-		for(String key: keysToBeDeleted) {
-			try {
-				DataManager.delete(key);
-			} catch (Exception e) {
-				logger.error("Delete failed");
+
+		if(!replicationTransfer) {
+			logger.info("Delete Started....");
+			for(String key: keysToBeDeleted) {
+				try {
+					DataManager.delete(key);
+					logger.debug("Deleted key:"+key);
+				} catch (Exception e) {
+					logger.error("Delete failed");
+				}
 			}
+			logger.info("Delete Completed....");
 		}
-		logger.info("Delete Completed....");
+
 		logger.info("Ending KV Server transfer-------");
 		if(shutdownFlag) {
 			System.exit(0);
@@ -125,7 +150,7 @@ public class KVServerAdminThread extends Thread {
 				try {
 					KVAdminMessage inpMsg = KVAdminMessageManager.receiveKVAdminMessage(inp);
 					KVAdminMessageImpl outMsg = new KVAdminMessageImpl();
-
+					logger.debug("Received Admin Command: "+inpMsg.toString());
 					switch (inpMsg.getCommand()) {
 					case PING:
 						outMsg.setCommand(Command.PING_SUCCESS);
@@ -182,10 +207,34 @@ public class KVServerAdminThread extends Thread {
 						    			 nodeName, 
 						    			 inpMsg.getTransferServer(), 
 						    			 KVServer.metaData,
-						    			 shutdownFlag);
+						    			 shutdownFlag, false);
 						     }
 						}).start();
 						outMsg.setCommand(Command.TRANSFER_SUCCESS);
+						break;
+					case REPLICATE:
+						new Thread(new Runnable() {
+						     @Override
+						     public void run() {
+						    	 KVServerAdminThread.transferData(
+						    			 nodeName, 
+						    			 inpMsg.getTransferServer(), 
+						    			 KVServer.metaData,
+						    			 false, true);
+						     }
+						}).start();
+						outMsg.setCommand(Command.REPLICATE_SUCCESS);				
+						break;
+					case DELETE_REPLICATED_FILES:
+						new Thread(new Runnable() {
+						     @Override
+						     public void run() {
+						    	 KVServerAdminThread.deleteFiles(
+						    			 inpMsg.getTransferServer(), 
+						    			 KVServer.metaData);
+						     }
+						}).start();
+						outMsg.setCommand(Command.DELETE_REPLICATED_FILES_SUCCESS);				
 						break;
 					case META_DATA_UPDATE:
 						KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
