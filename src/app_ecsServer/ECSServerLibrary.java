@@ -193,6 +193,7 @@ public class ECSServerLibrary {
 	 * @param activeServers
 	 */
 	public static void addNode(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy,  HashRing activeServers) {
+		logger.info("----------Started addNode----------");
 		int i = 1;
 		String keyToRemove = null;
 		Node newNode = null;
@@ -220,6 +221,13 @@ public class ECSServerLibrary {
 
 		Node prevNode = activeServers.getPrevNode(newNode);
 		Node nextNode = activeServers.getNextNode(newNode);
+		Node prevPrevNode = activeServers.getPrevNode(prevNode);
+		Node nextNextNode = activeServers.getPrevNode(nextNode);		
+		
+		logger.info("nextNode: "+nextNode.getIpAndPort());
+		logger.info("prevNode: "+prevNode.getIpAndPort());
+		logger.info("prevPrevNode: "+prevPrevNode.getIpAndPort());
+		logger.info("nextNextNode: "+nextNextNode.getIpAndPort());
 
 		writeLockUnlockServers(newNode, prevNode, true);
 		writeLockUnlockServers(newNode, nextNode, true);
@@ -255,6 +263,12 @@ public class ECSServerLibrary {
 		updateMetaData(newNode, activeServers);
 		updateMetaData(prevNode, activeServers);
 		updateMetaData(nextNode, activeServers);
+		updateMetaData(nextNextNode, activeServers);
+		updateMetaData(prevPrevNode, activeServers);
+		
+		replicateFiles(prevNode, newNode, activeServers.getMetaData());
+		replicateFiles(prevPrevNode, newNode, activeServers.getMetaData());
+		deleteReplicatedFiles(nextNextNode, newNode, activeServers.getMetaData());
 
 		writeLockUnlockServers(newNode, prevNode, false);
 		writeLockUnlockServers(newNode, nextNode, false);
@@ -262,7 +276,7 @@ public class ECSServerLibrary {
 		// Transfer Keys
 
 		serverConfig.remove(keyToRemove);
-
+		logger.info("----------Ending addNode----------");
 	}
 
 	/**
@@ -283,6 +297,7 @@ public class ECSServerLibrary {
 	 * @param activeServers
 	 */
 	public static void removeNode(Map<String, Node> serverConfig,  HashRing activeServers) {
+		logger.info("----------Started removeNode----------");
 		String key = null;
 		Node selectedNode = null;
 		Node nodes[] = activeServers.getMetaData();
@@ -294,6 +309,13 @@ public class ECSServerLibrary {
 
 		Node nextNode = activeServers.getNextNode(selectedNode);
 		Node prevNode = activeServers.getPrevNode(selectedNode);
+		Node prevPrevNode = activeServers.getPrevNode(prevNode);
+		Node nextNextNode = activeServers.getPrevNode(nextNode);
+		
+		logger.info("nextNode: "+nextNode.getIpAndPort());
+		logger.info("prevNode: "+prevNode.getIpAndPort());
+		logger.info("prevPrevNode: "+prevPrevNode.getIpAndPort());
+		logger.info("nextNextNode: "+nextNextNode.getIpAndPort());
 
 		activeServers.removeNode(selectedNode);
 
@@ -303,6 +325,13 @@ public class ECSServerLibrary {
 		initiateTransferFilesForRemove(selectedNode, prevNode, nextNode, activeServers.getMetaData());
 
 		updateMetaData(nextNode, activeServers);
+		updateMetaData(prevNode, activeServers);
+		updateMetaData(nextNode, activeServers);
+		updateMetaData(nextNextNode, activeServers);
+		updateMetaData(prevPrevNode, activeServers);
+		
+		replicateFiles(prevNode, nextNextNode, activeServers.getMetaData());
+		replicateFiles(prevPrevNode, nextNode, activeServers.getMetaData());
 
 		// writeLockUnlockServers(item.getValue(), item.getValue(), false); // Server
 		// Shutdown Not needed
@@ -312,6 +341,7 @@ public class ECSServerLibrary {
 
 		// Shutdwon is implmeneted at the KV Server itself
 		serverConfig.put(selectedNode.getName(), selectedNode);
+		logger.info("----------Ending removeNode----------");
 	}
 
 	/**
@@ -356,13 +386,44 @@ public class ECSServerLibrary {
 		KVAdminMessageImpl msg = new KVAdminMessageImpl();
 		msg.setCommand(Command.TRANSFER); // Below is a blocking operation !
 		msg.setMetaData(metaData);
-		if (!prevNode.getName().equals(newNode.getName())) {
-			msg.setTransferServer(newNode);
-			notifySingleServer(msg, prevNode);
-		}
+//		By the ring design there is nothing to be transfered to from previous node to new node 
+//		if (!prevNode.getName().equals(newNode.getName())) {
+//			msg.setTransferServer(newNode);
+//			notifySingleServer(msg, prevNode);
+//		}
 		if (!nextNode.getName().equals(newNode.getName())) {
 			msg.setTransferServer(newNode);
 			notifySingleServer(msg, nextNode);
+		}
+	}
+	
+	/**
+	 * @param fromNode the node from which transfer needs to be initiated
+	 * @param toNode target node
+	 * @param metaData metaData
+	 */
+	public static void replicateFiles(Node fromNode, Node toNode, Node[] metaData) {
+		KVAdminMessageImpl msg = new KVAdminMessageImpl();
+		msg.setCommand(Command.REPLICATE); 
+		msg.setMetaData(metaData);
+		if (!toNode.getName().equals(fromNode.getName())) {
+			msg.setTransferServer(toNode);
+			notifySingleServer(msg, fromNode);
+		}
+	}
+	
+	/**
+	 * @param fromNode the node from which transfer needs to be initiated
+	 * @param toNode target node
+	 * @param metaData metaData
+	 */
+	public static void deleteReplicatedFiles(Node fromNode, Node ofNode, Node[] metaData) {
+		KVAdminMessageImpl msg = new KVAdminMessageImpl();
+		msg.setCommand(Command.DELETE_REPLICATED_FILES); 
+		msg.setMetaData(metaData);
+		if (!ofNode.getName().equals(fromNode.getName())) {
+			msg.setTransferServer(ofNode);
+			notifySingleServer(msg, fromNode);
 		}
 	}
 
