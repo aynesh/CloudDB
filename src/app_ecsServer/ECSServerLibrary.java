@@ -195,7 +195,7 @@ public class ECSServerLibrary {
 	 * @param cacheStrategy
 	 * @param activeServers
 	 */
-	public static void addNode(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy,  HashRing activeServers) {
+	public static Node addNode(Map<String, Node> serverConfig, int cacheSize, String cacheStrategy,  HashRing activeServers) {
 		logger.info("----------Started addNode----------");
 		int i = 1;
 		String keyToRemove = null;
@@ -284,6 +284,7 @@ public class ECSServerLibrary {
 
 		serverConfig.remove(keyToRemove);
 		logger.info("----------Ending addNode----------");
+		return newNode;
 	}
 
 	/**
