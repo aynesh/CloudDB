@@ -92,7 +92,7 @@ public class ECSServer {
 		     });
 		scheduler.scheduleWithFixedDelay(new Runnable() {
 		       public void run() { FailureDetector.detectFailure(); }
-		     }, 1, 1, TimeUnit.MINUTES);
+		     }, 20, 20, TimeUnit.SECONDS);
 		     
 	}
 	
@@ -141,6 +141,7 @@ public class ECSServer {
 		} catch (UnknownHostException e1) {
 			ecsServer.ip = "localhost";
 		}
+		ecsServer.ip = "localhost";
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig(ecsConfigFileName);
 		

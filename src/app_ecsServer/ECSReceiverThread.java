@@ -62,7 +62,11 @@ import datastore.DataManager;
 						FailureDetector.fixAndReplaceFailedNode(inpMsg.getServer());
 						FailureDetector.startForwardPing(nextNode);
 						break;	
+					case PING_SUCCESS:
+						logger.info(inpMsg.getServer()+" is Alive - circle completed!");
+						break;
 					default:
+						
 						break;
 					}
 				

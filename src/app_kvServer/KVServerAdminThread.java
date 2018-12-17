@@ -266,6 +266,7 @@ public class KVServerAdminThread extends Thread {
 						}
 						else {
 							if(!pingForward(nextNode)) {
+								logger.info(nextNode.getName()+" is down!");
 								reportFailure(nextNode);
 							}
 						}
@@ -290,6 +291,7 @@ public class KVServerAdminThread extends Thread {
 		} catch (IOException e) {
 			return false;
 		}
+		
 		KVAdminMessage outMsg = new KVAdminMessageImpl();
 		outMsg.setCommand(Command.PING_FORWARD);
 		outMsg.setServer(toNode);
@@ -297,9 +299,9 @@ public class KVServerAdminThread extends Thread {
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
-			logger.debug("Sending failure detection message to "+toNode.getName());
+			logger.info("Sending failure detection message to "+toNode.getName());
 			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
-			
+			logger.info("Waiting for response message from "+toNode.getName());
 			KVAdminMessage inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
 			
 			sock.close();
@@ -328,22 +330,26 @@ public class KVServerAdminThread extends Thread {
 		try {
 			sock = new Socket(ip, port);
 		} catch (UnknownHostException e) {
+			logger.error("Unknownhost "+ip+" "+port);
 			return;
 			
 		} catch (IOException e) {
+			logger.error("I/O exception "+ip+" "+port);
 			return;
 		}
+		
 		KVAdminMessage outMsg = new KVAdminMessageImpl();
 		outMsg.setCommand(cmd);
 		outMsg.setServer(toNode);
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
+			logger.info("Reporting failure to: "+ip+" "+port);
 			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
 			sock.close();
 			
 		} catch (IOException e) {
-			
+			logger.error("I/O exception "+ip+" "+port);
 		}
 		
 	}
