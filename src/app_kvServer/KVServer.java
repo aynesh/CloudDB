@@ -27,6 +27,10 @@ public class KVServer {
 	public static volatile String storagePath="./";
 	
 	public static volatile  ConcurrentLinkedQueue<KVMessage> queue = new ConcurrentLinkedQueue<KVMessage>();
+
+	public static String ECSIP;
+
+	public static int ECSPort;
 	
 	private final ScheduledExecutorService scheduler;
 	

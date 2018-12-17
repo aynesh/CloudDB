@@ -21,7 +21,21 @@ public class Node implements Serializable {
 	private String userName;
 	private String storagePath;
 	private String startReadRange;
+	private String cacheType;
+	private int cacheSize;
 	
+	public String getCacheType() {
+		return cacheType;
+	}
+	public void setCacheType(String cacheType) {
+		this.cacheType = cacheType;
+	}
+	public int getCacheSize() {
+		return cacheSize;
+	}
+	public void setCacheSize(int cacheSize) {
+		this.cacheSize = cacheSize;
+	}
 	public Node() {
 		
 	}

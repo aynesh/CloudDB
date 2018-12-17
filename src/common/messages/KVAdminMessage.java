@@ -1,6 +1,9 @@
 package common.messages;
 
+import java.util.Arrays;
+
 import app.common.Node;
+import common.messages.KVAdminMessage.Command;
 
 public interface KVAdminMessage {
 	
@@ -28,6 +31,8 @@ public interface KVAdminMessage {
         META_DATA_UPDATE,
         META_DATA_UPDATE_SUCCESS,
         PING,
+        PING_FORWARD,
+        PING_FAILURE,
         PING_SUCCESS,
         REPLICATE,
         REPLICATE_SUCCESS,
@@ -39,20 +44,36 @@ public interface KVAdminMessage {
     
     public int getCacheSize();
     
-    public String getCacheType();
-    
-    public Node getServer();
+   
     
     public Node getTransferServer();
     
-    public String getTransferStartKey();
-    
-    public String getTransferEndKey();
+   
     
     public Command getCommand();
+    public void setCommand(Command cmd);
     
-    public Node[] getMetaData(); 
-    
-    public String toString();
+    public String getECSIP();
+	public void setECSIP(String eCSIP);
+	public int getPort();
+	public void setPort(int port);
 
+	
+	
+	public void setNumberOfNodes(int numberOfNodes) ;
+	
+	public void setCacheSize(int cacheSize) ;
+	public String getCacheType() ;
+	public void setCacheType(String cacheType) ;
+	public Node getServer();
+	public void setServer(Node server) ;
+	public Node[] getMetaData() ;
+	public void setMetaData(Node[] metaData);
+	
+	public String toString() ;
+	public String getTransferStartKey() ;
+	public void setTransferStartKey(String transferStartKey);
+	public String getTransferEndKey() ;
+	public void setTransferEndKey(String transferEndKey);
+	public void setTransferServer(Node transferServer);
 }

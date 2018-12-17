@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,11 +154,14 @@ public class KVServerAdminThread extends Thread {
 					KVAdminMessageImpl outMsg = new KVAdminMessageImpl();
 					logger.debug("Received Admin Command: "+inpMsg.toString());
 					switch (inpMsg.getCommand()) {
+					case PING_FORWARD:
 					case PING:
 						outMsg.setCommand(Command.PING_SUCCESS);
 						break;
 					case START:
 						try {
+							KVServer.ECSIP = inpMsg.getECSIP();
+							KVServer.ECSPort = inpMsg.getPort();
 							KVServer.serveClients = true;
 							KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 							outMsg.setCommand(Command.START_SUCCESS);
@@ -248,11 +253,90 @@ public class KVServerAdminThread extends Thread {
 						logger.info("Shutdown In Progress !");
 						System.exit(0);
 					}
+					
+					if(inpMsg.getCommand()==Command.PING_FORWARD) {
+						
+						Node nextNode = KVServer.metaData.getNextNode(inpMsg.getServer());
+						if(nextNode.getIpAndPort()==KVServer.metaData.getMetaData()[0].getIpAndPort())
+						{
+							sendToECS(inpMsg.getServer(),Command.PING_SUCCESS);
+						}
+						else {
+							if(!pingForward(nextNode)) {
+								reportFailure(nextNode);
+							}
+						}
+							
+					}
 				} catch (Exception e) {
 					break;
 				}
 			}
 
 		}
+	}
+
+	private boolean pingForward(Node toNode) {
+		String ip = toNode.getIpAddress();
+		int port = Integer.parseInt(toNode.getAdminPort());
+		Socket sock;
+		try {
+			sock = new Socket(ip, port);
+		} catch (UnknownHostException e) {
+			return false;
+			
+		} catch (IOException e) {
+			return false;
+		}
+		KVAdminMessage outMsg = new KVAdminMessageImpl();
+		
+		try {
+			InputStream in = sock.getInputStream();
+			OutputStream out = sock.getOutputStream();
+			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
+			KVAdminMessage inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
+			sock.close();
+			if(inMsg.getCommand()==Command.PING_SUCCESS) {
+				return true;
+			}
+		} catch (IOException|ClassNotFoundException e) {
+		
+			
+		}
+		
+		return false;
+		
+	}
+	
+	
+	private void reportFailure(Node toNode) {
+		sendToECS(toNode, Command.PING_FAILURE);
+	}
+	
+	private void sendToECS(Node toNode, Command cmd) {
+		String ip = KVServer.ECSIP;
+		int port = KVServer.ECSPort;
+		Socket sock;
+		try {
+			sock = new Socket(ip, port);
+		} catch (UnknownHostException e) {
+			return;
+			
+		} catch (IOException e) {
+			return;
+		}
+		KVAdminMessage outMsg = new KVAdminMessageImpl();
+		outMsg.setCommand(cmd);
+		outMsg.setServer(toNode);
+		try {
+			InputStream in = sock.getInputStream();
+			OutputStream out = sock.getOutputStream();
+			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
+			sock.close();
+			
+		} catch (IOException e) {
+			
+		}
+		
 	}
 }
