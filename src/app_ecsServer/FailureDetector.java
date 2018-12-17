@@ -67,7 +67,17 @@ public class FailureDetector {
 		logger.info("FailureDetector: Detected node failure.\nAttempting to fix...");
 		ECSServerLibrary.removeNode(ECSServer.serverConfig, ECSServer.activeServers, node);
 
-		ECSServerLibrary.addNode(ECSServer.serverConfig, cacheSize, cacheStrategy, ECSServer.activeServers);
+		Node newNode = ECSServerLibrary.addNode(ECSServer.serverConfig, cacheSize, cacheStrategy, ECSServer.activeServers);
+		
+		if(ECSServer.serverState) {
+		KVAdminMessage adminMsg = new KVAdminMessageImpl();
+		adminMsg.setCommand(KVAdminMessage.Command.START);
+		adminMsg.setMetaData(ECSServer.activeServers.getMetaData());
+		adminMsg.setECSIP(ECSServer.ip);
+		adminMsg.setPort(ECSServer.port);
+		ECSServerLibrary.notifySingleServer(adminMsg, newNode);
+		}
+	
 	}
 	
 	

@@ -28,7 +28,7 @@ public class ECSServer {
 	public static int port;
 
 	public static String ip;
-	
+	public static boolean  serverState = false;
 	private final ScheduledExecutorService scheduler;
 	private final ExecutorService executor;
 	
@@ -39,8 +39,6 @@ public class ECSServer {
 	    executor = Executors.newFixedThreadPool(1);
 	   
 	}
-
-	
 	
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
@@ -101,8 +99,7 @@ public class ECSServer {
 		adminMsg.setCommand(KVAdminMessage.Command.STOP);
 		adminMsg.setMetaData(activeServers.getMetaData());
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
-		scheduler.shutdownNow();
-		executor.shutdownNow();
+		
 	}
 	
 	public void shutdown(String fileName) {
@@ -111,6 +108,8 @@ public class ECSServer {
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
 		activeServers.removeAll();
 		serverConfig = ECSServerLibrary.readConfigFile(fileName);
+		scheduler.shutdownNow();
+		executor.shutdownNow();
 	}
 	
 	public void addNode(String tokens[]) {
@@ -147,7 +146,8 @@ public class ECSServer {
 		
 		boolean quit = false;
 		Scanner cons = new Scanner(System.in);
-     
+		
+		
 		while (true) {
 			System.out.print("ECSServer> ");
 			String input=cons.nextLine();
@@ -168,6 +168,7 @@ public class ECSServer {
 			} else if (tokens[0].equals("start")) {
 
 				try {
+					serverState = true; 
 					ecsServer.start();
 					System.out.println("Server> Start Sent");
 				} catch (Exception e) {
@@ -177,6 +178,7 @@ public class ECSServer {
 			} else if (tokens[0].equals("stop")) {
 
 				try {
+					serverState = false;
 					ecsServer.stop();
 					System.out.println("Server> Stop Sent");
 				} catch (Exception e) {
