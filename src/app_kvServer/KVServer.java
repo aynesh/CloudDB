@@ -27,6 +27,10 @@ public class KVServer {
 	public static volatile String storagePath="./";
 	
 	public static volatile  ConcurrentLinkedQueue<KVMessage> queue = new ConcurrentLinkedQueue<KVMessage>();
+
+	public static String ECSIP = "localhost";
+
+	public static int ECSPort = 40000;
 	
 	private final ScheduledExecutorService scheduler;
 	
@@ -49,7 +53,7 @@ public class KVServer {
     	
     	KVServer.storagePath = path;
     	
-		new KVServerAdminThread(adminPort, nodeName).start();
+		new KVServerAdmin(adminPort, nodeName).start();
     	
     	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
         

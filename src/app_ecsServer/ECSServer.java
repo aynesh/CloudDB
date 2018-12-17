@@ -1,13 +1,19 @@
 package app_ecsServer;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import app.common.HashRing;
 import app.common.Node;
+import app_kvServer.KVServerReplicationScheduler;
 import common.messages.KVAdminMessage;
 import common.messages.impl.KVAdminMessageImpl;
 
@@ -15,14 +21,27 @@ public class ECSServer {
 
 	static Logger logger = Logger.getLogger(ECSServer.class);
 	
-	private HashRing activeServers;
+	public static HashRing activeServers;
 	
-	private Map<String, Node> serverConfig;
+	public static Map<String, Node> serverConfig;
+	
+	public static int port;
+
+	public static String ip;
+	
+	private final ScheduledExecutorService scheduler;
+	private final ExecutorService executor;
 	
 	public ECSServer() {
+
 		
+		scheduler = Executors.newScheduledThreadPool(1);
+	    executor = Executors.newFixedThreadPool(1);
+	   
 	}
 
+	
+	
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
 		System.out.println(
@@ -64,7 +83,17 @@ public class ECSServer {
 		KVAdminMessageImpl adminMsg = new KVAdminMessageImpl();
 		adminMsg.setCommand(KVAdminMessage.Command.START);
 		adminMsg.setMetaData(activeServers.getMetaData());
+		adminMsg.setECSIP(ip);
+		adminMsg.setPort(port);
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
+		
+		executor.submit(new Runnable() {
+		       public void run() { ECSReceiver receiver = new ECSReceiver(ECSServer.port); }
+		     });
+		scheduler.scheduleWithFixedDelay(new Runnable() {
+		       public void run() { FailureDetector.detectFailure(); }
+		     }, 20, 20, TimeUnit.SECONDS);
+		     
 	}
 	
 	public void stop() {
@@ -72,6 +101,8 @@ public class ECSServer {
 		adminMsg.setCommand(KVAdminMessage.Command.STOP);
 		adminMsg.setMetaData(activeServers.getMetaData());
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
+		scheduler.shutdownNow();
+		executor.shutdownNow();
 	}
 	
 	public void shutdown(String fileName) {
@@ -103,12 +134,20 @@ public class ECSServer {
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
 		
 		ECSServer ecsServer = new ECSServer();
+		ECSServer.port = args.length == 0? 40000: Integer.parseInt(args[0]);
+		
+		try {
+			ecsServer.ip = InetAddress.getLocalHost().toString();
+		} catch (UnknownHostException e1) {
+			ecsServer.ip = "localhost";
+		}
+		ecsServer.ip = "localhost";
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig(ecsConfigFileName);
 		
 		boolean quit = false;
 		Scanner cons = new Scanner(System.in);
-
+     
 		while (true) {
 			System.out.print("ECSServer> ");
 			String input=cons.nextLine();
@@ -191,12 +230,11 @@ public class ECSServer {
 			
 			if(quit) {
 				System.out.println("Exiting CLI");
+				System.exit(0);
 				break;
 				
 			}
 		}
-
-
 	}
 
 	public HashRing getActiveServers() {

@@ -221,6 +221,14 @@ public class HashRing {
 		}
 	}
 	
+	public static String toString(Node nodes[]) {
+		StringBuilder str = new StringBuilder();
+		for(Node node:nodes) {
+			str.append(node.toString());
+		}
+		return str.toString();
+	}
+	
 	/**
 	 * @param input
 	 * @return Returns the MD5 hash for the given string.

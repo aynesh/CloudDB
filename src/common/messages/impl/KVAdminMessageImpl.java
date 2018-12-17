@@ -17,6 +17,21 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private String transferStartKey;
 	private String transferEndKey;
 	private Node transferServer;
+	private String ECSIP;
+	private int port;
+	
+	public String getECSIP() {
+		return ECSIP;
+	}
+	public void setECSIP(String eCSIP) {
+		ECSIP = eCSIP;
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
 	public Command getCommand() {
 		return command;
 	}

@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +33,13 @@ public class KVServerAdminThread extends Thread {
 	
 	private int port = 3000;
 	private String nodeName = "";
-
-	public KVServerAdminThread(int port, String nodeName) {
+	Socket socket = null;
+	
+	public KVServerAdminThread(Socket socket, int port, String nodeName) {
 		
 		this.port = port;
 		this.nodeName = nodeName;
+		this.socket = socket;
 	}
 	
 	public static synchronized void deleteFiles(Node ofNode,  HashRing metaData) {
@@ -119,7 +123,7 @@ public class KVServerAdminThread extends Thread {
 	}
 	
 	public void run() {
-		ServerSocket serverSocket = null;
+		/*ServerSocket serverSocket = null;
 		Socket socket = null;
 		try {
 			serverSocket = new ServerSocket(this.port);
@@ -133,7 +137,7 @@ public class KVServerAdminThread extends Thread {
 			} catch (IOException e) {
 				logger.error("I/O error: " + e);
 			}
-
+*/
 			InputStream inp = null;
 			BufferedReader brinp = null;
 			DataOutputStream out = null;
@@ -152,11 +156,19 @@ public class KVServerAdminThread extends Thread {
 					KVAdminMessageImpl outMsg = new KVAdminMessageImpl();
 					logger.debug("Received Admin Command: "+inpMsg.toString());
 					switch (inpMsg.getCommand()) {
+					case PING_FORWARD:
+						logger.info("Received failure detection message at "+nodeName);
+						outMsg.setCommand(Command.PING_SUCCESS);
+						break;
 					case PING:
 						outMsg.setCommand(Command.PING_SUCCESS);
+						KVServer.ECSIP = inpMsg.getECSIP();
+						KVServer.ECSPort = inpMsg.getPort();
 						break;
 					case START:
 						try {
+							KVServer.ECSIP = inpMsg.getECSIP();
+							KVServer.ECSPort = inpMsg.getPort();
 							KVServer.serveClients = true;
 							KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 							outMsg.setCommand(Command.START_SUCCESS);
@@ -248,11 +260,101 @@ public class KVServerAdminThread extends Thread {
 						logger.info("Shutdown In Progress !");
 						System.exit(0);
 					}
+					
+					if(inpMsg.getCommand()==Command.PING_FORWARD) {
+						logger.info("next->node "+KVServer.metaData.getNextNode(inpMsg.getServer()).getName()+" first node-> "+KVServer.metaData.getMetaData()[0].getName());
+						Node nextNode = KVServer.metaData.getNextNode(inpMsg.getServer());
+						if(nextNode.getName()==KVServer.metaData.getMetaData()[0].getName())
+						{
+							sendToECS(inpMsg.getServer(),Command.PING_SUCCESS);
+						}
+						else {
+							if(!pingForward(nextNode)) {
+								logger.info(nextNode.getName()+" is down!");
+								reportFailure(nextNode);
+							}
+						}
+							
+					}
 				} catch (Exception e) {
 					break;
 				}
 			}
 
 		}
+
+	private boolean pingForward(Node toNode) {
+		String ip = toNode.getIpAddress();
+		int port = Integer.parseInt(toNode.getAdminPort());
+		Socket sock;
+		try {
+			sock = new Socket(ip, port);
+		} catch (UnknownHostException e) {
+			return false;
+			
+		} catch (IOException e) {
+			return false;
+		}
+		
+		KVAdminMessage outMsg = new KVAdminMessageImpl();
+		outMsg.setCommand(Command.PING_FORWARD);
+		outMsg.setServer(toNode);
+		
+		try {
+			InputStream in = sock.getInputStream();
+			OutputStream out = sock.getOutputStream();
+			logger.info("Sending failure detection message to "+toNode.getName());
+			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
+			logger.info("Waiting for response message from "+toNode.getName());
+			KVAdminMessage inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
+			
+			sock.close();
+			if(inMsg.getCommand()==Command.PING_SUCCESS) {
+				logger.info(toNode.getName()+" is alive!");
+				return true;
+			}
+		} catch (IOException|ClassNotFoundException e) {
+		
+			
+		}
+		
+		return false;
+		
+	}
+	
+	
+	private void reportFailure(Node toNode) {
+		sendToECS(toNode, Command.PING_FAILURE);
+	}
+	
+	private void sendToECS(Node toNode, Command cmd) {
+		String ip = KVServer.ECSIP;
+		int port = KVServer.ECSPort;
+		Socket sock;
+		try {
+			sock = new Socket(ip, port);
+		} catch (UnknownHostException e) {
+			logger.error("Unknownhost "+ip+" "+port);
+			return;
+			
+		} catch (IOException e) {
+			logger.error("I/O exception "+ip+" "+port);
+			return;
+		}
+		
+		KVAdminMessage outMsg = new KVAdminMessageImpl();
+		outMsg.setCommand(cmd);
+		outMsg.setServer(toNode);
+		try {
+			InputStream in = sock.getInputStream();
+			OutputStream out = sock.getOutputStream();
+			logger.info("Reporting to ECS: "+ip+" "+port);
+			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
+			sock.close();
+			
+		} catch (IOException e) {
+			logger.error("I/O exception "+ip+" "+port);
+		}
+		
 	}
 }

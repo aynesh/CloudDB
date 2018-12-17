@@ -175,8 +175,11 @@ public class ECSServerLibrary {
 					// new KVServer(50000, 10, "LFU")
 				}
 			}).start();
-
-			activeServers.addNode(item.getValue());
+			
+			Node newNode = item.getValue();
+			newNode.setCacheSize(cacheSize);
+			newNode.setCacheType(cacheStrategy);
+			activeServers.addNode(newNode);
 			itemsToRemove.add(item.getKey());
 			i++;
 		}
@@ -216,6 +219,8 @@ public class ECSServerLibrary {
 
 		}
 
+		newNode.setCacheSize(cacheSize);
+		newNode.setCacheType(cacheStrategy);
 		activeServers.addNode(newNode);
 		keyToRemove = newNode.getName();
 
@@ -235,6 +240,8 @@ public class ECSServerLibrary {
 		boolean serverOnline = false;
 		KVAdminMessageImpl pingMessage = new KVAdminMessageImpl();
 		pingMessage.setCommand(Command.PING);
+		pingMessage.setPort(ECSServer.port);
+		pingMessage.setECSIP(ECSServer.ip);
 		i=1;
 		while (!serverOnline) {
 			if(i > 100) {
@@ -296,16 +303,19 @@ public class ECSServerLibrary {
 	 * @param serverConfig
 	 * @param activeServers
 	 */
+	
 	public static void removeNode(Map<String, Node> serverConfig,  HashRing activeServers) {
-		logger.info("----------Started removeNode----------");
-		String key = null;
-		Node selectedNode = null;
+		
 		Node nodes[] = activeServers.getMetaData();
 
 		if (nodes.length == 0) {
 			return;
 		}
-		selectedNode = nodes[0];
+		removeNode(serverConfig,activeServers,nodes[0]);
+	}
+	
+	public static void removeNode(Map<String, Node> serverConfig,  HashRing activeServers, Node selectedNode) {
+		logger.info("----------Started removeNode----------");
 
 		Node nextNode = activeServers.getNextNode(selectedNode);
 		Node prevNode = activeServers.getPrevNode(selectedNode);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
@@ -42,7 +43,7 @@ public class ECSServerCommunicator {
 			sock = new Socket(ip, port);
 			in = sock.getInputStream();
 			out = sock.getOutputStream();
-
+			
 		} catch (UnknownHostException e) {
 			logger.error("Unknown host. Unable to establish connection.");
 			throw e;
@@ -85,6 +86,10 @@ public class ECSServerCommunicator {
 			logger.info("Server response: " + recvdMsg.toString());
 			return recvdMsg;
 		}
+    }
+    
+    public void setTimeOut(int N) throws SocketException {
+    	sock.setSoTimeout(1000*N);
     }
 
 
