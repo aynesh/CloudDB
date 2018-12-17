@@ -258,9 +258,9 @@ public class KVServerAdminThread extends Thread {
 					}
 					
 					if(inpMsg.getCommand()==Command.PING_FORWARD) {
-						
+						logger.info("next->node "+KVServer.metaData.getNextNode(inpMsg.getServer()).getName()+" first node-> "+KVServer.metaData.getMetaData()[0].getName());
 						Node nextNode = KVServer.metaData.getNextNode(inpMsg.getServer());
-						if(nextNode.getIpAndPort()==KVServer.metaData.getMetaData()[0].getIpAndPort())
+						if(nextNode.getName()==KVServer.metaData.getMetaData()[0].getName())
 						{
 							sendToECS(inpMsg.getServer(),Command.PING_SUCCESS);
 						}
