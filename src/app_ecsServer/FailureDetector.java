@@ -18,7 +18,7 @@ public class FailureDetector {
 	public static void detectFailure() {
 		int i=0;
 		Node nodes[] = ECSServer.activeServers.getMetaData();
-		logger.info( "Active servers " + ECSServer.activeServers.getMetaData().toString());
+		logger.info( "Active servers " + ECSServer.activeServers.toString());
 		startForwardPing(nodes[0]);
 		
 		}
