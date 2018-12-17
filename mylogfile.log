@@ -52,3 +52,847 @@
 2018-12-17 13:47:39,797 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
 2018-12-17 13:47:44,854 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
 2018-12-17 13:47:46,722 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:35:42,451 INFO  [ECSServerLibrary] - java.io.FileNotFoundException: C:\Users\Akshaya\gr6\.ssh\id_rsa (No such file or directory)
+2018-12-17 15:35:42,451 INFO  [ECSServerLibrary] - java.io.FileNotFoundException: C:\Users\Akshaya\gr6\.ssh\id_rsa (No such file or directory)
+2018-12-17 15:35:42,451 INFO  [ECSServerLibrary] - java.io.FileNotFoundException: C:\Users\Akshaya\gr6\.ssh\id_rsa (No such file or directory)
+2018-12-17 15:35:42,451 INFO  [ECSServerLibrary] - java.io.FileNotFoundException: C:\Users\Akshaya\gr6\.ssh\id_rsa (No such file or directory)
+2018-12-17 15:35:42,452 INFO  [ECSServerLibrary] - java.io.FileNotFoundException: C:\Users\Akshaya\gr6\.ssh\id_rsa (No such file or directory)
+2018-12-17 15:36:33,275 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node3 50002 3002 5 LRU /home/aksh/data/node3/
+2018-12-17 15:36:33,283 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node2 50001 3001 5 LRU /home/aksh/data/node2/
+2018-12-17 15:36:33,290 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node5 50004 3004 5 LRU /home/aksh/data/node5/
+2018-12-17 15:36:33,290 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 15:36:33,291 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node4 50003 3003 5 LRU /home/aksh/data/node4/
+2018-12-17 15:39:50,892 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node2 50001 3001 5 LRU /home/aksh/data/node2/
+2018-12-17 15:39:50,934 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 15:39:50,936 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node4 50003 3003 5 LRU /home/aksh/data/node4/
+2018-12-17 15:39:50,985 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node5 50004 3004 5 LRU /home/aksh/data/node5/
+2018-12-17 15:39:50,988 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node3 50002 3002 5 LRU /home/aksh/data/node3/
+2018-12-17 15:40:08,351 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:40:08,352 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:40:08,357 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:40:08,526 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:40:08,527 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:40:08,527 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:40:08,527 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:40:08,527 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:40:08,529 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:40:08,634 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:40:08,634 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:40:08,634 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:40:08,634 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:40:08,634 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:40:08,634 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:40:08,784 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:40:08,784 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:40:08,787 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:40:08,787 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:40:08,787 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:40:08,788 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:40:08,958 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:40:08,958 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:40:08,959 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:40:08,959 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:40:08,959 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:40:08,959 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:40:09,068 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:40:09,069 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:40:09,069 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:40:42,732 INFO  [KVStore] - Attempting to establish connection to localhost 50002
+2018-12-17 15:40:48,550 INFO  [KVStore] - Attempting to update: a : b
+2018-12-17 15:40:48,736 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 15:40:48,739 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:40:48,750 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50009
+2018-12-17 15:40:48,754 INFO  [KVStore] - Attempting to update: a : b
+2018-12-17 15:40:48,772 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=b, type=PUT_SUCCESS]
+2018-12-17 15:40:52,024 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:40:52,034 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:40:57,673 INFO  [KVStore] - Attempting to update: 1 : 2
+2018-12-17 15:40:57,677 INFO  [KVStore] - Server response: KVMessageImpl [key=1, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 15:40:57,678 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:40:57,678 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50004
+2018-12-17 15:40:57,681 INFO  [KVStore] - Attempting to update: 1 : 2
+2018-12-17 15:40:57,699 INFO  [KVStore] - Server response: KVMessageImpl [key=1, value=2, type=PUT_SUCCESS]
+2018-12-17 15:41:01,916 INFO  [KVStore] - Attempting to update: g : y
+2018-12-17 15:41:01,921 INFO  [KVStore] - Server response: KVMessageImpl [key=g, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 15:41:01,923 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:41:01,923 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50002
+2018-12-17 15:41:01,924 INFO  [KVStore] - Attempting to update: g : y
+2018-12-17 15:41:01,931 INFO  [KVStore] - Server response: KVMessageImpl [key=g, value=y, type=PUT_SUCCESS]
+2018-12-17 15:41:08,186 INFO  [KVStore] - Attempting to update: x : y
+2018-12-17 15:41:08,189 INFO  [KVStore] - Server response: KVMessageImpl [key=x, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 15:41:08,190 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:41:08,191 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50003
+2018-12-17 15:41:08,194 INFO  [KVStore] - Attempting to update: x : y
+2018-12-17 15:41:08,200 INFO  [KVStore] - Server response: KVMessageImpl [key=x, value=y, type=PUT_SUCCESS]
+2018-12-17 15:41:51,882 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:41:52,038 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:41:52,069 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:42:11,480 INFO  [ECSServerLibrary] - ----------Started removeNode----------
+2018-12-17 15:42:11,480 INFO  [ECSServerLibrary] - nextNode: 127.0.0.1:50003
+2018-12-17 15:42:11,480 INFO  [ECSServerLibrary] - prevNode: 127.0.0.1:50001
+2018-12-17 15:42:11,480 INFO  [ECSServerLibrary] - prevPrevNode: 127.0.0.1:50004
+2018-12-17 15:42:11,480 INFO  [ECSServerLibrary] - nextNextNode: 127.0.0.1:50009
+2018-12-17 15:42:11,480 INFO  [HashRing] - node
+2018-12-17 15:42:11,480 INFO  [HashRing] - Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E]
+2018-12-17 15:42:11,481 INFO  [HashRing] - [Lapp.common.Node;@5197848c
+2018-12-17 15:42:11,481 INFO  [HashRing] - bi
+2018-12-17 15:42:11,481 INFO  [HashRing] - 33018782963055426442400102687614908157
+2018-12-17 15:42:11,481 INFO  [HashRing] - key
+2018-12-17 15:42:11,482 INFO  [HashRing] - 18D72FB047CFA96BF76B263790DF36FD
+2018-12-17 15:42:11,482 INFO  [HashRing] - map
+2018-12-17 15:42:11,482 INFO  [HashRing] - {33018782963055426442400102687614908157=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], 225309527215752282658527527430926779768=Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], 238448651628652111871958059464909257854=Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], 290462380766460467658039843920390100539=Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], 293665975790736140455366914418740328201=Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]}
+2018-12-17 15:42:11,482 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:11,482 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:11,482 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,484 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,484 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_LOCK
+2018-12-17 15:42:11,484 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,484 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:42:11,484 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:42:11,485 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=TRANSFER_AND_SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,488 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=TRANSFER_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,488 INFO  [ECSServerLibrary] - Status from KV Server: TRANSFER_SUCCESS
+2018-12-17 15:42:11,488 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,489 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:11,489 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:11,492 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,492 INFO  [ECSServerLibrary] - Attempting to transgfer: a : b
+
+2018-12-17 15:42:11,496 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,502 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:11,502 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,499 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:42:11,504 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:42:11,505 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:42:11,505 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,517 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,517 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:11,518 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,518 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:11,518 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:11,518 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,520 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,521 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:11,521 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,521 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:42:11,521 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:42:11,521 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,839 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 15:42:11,840 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:42:11,840 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:42:11,840 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,844 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 15:42:11,845 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,849 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:11,849 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,850 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:42:11,850 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:42:11,850 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,858 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,858 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 15:42:11,858 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,858 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:42:11,858 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:42:11,859 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:42:11,865 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,865 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 15:42:11,866 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,892 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:11,892 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:11,892 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,884 INFO  [ECSServerLibrary] - Attempting to transgfer: g : y
+Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: 1 : 2
+Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: x : y
+Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:42:11,894 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:11,909 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_UNLOCK
+2018-12-17 15:42:11,909 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:11,910 INFO  [ECSServerLibrary] - ----------Ending removeNode----------
+2018-12-17 15:42:22,690 INFO  [KVStore] - Attempting to retrieve: a
+2018-12-17 15:42:22,695 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=b, type=GET_SUCCESS]
+2018-12-17 15:42:27,244 INFO  [KVStore] - Attempting to retrieve: 1
+2018-12-17 15:42:27,250 INFO  [KVStore] - Server response: KVMessageImpl [key=1, value=2, type=GET_SUCCESS]
+2018-12-17 15:42:31,622 INFO  [KVStore] - Attempting to retrieve: x
+2018-12-17 15:42:31,628 INFO  [KVStore] - Server response: KVMessageImpl [key=x, value=y, type=GET_SUCCESS]
+2018-12-17 15:42:40,299 INFO  [ECSServerLibrary] - ----------Started removeNode----------
+2018-12-17 15:42:40,299 INFO  [ECSServerLibrary] - nextNode: 127.0.0.1:50002
+2018-12-17 15:42:40,299 INFO  [ECSServerLibrary] - prevNode: 127.0.0.1:50001
+2018-12-17 15:42:40,299 INFO  [ECSServerLibrary] - prevPrevNode: 127.0.0.1:50004
+2018-12-17 15:42:40,299 INFO  [ECSServerLibrary] - nextNextNode: 127.0.0.1:50003
+2018-12-17 15:42:40,299 INFO  [HashRing] - node
+2018-12-17 15:42:40,299 INFO  [HashRing] - Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E]
+2018-12-17 15:42:40,299 INFO  [HashRing] - [Lapp.common.Node;@799f7e29
+2018-12-17 15:42:40,299 INFO  [HashRing] - bi
+2018-12-17 15:42:40,300 INFO  [HashRing] - 225309527215752282658527527430926779768
+2018-12-17 15:42:40,300 INFO  [HashRing] - key
+2018-12-17 15:42:40,300 INFO  [HashRing] - A98109598267087DFC364FAE4CF24578
+2018-12-17 15:42:40,301 INFO  [HashRing] - map
+2018-12-17 15:42:40,301 INFO  [HashRing] - {225309527215752282658527527430926779768=Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], 238448651628652111871958059464909257854=Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], 290462380766460467658039843920390100539=Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], 293665975790736140455366914418740328201=Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]}
+2018-12-17 15:42:40,301 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:42:40,301 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:42:40,301 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,304 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,304 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_LOCK
+2018-12-17 15:42:40,304 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,304 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:40,304 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:40,305 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=TRANSFER_AND_SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,307 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=TRANSFER_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,307 INFO  [ECSServerLibrary] - Status from KV Server: TRANSFER_SUCCESS
+2018-12-17 15:42:40,308 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,308 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:42:40,309 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:42:40,309 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,310 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,310 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:40,311 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,311 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:42:40,311 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:42:40,311 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,308 INFO  [ECSServerLibrary] - Attempting to transgfer: g : y
+
+2018-12-17 15:42:40,321 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,323 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:40,324 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,324 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:42:40,324 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:42:40,324 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,326 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,326 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:40,327 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,327 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:42:40,327 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:42:40,327 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,327 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: x : y
+Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: a : b
+Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:42:40,644 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 15:42:40,645 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:42:40,645 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:42:40,646 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,647 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,647 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 15:42:40,660 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,660 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:42:40,660 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:42:40,660 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,669 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 15:42:40,683 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,689 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 15:42:40,689 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,689 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:42:40,689 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:42:40,689 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:42:40,692 INFO  [ECSServerLibrary] - Attempting to transgfer: g : y
+
+2018-12-17 15:42:40,693 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,707 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 15:42:40,696 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+2018-12-17 15:42:40,707 INFO  [ECSServerLibrary] - 
+Attempting to transgfer: 1 : 2
+Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: x : y
+
+2018-12-17 15:42:40,709 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,709 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:42:40,709 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:42:40,709 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,711 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:42:40,718 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:42:40,724 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_UNLOCK
+2018-12-17 15:42:40,724 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:42:40,724 INFO  [ECSServerLibrary] - ----------Ending removeNode----------
+2018-12-17 15:42:44,906 INFO  [KVStore] - Attempting to retrieve: 1
+2018-12-17 15:42:44,910 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:42:44,910 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50003
+2018-12-17 15:42:44,911 ERROR [KVStore] - Unable to establish connection.
+2018-12-17 15:42:44,911 ERROR [KVClient] - Connect to 127.0.0.1:50003 failed.
+2018-12-17 15:42:44,911 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50002
+2018-12-17 15:42:44,912 INFO  [KVStore] - Attempting to retrieve: 1
+2018-12-17 15:42:44,917 INFO  [KVStore] - Server response: KVMessageImpl [key=1, value=2, type=GET_SUCCESS]
+2018-12-17 15:42:48,699 INFO  [KVStore] - Attempting to retrieve: x
+2018-12-17 15:42:48,703 INFO  [KVStore] - Server response: KVMessageImpl [key=x, value=y, type=GET_SUCCESS]
+2018-12-17 15:43:02,205 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:43:02,206 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:43:02,207 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=STOP, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:43:02,209 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=STOP_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:02,210 INFO  [ECSServerLibrary] - Status from KV Server: STOP_SUCCESS
+2018-12-17 15:43:02,211 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:02,211 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:43:02,211 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:43:02,211 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=STOP, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:43:02,213 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=STOP_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:02,213 INFO  [ECSServerLibrary] - Status from KV Server: STOP_SUCCESS
+2018-12-17 15:43:02,214 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:02,214 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:43:02,214 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:43:02,215 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=STOP, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=DCEE0277EB13B76434E8DCD31A387709]]]
+2018-12-17 15:43:02,228 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=STOP_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:02,229 INFO  [ECSServerLibrary] - Status from KV Server: STOP_SUCCESS
+2018-12-17 15:43:02,230 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:18,797 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:43:18,797 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:43:18,798 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,804 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SHUTDOWN_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,804 INFO  [ECSServerLibrary] - Status from KV Server: SHUTDOWN_SUCCESS
+2018-12-17 15:43:18,804 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:18,804 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:43:18,804 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:43:18,805 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,807 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SHUTDOWN_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,807 INFO  [ECSServerLibrary] - Status from KV Server: SHUTDOWN_SUCCESS
+2018-12-17 15:43:18,807 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:18,807 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:43:18,807 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:43:18,807 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,810 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SHUTDOWN_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:43:18,813 INFO  [ECSServerLibrary] - Status from KV Server: SHUTDOWN_SUCCESS
+2018-12-17 15:43:18,813 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:43:19,123 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 15:43:19,124 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 15:43:19,135 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 15:52:33,108 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 15:52:33,110 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node5 50004 3004 5 LRU /home/aksh/data/node5/
+2018-12-17 15:52:33,124 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node3 50002 3002 5 LRU /home/aksh/data/node3/
+2018-12-17 15:52:33,126 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node2 50001 3001 5 LRU /home/aksh/data/node2/
+2018-12-17 15:52:33,267 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node4 50003 3003 5 LRU /home/aksh/data/node4/
+2018-12-17 15:52:45,068 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:52:45,069 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:52:45,071 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:52:45,218 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:52:45,218 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:52:45,221 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:52:45,221 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 15:52:45,221 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 15:52:45,224 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:52:45,402 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:52:45,402 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:52:45,402 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:52:45,402 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 15:52:45,402 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 15:52:45,406 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:52:45,528 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:52:45,529 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:52:45,531 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:52:45,531 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 15:52:45,531 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 15:52:45,536 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:52:45,707 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:52:45,708 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:52:45,708 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:52:45,708 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 15:52:45,708 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 15:52:45,713 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:52:45,834 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:52:45,834 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 15:52:45,834 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:53:18,238 INFO  [KVStore] - Attempting to establish connection to localhost 50001
+2018-12-17 15:53:23,966 INFO  [KVStore] - Attempting to update: a : b
+2018-12-17 15:53:24,173 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 15:53:24,176 INFO  [KVStore] - Diconnected from server.
+2018-12-17 15:53:24,183 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50009
+2018-12-17 15:53:24,188 INFO  [KVStore] - Attempting to update: a : b
+2018-12-17 15:53:24,201 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=b, type=PUT_SUCCESS]
+2018-12-17 15:53:33,147 INFO  [KVStore] - Attempting to retrieve: a
+2018-12-17 15:53:33,150 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=b, type=GET_SUCCESS]
+2018-12-17 15:53:34,207 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 15:53:45,837 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:53:45,838 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:53:45,839 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 15:53:45,844 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 15:53:45,844 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 15:53:45,844 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 15:54:19,378 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:54:19,378 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:54:19,378 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=STOP, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 15:54:45,844 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 15:54:45,844 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 15:54:45,845 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:12:35,339 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node3 50002 3002 5 LRU /home/aksh/data/node3/
+2018-12-17 16:12:35,930 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 16:12:38,836 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node5 50004 3004 5 LRU /home/aksh/data/node5/
+2018-12-17 16:12:40,550 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node4 50003 3003 5 LRU /home/aksh/data/node4/
+2018-12-17 16:12:46,062 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node2 50001 3001 5 LRU /home/aksh/data/node2/
+2018-12-17 16:13:22,740 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:13:22,741 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:13:22,741 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:13:22,918 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:13:22,918 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:13:22,918 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:13:22,918 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:13:22,918 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:13:22,921 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:13:23,068 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:13:23,068 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:13:23,068 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:13:23,068 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 16:13:23,068 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 16:13:23,068 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:13:23,184 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:13:23,187 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:13:23,189 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:13:23,189 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:13:23,189 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:13:23,192 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:13:23,355 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:13:23,355 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:13:23,358 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:13:23,358 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:13:23,358 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:13:23,360 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:13:23,558 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:13:23,558 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:13:23,560 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:13:56,703 INFO  [KVStore] - Attempting to establish connection to localhost 50009
+2018-12-17 16:14:00,153 INFO  [KVStore] - Attempting to update: m : n
+2018-12-17 16:14:00,338 INFO  [KVStore] - Server response: KVMessageImpl [key=m, value=null, type=SERVER_NOT_RESPONSIBLE]
+2018-12-17 16:14:00,339 INFO  [KVStore] - Diconnected from server.
+2018-12-17 16:14:00,343 INFO  [KVStore] - Attempting to establish connection to 127.0.0.1 50003
+2018-12-17 16:14:00,346 INFO  [KVStore] - Attempting to update: m : n
+2018-12-17 16:14:00,355 INFO  [KVStore] - Server response: KVMessageImpl [key=m, value=n, type=PUT_SUCCESS]
+2018-12-17 16:14:04,756 INFO  [KVStore] - Attempting to retrieve: m
+2018-12-17 16:14:04,759 INFO  [KVStore] - Server response: KVMessageImpl [key=m, value=n, type=GET_SUCCESS]
+2018-12-17 16:14:10,872 INFO  [KVStore] - Attempting to update: k : l
+2018-12-17 16:14:10,879 INFO  [KVStore] - Server response: KVMessageImpl [key=k, value=l, type=PUT_SUCCESS]
+2018-12-17 16:14:14,171 INFO  [KVStore] - Attempting to retrieve: k
+2018-12-17 16:14:14,177 INFO  [KVStore] - Server response: KVMessageImpl [key=k, value=l, type=GET_SUCCESS]
+2018-12-17 16:14:23,580 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:14:23,582 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:14:23,583 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:14:23,587 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:14:23,587 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:14:23,587 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:14:41,077 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=m, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:14:41,096 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=m, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:14:41,096 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=k, value=null, type=COPY_SUCCESS]
+Server response: KVMessageImpl [key=k, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:15:23,587 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:15:23,588 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:15:23,588 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:15:48,886 INFO  [ECSServerLibrary] - exit-status: -1
+2018-12-17 16:18:15,702 INFO  [KVStore] - Attempting to retrieve: k
+2018-12-17 16:18:15,704 INFO  [KVStore] - Server response: KVMessageImpl [key=k, value=l, type=GET_SUCCESS]
+2018-12-17 16:19:40,786 INFO  [ECSServerLibrary] - exit-status: -1
+2018-12-17 16:19:40,786 INFO  [FailureDetector] - FailureDetector: sendMessage: Unable to establish connection.
+2018-12-17 16:19:40,786 INFO  [FailureDetector] - FailureDetector: Detected node failure.
+Attempting to fix...
+2018-12-17 16:19:40,786 INFO  [ECSServerLibrary] - ----------Started removeNode----------
+2018-12-17 16:19:40,787 INFO  [ECSServerLibrary] - nextNode: 127.0.0.1:50003
+2018-12-17 16:19:40,787 INFO  [ECSServerLibrary] - prevNode: 127.0.0.1:50001
+2018-12-17 16:19:40,787 INFO  [ECSServerLibrary] - prevPrevNode: 127.0.0.1:50004
+2018-12-17 16:19:40,787 INFO  [ECSServerLibrary] - nextNextNode: 127.0.0.1:50009
+2018-12-17 16:19:40,787 INFO  [HashRing] - node
+2018-12-17 16:19:40,787 INFO  [HashRing] - Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E]
+2018-12-17 16:19:40,787 INFO  [HashRing] - [Lapp.common.Node;@1133a433
+2018-12-17 16:19:40,787 INFO  [HashRing] - bi
+2018-12-17 16:19:40,787 INFO  [HashRing] - 33018782963055426442400102687614908157
+2018-12-17 16:19:40,787 INFO  [HashRing] - key
+2018-12-17 16:19:40,787 INFO  [HashRing] - 18D72FB047CFA96BF76B263790DF36FD
+2018-12-17 16:19:40,787 INFO  [HashRing] - map
+2018-12-17 16:19:40,787 INFO  [HashRing] - {33018782963055426442400102687614908157=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], 225309527215752282658527527430926779768=Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], 238448651628652111871958059464909257854=Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], 290462380766460467658039843920390100539=Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], 293665975790736140455366914418740328201=Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]}
+2018-12-17 16:19:40,821 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:40,821 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:40,822 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,832 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,832 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_LOCK
+2018-12-17 16:19:40,832 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,832 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:40,832 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:40,833 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:40,833 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:40,833 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:40,833 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:40,841 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,843 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,843 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:40,844 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,844 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:40,844 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:40,844 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,846 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,846 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:40,847 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,847 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:40,847 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:40,847 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,858 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,859 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:40,859 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,859 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:40,859 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:40,859 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:40,860 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:40,860 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:19:40,860 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:19:40,860 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,862 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,862 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:40,863 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,863 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:40,863 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:40,863 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,866 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,866 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 16:19:40,869 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,869 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:19:40,869 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:19:40,869 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:40,873 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,873 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 16:19:40,873 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,873 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:40,873 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:40,874 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,881 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,881 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_UNLOCK
+2018-12-17 16:19:40,882 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,882 INFO  [ECSServerLibrary] - ----------Ending removeNode----------
+2018-12-17 16:19:40,882 INFO  [ECSServerLibrary] - ----------Started addNode----------
+2018-12-17 16:19:40,903 INFO  [ECSServerLibrary] - nextNode: 127.0.0.1:50003
+2018-12-17 16:19:40,903 INFO  [ECSServerLibrary] - prevNode: 127.0.0.1:50001
+2018-12-17 16:19:40,903 INFO  [ECSServerLibrary] - prevPrevNode: 127.0.0.1:50004
+2018-12-17 16:19:40,911 INFO  [ECSServerLibrary] - Attempting to transgfer: k : l
+Server response: KVMessageImpl [key=k, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: m : n
+Server response: KVMessageImpl [key=m, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: g : y
+Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: 1 : 2
+Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: x : y
+Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:19:40,913 INFO  [ECSServerLibrary] - nextNextNode: 127.0.0.1:50009
+2018-12-17 16:19:40,913 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:40,913 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:40,914 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,915 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,915 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_LOCK
+2018-12-17 16:19:40,915 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,915 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:40,915 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:40,916 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,917 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_LOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:40,917 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_LOCK
+2018-12-17 16:19:40,917 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:40,917 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:40,917 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:40,917 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:40,918 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:40,918 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 1
+2018-12-17 16:19:40,968 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:40,968 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:40,968 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:40,968 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:40,968 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 2
+2018-12-17 16:19:41,000 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 16:19:41,018 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,018 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,019 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,019 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,019 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 3
+2018-12-17 16:19:41,069 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,069 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,069 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,069 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,069 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 4
+2018-12-17 16:19:41,119 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,119 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,120 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,120 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,120 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 5
+2018-12-17 16:19:41,170 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,170 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,170 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,170 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,170 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 6
+2018-12-17 16:19:41,221 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,221 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,221 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,221 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,221 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 7
+2018-12-17 16:19:41,271 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,271 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,272 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,272 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,272 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 8
+2018-12-17 16:19:41,324 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,324 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,324 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,324 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,324 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 9
+2018-12-17 16:19:41,376 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,376 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,376 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,376 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,376 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 10
+2018-12-17 16:19:41,430 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,430 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,430 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,430 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,430 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 11
+2018-12-17 16:19:41,494 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,494 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,494 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,495 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,495 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 12
+2018-12-17 16:19:41,545 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,545 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,545 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:19:41,545 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:19:41,545 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 13
+2018-12-17 16:19:41,595 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,595 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,597 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,737 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,737 INFO  [ECSServerLibrary] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:19:41,737 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,737 INFO  [ECSServerLibrary] - Ping success: 127.0.0.1
+2018-12-17 16:19:41,737 INFO  [ECSServerLibrary] - Ping sleep... attempting next ping 14
+2018-12-17 16:19:41,787 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:41,787 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:41,788 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=TRANSFER, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,792 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=TRANSFER_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,792 INFO  [ECSServerLibrary] - Status from KV Server: TRANSFER_SUCCESS
+2018-12-17 16:19:41,792 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,792 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,792 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,793 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,802 INFO  [ECSServerLibrary] - Attempting to transgfer: a : b
+
+2018-12-17 16:19:41,809 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,809 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=a, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:19:41,809 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:41,809 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,809 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:41,809 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:41,810 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,813 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,813 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:41,813 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,813 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:41,813 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:41,813 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,815 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,815 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:41,815 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,815 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:19:41,815 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:19:41,815 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,817 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,817 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:41,817 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,817 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:19:41,818 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:19:41,818 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=META_DATA_UPDATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,821 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=META_DATA_UPDATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,821 INFO  [ECSServerLibrary] - Status from KV Server: META_DATA_UPDATE_SUCCESS
+2018-12-17 16:19:41,821 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,821 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:41,822 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:41,822 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,825 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,825 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 16:19:41,826 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,826 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:19:41,826 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:19:41,826 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=REPLICATE, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:19:41,838 INFO  [ECSServerLibrary] - Attempting to transgfer: g : y
+Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:19:41,842 INFO  [ECSServerLibrary] - Attempting to transgfer: 1 : 2
+Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+
+2018-12-17 16:19:41,846 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=REPLICATE_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,846 INFO  [ECSServerLibrary] - Status from KV Server: REPLICATE_SUCCESS
+2018-12-17 16:19:41,846 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,846 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:19:41,846 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:19:41,850 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,851 INFO  [ECSServerLibrary] - Attempting to transgfer: k : l
+Server response: KVMessageImpl [key=k, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: m : n
+Server response: KVMessageImpl [key=m, value=null, type=COPY_SUCCESS]
+Attempting to transgfer: g : y
+
+2018-12-17 16:19:41,852 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,852 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_UNLOCK
+2018-12-17 16:19:41,852 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,852 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:19:41,852 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:19:41,852 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,854 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SERVER_WRITE_UNLOCK, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:19:41,854 INFO  [ECSServerLibrary] - Status from KV Server: SERVER_WRITE_UNLOCK
+2018-12-17 16:19:41,854 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:19:41,854 INFO  [ECSServerLibrary] - ----------Ending addNode----------
+2018-12-17 16:19:41,856 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=g, value=null, type=COPY_SUCCESS]
+2018-12-17 16:19:41,856 INFO  [ECSServerLibrary] - 
+Attempting to transgfer: 1 : 2
+2018-12-17 16:19:41,856 INFO  [ECSServerLibrary] - 
+
+2018-12-17 16:19:41,862 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=1, value=null, type=COPY_SUCCESS]
+2018-12-17 16:19:41,862 INFO  [ECSServerLibrary] - 
+
+2018-12-17 16:19:41,865 INFO  [ECSServerLibrary] - Attempting to transgfer: x : y
+2018-12-17 16:19:41,865 INFO  [ECSServerLibrary] - 
+
+2018-12-17 16:19:41,869 INFO  [ECSServerLibrary] - Server response: KVMessageImpl [key=x, value=null, type=COPY_SUCCESS]
+2018-12-17 16:19:41,869 INFO  [ECSServerLibrary] - 
+
+2018-12-17 16:20:41,855 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:20:41,855 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:20:41,855 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:20:41,856 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:20:41,856 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:20:41,856 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:21:41,856 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:21:41,856 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:21:41,857 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:23:34,423 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:23:34,423 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:23:34,423 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:23:34,423 INFO  [ECSServerLibrary] - exit-status: -1
+2018-12-17 16:24:34,424 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:24:34,424 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:24:34,424 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:24:34,427 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:24:34,427 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:24:34,427 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:25:34,427 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:25:34,427 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:25:34,427 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:25:34,433 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:25:34,433 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:25:34,433 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:25:36,647 INFO  [ECSServerLibrary] - exit-status: -1
+2018-12-17 16:26:34,433 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:26:34,433 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:26:34,434 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:26:34,435 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:26:34,435 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:26:34,435 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:26:51,399 INFO  [ECSServerLibrary] - exit-status: 143
+2018-12-17 16:27:34,435 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:27:34,435 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:27:34,435 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:27:34,437 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:27:34,437 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:27:34,437 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:28:34,437 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:28:34,437 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:28:34,438 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:28:34,439 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:28:34,439 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:28:34,439 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:29:34,439 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:29:34,439 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:29:34,439 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:29:34,440 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:29:34,440 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:29:34,440 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:30:34,441 INFO  [FailureDetector] - Active servers [Lapp.common.Node;@76bd6a22
+2018-12-17 16:30:34,441 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:30:34,441 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:30:34,441 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:30:34,443 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:30:34,443 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:30:34,443 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:30:49,965 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:30:49,965 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:30:49,965 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=SHUTDOWN, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:30:49,967 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=SHUTDOWN_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:30:49,967 INFO  [ECSServerLibrary] - Status from KV Server: SHUTDOWN_SUCCESS
+2018-12-17 16:30:49,967 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:30:49,967 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:30:49,967 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:30:49,968 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 16:30:49,968 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 16:30:49,968 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:30:49,968 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:30:49,968 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:30:49,968 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:30:49,968 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:30:49,968 ERROR [ECSServerCommunicator] - Unable to establish connection. -> Connection refused (Connection refused)
+2018-12-17 16:30:49,969 INFO  [ECSServerLibrary] - ECSServerLibrary: sendMessage: Unable to establish connection.
+2018-12-17 16:30:50,282 INFO  [ECSServerLibrary] - exit-status: 0
+2018-12-17 16:31:19,009 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node2 50001 3001 5 LRU /home/aksh/data/node2/
+2018-12-17 16:31:19,016 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node10 50009 3009 5 LRU /home/aksh/data/node10/
+2018-12-17 16:31:19,046 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node5 50004 3004 5 LRU /home/aksh/data/node5/
+2018-12-17 16:31:19,052 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node4 50003 3003 5 LRU /home/aksh/data/node4/
+2018-12-17 16:31:19,088 INFO  [ECSServerLibrary] - java -jar /home/aksh/gr6/ms4-server.jar node3 50002 3002 5 LRU /home/aksh/data/node3/
+2018-12-17 16:31:27,390 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:31:27,393 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:31:27,394 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:31:27,589 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:31:27,589 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:31:27,589 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:31:27,589 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3003
+2018-12-17 16:31:27,589 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3003
+2018-12-17 16:31:27,595 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:31:27,803 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:31:27,803 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:31:27,803 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:31:27,804 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3002
+2018-12-17 16:31:27,804 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3002
+2018-12-17 16:31:27,804 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:31:27,939 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:31:27,939 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:31:27,939 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:31:27,939 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3004
+2018-12-17 16:31:27,939 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3004
+2018-12-17 16:31:27,939 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:31:28,102 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:31:28,102 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:31:28,103 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:31:28,103 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3001
+2018-12-17 16:31:28,103 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3001
+2018-12-17 16:31:28,103 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=START, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:31:28,268 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=START_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:31:28,268 INFO  [ECSServerLibrary] - Status from KV Server: START_SUCCESS
+2018-12-17 16:31:28,268 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:31:44,332 INFO  [KVStore] - Attempting to establish connection to localhost 50002
+2018-12-17 16:32:27,832 INFO  [KVStore] - Attempting to retrieve: a
+2018-12-17 16:32:28,063 INFO  [KVStore] - Server response: KVMessageImpl [key=a, value=b, type=GET_SUCCESS]
+2018-12-17 16:32:28,284 INFO  [FailureDetector] - Active servers [Lapp.common.Node;@7509b043
+2018-12-17 16:32:28,286 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:32:28,286 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:32:28,290 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]
+2018-12-17 16:32:28,296 INFO  [ECSServerCommunicator] - Server response: KVAdminMessageImpl [command=PING_SUCCESS, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=null]
+2018-12-17 16:32:28,296 INFO  [FailureDetector] - Status from KV Server: PING_SUCCESS
+2018-12-17 16:32:28,296 INFO  [ECSServerCommunicator] - Diconnected from server.
+2018-12-17 16:32:31,760 INFO  [KVStore] - Attempting to retrieve: k
+2018-12-17 16:32:31,766 INFO  [KVStore] - Server response: KVMessageImpl [key=k, value=l, type=GET_SUCCESS]
+2018-12-17 16:32:47,439 INFO  [ECSServerLibrary] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:32:47,439 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:32:47,439 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=STOP, numberOfNodes=0, cacheSize=0, cacheType=null, server=null, metaData=[Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], Node [name=node4, port=50003, ipAddress=127.0.0.1, startWriteRange=18D72FB047CFA96BF76B263790DF36FD, endWriteRange=A98109598267087DFC364FAE4CF24578, startReadRange=DA850509FC3B88A612B0BCAD7A37963B], Node [name=node3, port=50002, ipAddress=127.0.0.1, startWriteRange=A98109598267087DFC364FAE4CF24578, endWriteRange=B3638A32C297F43AA37E63BBD839FC7E, startReadRange=DCEE0277EB13B76434E8DCD31A387709], Node [name=node5, port=50004, ipAddress=127.0.0.1, startWriteRange=B3638A32C297F43AA37E63BBD839FC7E, endWriteRange=DA850509FC3B88A612B0BCAD7A37963B, startReadRange=18D72FB047CFA96BF76B263790DF36FD], Node [name=node2, port=50001, ipAddress=127.0.0.1, startWriteRange=DA850509FC3B88A612B0BCAD7A37963B, endWriteRange=DCEE0277EB13B76434E8DCD31A387709, startReadRange=A98109598267087DFC364FAE4CF24578]]]
+2018-12-17 16:33:28,296 INFO  [FailureDetector] - Active servers [Lapp.common.Node;@2407e1c
+2018-12-17 16:33:28,296 INFO  [FailureDetector] - Sending admin message: 127.0.0.1:3009
+2018-12-17 16:33:28,296 INFO  [ECSServerCommunicator] - Attempting to establish connection to 127.0.0.1 3009
+2018-12-17 16:33:28,296 INFO  [ECSServerCommunicator] - Attempting to send : KVAdminMessageImpl [command=PING_FORWARD, numberOfNodes=0, cacheSize=0, cacheType=null, server=Node [name=node10, port=50009, ipAddress=127.0.0.1, startWriteRange=DCEE0277EB13B76434E8DCD31A387709, endWriteRange=18D72FB047CFA96BF76B263790DF36FD, startReadRange=B3638A32C297F43AA37E63BBD839FC7E], metaData=null]

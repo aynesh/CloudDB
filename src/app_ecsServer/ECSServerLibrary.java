@@ -46,7 +46,7 @@ public class ECSServerLibrary {
 
 			String host = userName + "@" + ipAddress;
 			String user = host.substring(0, host.indexOf('@'));
-			String privateKey = "C:\\Users\\Akshaya\\gr6\\.ssh\\id_rsa";
+			String privateKey = "/home/" + userName + "/.ssh/id_rsa";
 			host = host.substring(host.indexOf('@') + 1);
 
 			Session session = jsch.getSession(user, host, 22);

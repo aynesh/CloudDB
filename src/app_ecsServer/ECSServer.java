@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -24,17 +25,18 @@ public class ECSServer {
 	
 	public static Map<String, Node> serverConfig;
 	
-	int port;
+	public static int port;
 
 	private String ip;
 	
 	private final ScheduledExecutorService scheduler;
+	private final ExecutorService executor;
 	
 	public ECSServer() {
 
 		
 		scheduler = Executors.newScheduledThreadPool(1);
-	    
+	    executor = Executors.newFixedThreadPool(1);
 	   
 	}
 
@@ -84,10 +86,14 @@ public class ECSServer {
 		adminMsg.setECSIP(ip);
 		adminMsg.setPort(port);
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
-		/*scheduler.scheduleWithFixedDelay(new Runnable() {
+		
+		executor.submit(new Runnable() {
+		       public void run() { ECSReceiver receiver = new ECSReceiver(ECSServer.port); }
+		     });
+		scheduler.scheduleWithFixedDelay(new Runnable() {
 		       public void run() { FailureDetector.detectFailure(); }
 		     }, 1, 1, TimeUnit.MINUTES);
-		     */
+		     
 	}
 	
 	public void stop() {
@@ -95,7 +101,8 @@ public class ECSServer {
 		adminMsg.setCommand(KVAdminMessage.Command.STOP);
 		adminMsg.setMetaData(activeServers.getMetaData());
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
-		//scheduler.shutdownNow();
+		scheduler.shutdownNow();
+		executor.shutdownNow();
 	}
 	
 	public void shutdown(String fileName) {
@@ -127,7 +134,8 @@ public class ECSServer {
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
 		
 		ECSServer ecsServer = new ECSServer();
-		ecsServer.port = args.length == 0? 40000: Integer.parseInt(args[0]);
+		ECSServer.port = args.length == 0? 40000: Integer.parseInt(args[0]);
+		
 		try {
 			ecsServer.ip = InetAddress.getLocalHost().toString();
 		} catch (UnknownHostException e1) {
