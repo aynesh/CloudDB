@@ -291,13 +291,17 @@ public class KVServerAdminThread extends Thread {
 			return false;
 		}
 		KVAdminMessage outMsg = new KVAdminMessageImpl();
+		outMsg.setCommand(Command.PING_FORWARD);
+		outMsg.setServer(toNode);
 		
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
-			logger.info("Sending failure detection message to "+toNode.getName());
+			logger.debug("Sending failure detection message to "+toNode.getName());
 			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
+			
 			KVAdminMessage inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
+			
 			sock.close();
 			if(inMsg.getCommand()==Command.PING_SUCCESS) {
 				logger.info(toNode.getName()+" is alive!");

@@ -29,7 +29,7 @@ public class FailureDetector {
 		try {
 			String ipAddress = node.getIpAddress();
 			int port = Integer.parseInt(node.getAdminPort());
-			logger.info( "Sending admin message: " + ipAddress + ":" + port);
+			logger.info("Sending failure detection message to "+node.getName());
 			ECSServerCommunicator client = new ECSServerCommunicator(ipAddress, port);
 			client.connect();
 			KVAdminMessage msg = new KVAdminMessageImpl();
@@ -40,6 +40,9 @@ public class FailureDetector {
 			logger.info("Status from KV Server: " + recd.getCommand());
 			if(recd.getCommand()!=Command.PING_SUCCESS) {
 				fixAndReplaceFailedNode(recd.getServer());
+			}
+			else {
+				logger.info(node.getName()+" is alive!");
 			}
 			client.disconnect();
 			
