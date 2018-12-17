@@ -27,7 +27,7 @@ public class ECSServer {
 	
 	public static int port;
 
-	private String ip;
+	public static String ip;
 	
 	private final ScheduledExecutorService scheduler;
 	private final ExecutorService executor;
@@ -230,6 +230,7 @@ public class ECSServer {
 			
 			if(quit) {
 				System.out.println("Exiting CLI");
+				System.exit(0);
 				break;
 				
 			}

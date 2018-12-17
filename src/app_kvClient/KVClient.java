@@ -31,14 +31,15 @@ public class KVClient {
 	private Node[] metaData=null;
 
 	public static void help() {
-		System.out.println("Intended usage of available commands:");
-		System.out.println(
-				"connect <address> <port> - Tries to establish a TCP- connection to the server at <address> and <port>.");
-		System.out.println("disconnect - Tries to disconnect from server");
-		System.out.println("send <message> - Tries to send <message> to connected server");
-		System.out.println("logLevel <level> - Tries to set logger level to <level>");
-		System.out.println("quit - quits the echo client");
-		System.out.println("help - displays list of available commands");
+		 System.out.println("Intended usage of available commands:");
+		 System.out.println(
+		 "connect <address> <port> - Tries to establish a TCP- connection to the server at <address> and <port>.");
+		 System.out.println("disconnect - Tries to disconnect from server");
+		 System.out.println("put <key> <data> - Tries to store key value in the  KV server.");
+		 System.out.println("put <key> - Tries to delete key from the responsible KV server.");
+		 System.out.println("get <key> - Tries to get key from the responsible KV server.");
+		 System.out.println("quit - quits the echo client");
+		 System.out.println("help - displays list of available commands");
 	}
 
 	/**

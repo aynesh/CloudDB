@@ -158,8 +158,12 @@ public class KVServerAdminThread extends Thread {
 					switch (inpMsg.getCommand()) {
 					case PING_FORWARD:
 						logger.info("Received failure detection message at "+nodeName);
+						outMsg.setCommand(Command.PING_SUCCESS);
+						break;
 					case PING:
 						outMsg.setCommand(Command.PING_SUCCESS);
+						KVServer.ECSIP = inpMsg.getECSIP();
+						KVServer.ECSPort = inpMsg.getPort();
 						break;
 					case START:
 						try {
@@ -344,7 +348,7 @@ public class KVServerAdminThread extends Thread {
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
-			logger.info("Reporting failure to: "+ip+" "+port);
+			logger.info("Reporting to ECS: "+ip+" "+port);
 			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
 			sock.close();
 			

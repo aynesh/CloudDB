@@ -240,6 +240,8 @@ public class ECSServerLibrary {
 		boolean serverOnline = false;
 		KVAdminMessageImpl pingMessage = new KVAdminMessageImpl();
 		pingMessage.setCommand(Command.PING);
+		pingMessage.setPort(ECSServer.port);
+		pingMessage.setECSIP(ECSServer.ip);
 		i=1;
 		while (!serverOnline) {
 			if(i > 100) {

@@ -28,9 +28,9 @@ public class KVServer {
 	
 	public static volatile  ConcurrentLinkedQueue<KVMessage> queue = new ConcurrentLinkedQueue<KVMessage>();
 
-	public static String ECSIP;
+	public static String ECSIP = "localhost";
 
-	public static int ECSPort;
+	public static int ECSPort = 40000;
 	
 	private final ScheduledExecutorService scheduler;
 	
