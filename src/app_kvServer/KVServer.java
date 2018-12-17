@@ -53,7 +53,7 @@ public class KVServer {
     	
     	KVServer.storagePath = path;
     	
-		new KVServerAdminThread(adminPort, nodeName).start();
+		new KVServerAdmin(adminPort, nodeName).start();
     	
     	DataManager.cache = CacheManager.instantiateCache(strategy,cacheSize);
         

@@ -33,11 +33,13 @@ public class KVServerAdminThread extends Thread {
 	
 	private int port = 3000;
 	private String nodeName = "";
-
-	public KVServerAdminThread(int port, String nodeName) {
+	Socket socket = null;
+	
+	public KVServerAdminThread(Socket socket, int port, String nodeName) {
 		
 		this.port = port;
 		this.nodeName = nodeName;
+		this.socket = socket;
 	}
 	
 	public static synchronized void deleteFiles(Node ofNode,  HashRing metaData) {
@@ -121,7 +123,7 @@ public class KVServerAdminThread extends Thread {
 	}
 	
 	public void run() {
-		ServerSocket serverSocket = null;
+		/*ServerSocket serverSocket = null;
 		Socket socket = null;
 		try {
 			serverSocket = new ServerSocket(this.port);
@@ -135,7 +137,7 @@ public class KVServerAdminThread extends Thread {
 			} catch (IOException e) {
 				logger.error("I/O error: " + e);
 			}
-
+*/
 			InputStream inp = null;
 			BufferedReader brinp = null;
 			DataOutputStream out = null;
@@ -155,6 +157,7 @@ public class KVServerAdminThread extends Thread {
 					logger.debug("Received Admin Command: "+inpMsg.toString());
 					switch (inpMsg.getCommand()) {
 					case PING_FORWARD:
+						logger.info("Received failure detection message at "+nodeName);
 					case PING:
 						outMsg.setCommand(Command.PING_SUCCESS);
 						break;
@@ -274,7 +277,6 @@ public class KVServerAdminThread extends Thread {
 			}
 
 		}
-	}
 
 	private boolean pingForward(Node toNode) {
 		String ip = toNode.getIpAddress();
@@ -293,10 +295,12 @@ public class KVServerAdminThread extends Thread {
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
+			logger.info("Sending failure detection message to "+toNode.getName());
 			KVAdminMessageManager.sendKVAdminMessage(outMsg, out);
 			KVAdminMessage inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
 			sock.close();
 			if(inMsg.getCommand()==Command.PING_SUCCESS) {
+				logger.info(toNode.getName()+" is alive!");
 				return true;
 			}
 		} catch (IOException|ClassNotFoundException e) {

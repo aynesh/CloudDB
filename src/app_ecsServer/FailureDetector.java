@@ -6,6 +6,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
+import app.common.HashRing;
 import app.common.Node;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
@@ -18,7 +19,7 @@ public class FailureDetector {
 	public static void detectFailure() {
 		int i=0;
 		Node nodes[] = ECSServer.activeServers.getMetaData();
-		logger.info( "Active servers " + ECSServer.activeServers.toString());
+		logger.info( "Active servers " + HashRing.toString(ECSServer.activeServers.getMetaData()));
 		startForwardPing(nodes[0]);
 		
 		}
