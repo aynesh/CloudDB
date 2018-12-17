@@ -21,6 +21,9 @@ ecs.config contains all the servers available for ecs to launch and it needs fol
 node1 username 127.0.0.1 50000 3000 /home/username/Desktop/Praktikum/gr6/ms4-server.jar /home/username/data/node1/
 <node unique name> <ssh username> <ip> <ipport> <adminPort> <jar location> <server storage location>
 
+To start ECS Server on a custom port with a custom config file, use the format
+java -jar ms4-ecs.jar ecs.config 40000
+
 #ECS Commands
 
 initService <number of nodes> <Cache Size> <Cache Strategy> - Initialize n number of servers
@@ -45,7 +48,6 @@ help - displays list of available commands
 The Client should know atleast one ip and port of a running KV Server to begin communication:
 In case of SERVER_NOT_RESPONSIBLE the client automatically connects the correct node and performs the operation.
 
-#Replication:
 '
 #Replication:
 

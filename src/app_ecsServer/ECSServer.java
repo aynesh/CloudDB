@@ -70,6 +70,14 @@ public class ECSServer {
 						Integer.parseInt(tokens[1]), activeServers);
 				System.out.println("Server> Initialized");
 				HashRing.printMetaData(activeServers.getMetaData());
+				
+				executor.submit(new Runnable() {
+				       public void run() { ECSReceiver receiver = new ECSReceiver(ECSServer.port); }
+				     });
+				scheduler.scheduleWithFixedDelay(new Runnable() {
+				       public void run() { FailureDetector.detectFailure(); }
+				     }, 20, 20, TimeUnit.SECONDS);
+				     
 			}
 
 		} catch (Exception e) {
@@ -85,13 +93,7 @@ public class ECSServer {
 		adminMsg.setPort(port);
 		ECSServerLibrary.notifyAllServers(adminMsg, activeServers);
 		
-		executor.submit(new Runnable() {
-		       public void run() { ECSReceiver receiver = new ECSReceiver(ECSServer.port); }
-		     });
-		scheduler.scheduleWithFixedDelay(new Runnable() {
-		       public void run() { FailureDetector.detectFailure(); }
-		     }, 20, 20, TimeUnit.SECONDS);
-		     
+		
 	}
 	
 	public void stop() {
@@ -133,7 +135,7 @@ public class ECSServer {
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
 		
 		ECSServer ecsServer = new ECSServer();
-		ECSServer.port = args.length == 0? 40000: Integer.parseInt(args[0]);
+		ECSServer.port = args.length < 2? 40000: Integer.parseInt(args[1]);
 		
 		try {
 			ecsServer.ip = InetAddress.getLocalHost().toString();
