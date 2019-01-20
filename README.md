@@ -1,10 +1,10 @@
-## Practical Course Cloud Databases - MS4
+## Practical Course Cloud Databases - MS5
 
 The Server contains 3 components:
 
-1) ms4-client.jar -  Client for connecting to KV Server instances.
-2) ms4-server.jar -  KVServer.
-3) ms4-ecs.jar - Responsible for managing KV server instances.
+1) ms5-client.jar -  Client for connecting to KV Server instances.
+2) ms5-server.jar -  KVServer.
+3) ms5-ecs.jar - Responsible for managing KV server instances.
 
 ## ECS Server Configuration
 
@@ -18,11 +18,11 @@ The KV Servers can be configured using ecs.config
 ecs.config contains all the servers available for ecs to launch and it needs following parameters: 
 
 
-node1 username 127.0.0.1 50000 3000 /home/username/Desktop/Praktikum/gr6/ms4-server.jar /home/username/data/node1/
+node1 username 127.0.0.1 50000 3000 /home/username/Desktop/Praktikum/gr6/ms5-server.jar /home/username/data/node1/
 <node unique name> <ssh username> <ip> <ipport> <adminPort> <jar location> <server storage location>
 
 To start ECS Server on a custom port with a custom config file, use the format
-java -jar ms4-ecs.jar ecs.config 40000
+java -jar ms5-ecs.jar ecs.config 40000
 
 #ECS Commands
 
@@ -35,7 +35,7 @@ removeNode - Remove a Server
 metaData -  meta Data of Servers
 quit - shutdown ECS Server
 
-#KV Client(ms4-client.jar)
+#KV Client(ms5-client.jar)
 
 connect <address> <port> - Tries to establish a TCP- connection to the server at <address> and <port>.
 disconnect - Tries to disconnect from server
