@@ -115,6 +115,10 @@ public class ECSServer {
 	}
 	
 	public void addNode(String tokens[]) {
+		if(serverConfig.size() == 0) {
+			System.out.println("Server> No more servers available to add.");
+			return;
+		}
 		ECSServerLibrary.addNode(serverConfig, Integer.parseInt(tokens[1]), tokens[2], activeServers);
 		System.out.println("Server> Add Node Success.");
 		HashRing.printMetaData(activeServers.getMetaData());

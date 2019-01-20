@@ -227,7 +227,7 @@ public class ECSServerLibrary {
 		Node prevNode = activeServers.getPrevNode(newNode);
 		Node nextNode = activeServers.getNextNode(newNode);
 		Node prevPrevNode = activeServers.getPrevNode(prevNode);
-		Node nextNextNode = activeServers.getPrevNode(nextNode);		
+		Node nextNextNode = activeServers.getNextNode(nextNode);		
 		
 		logger.info("nextNode: "+nextNode.getIpAndPort());
 		logger.info("prevNode: "+prevNode.getIpAndPort());
@@ -236,7 +236,9 @@ public class ECSServerLibrary {
 
 		writeLockUnlockServers(newNode, prevNode, true);
 		writeLockUnlockServers(newNode, nextNode, true);
-
+		writeLockUnlockServers(newNode, prevPrevNode, true);
+		writeLockUnlockServers(newNode, nextNextNode, true);
+		
 		boolean serverOnline = false;
 		KVAdminMessageImpl pingMessage = new KVAdminMessageImpl();
 		pingMessage.setCommand(Command.PING);
@@ -245,6 +247,7 @@ public class ECSServerLibrary {
 		i=1;
 		while (!serverOnline) {
 			if(i > 100) {
+				//This needs to be coded.
 				break;
 			}
 			KVAdminMessage reply = ECSServerLibrary.sendMessage(pingMessage, newNode.getIpAddress(),
@@ -275,11 +278,13 @@ public class ECSServerLibrary {
 		
 		replicateFiles(prevNode, newNode, activeServers.getMetaData());
 		replicateFiles(prevPrevNode, newNode, activeServers.getMetaData());
-		deleteReplicatedFiles(nextNextNode, newNode, activeServers.getMetaData());
+		deleteReplicatedFiles(nextNextNode, prevNode, activeServers.getMetaData());
 
 		writeLockUnlockServers(newNode, prevNode, false);
 		writeLockUnlockServers(newNode, nextNode, false);
-
+		writeLockUnlockServers(newNode, prevPrevNode, false);
+		writeLockUnlockServers(newNode, nextNextNode, false);
+		
 		// Transfer Keys
 
 		serverConfig.remove(keyToRemove);

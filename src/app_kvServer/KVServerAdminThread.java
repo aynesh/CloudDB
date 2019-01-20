@@ -43,6 +43,7 @@ public class KVServerAdminThread extends Thread {
 	}
 	
 	public static synchronized void deleteFiles(Node ofNode,  HashRing metaData) {
+		logger.info("Delete Replicated Files Started. Deleting ofNode: " + ofNode.getName());
 		File files[] = DataManager.getAllTextFiles();
 		
 		for(File file: files) {
@@ -59,6 +60,19 @@ public class KVServerAdminThread extends Thread {
 				logger.error(e);
 			}
 		}
+		logger.info("Delete Replicated Files Completed.");
+	}
+	
+	
+	public static boolean isReplica(String key,String nodeName, Node toNode, HashRing metaData) throws NoSuchAlgorithmException {
+		Node nextNode = metaData.getNextNode(nodeName);
+		Node nextToNextNode = metaData.getNextNode(nextNode);
+		if(nextNode != null && !nextNode.getName().equals(nodeName) && nodeName.equals(metaData.getNode(key).getName())) {
+			return true;
+		} else if(nextToNextNode != null && !nextToNextNode.getName().equals(nodeName) && nodeName.equals(metaData.getNode(key).getName())) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -72,6 +86,7 @@ public class KVServerAdminThread extends Thread {
 		File files[] = DataManager.getAllTextFiles();
 		List<String> keysToBeDeleted=new ArrayList<>();
 		logger.info("Starting KV Server transfer-------");
+
 		for(File file: files) {
 			String name = file.getName();
 
@@ -79,8 +94,9 @@ public class KVServerAdminThread extends Thread {
 			logger.info("key: "+key+" Filename>"+name);
 			
 			try {
-				logger.info("Belongs to: "+metaData.getNode(key).getName()+" Checking toNode: "+toNode.getName());
-				if(metaData.getNode(key).getName().equals(toNode.getName()) || replicationTransfer) {
+				if(metaData.getNode(key).getName().equals(toNode.getName()) || (replicationTransfer && isReplica(key, nodeName, toNode, metaData))) {
+					logger.info("Transfering Key: "+metaData.getNode(key).getName()+" fromNode: "+nodeName+" toNode: "+toNode.getName() + " replication: "+ replicationTransfer);
+					
 					try {
 						String data=DataManager.get(key);
 						KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
