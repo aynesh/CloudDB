@@ -113,8 +113,8 @@ public class KVClient {
 			recd = client.get(key);
 		}
 
-		if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE) {
-			System.out.println("Server> SERVER_NOT_RESPONSIBLE");
+		if(recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE || recd.getStatus() == StatusType.REPLICA_NOT_AVAILABLE) {
+			System.out.println("Server> " + (recd.getStatus() == StatusType.SERVER_NOT_RESPONSIBLE ? "SERVER_NOT_RESPONSIBLE" : "REPLICA_NOT_AVAILABLE" ));
 			HashRing.printMetaData(recd.getMetaData());
 			metaData = recd.getMetaData();
 			client.disconnect();

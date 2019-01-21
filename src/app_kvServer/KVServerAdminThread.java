@@ -63,7 +63,9 @@ public class KVServerAdminThread extends Thread {
 		logger.info("Delete Replicated Files Completed.");
 	}
 	
-	
+	/*
+	 * It checks whether the key belongs to current node and target(toNode) is next or nextToNext node.
+	 */
 	public static boolean isReplica(String key,String nodeName, Node toNode, HashRing metaData) throws NoSuchAlgorithmException {
 		Node nextNode = metaData.getNextNode(nodeName);
 		Node nextToNextNode = metaData.getNextNode(nextNode);

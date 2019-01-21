@@ -89,7 +89,8 @@ public class PerformanceTest extends TestCase {
 		ECSServer ecsServer =  new ECSServer();
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig("ecs.config");
-		String command="initService 10 10 LFU";
+		int numberOfServers=5;
+		String command="initService "+numberOfServers+" 10 LFU";
 		ecsServer.initService(command.split(" "));
 		Thread.sleep(5000);
 		ecsServer.start();
@@ -115,11 +116,12 @@ public class PerformanceTest extends TestCase {
 		for(i=0; i<noOfClients; i++) {
 			simulatedClients[i].join();
 		}
+		Thread.sleep(70000);
 		
 		ecsServer.shutdown("ecs.config");
 		System.out.println("Reached here.... ");
 		System.out.println("========Report===========");
-		System.out.println("Number of Servers: 10 Number of Clients: "+noOfClients);
+		System.out.println("Number of Servers: "+numberOfServers+" Number of Clients: "+noOfClients);
 		System.out.println("Total Put Time in ms: "+(totalPutTime ));
 		System.out.println("Total Put Count: "+(totalPutCount ));
 		

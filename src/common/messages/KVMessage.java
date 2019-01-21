@@ -24,6 +24,7 @@ public interface KVMessage {
         DELETE_REPLICA_COPY, 
         DELETE_REPLICA_COPY_SUCCESS,
         DELETE_REPLICA_COPY_ERROR,
+        REPLICA_NOT_AVAILABLE,
     }
 
     public enum DataType {

@@ -2,6 +2,7 @@ package app_kvServer;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -125,7 +126,11 @@ public class KVServerThread extends Thread {
 						} catch (Exception e) {
 							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setValue(e.getMessage());
-							outMsg.setStatus(StatusType.GET_ERROR);
+							if( (e instanceof FileNotFoundException) && this.checkIfReplica(inpMsg.getKey())) {
+								outMsg.setStatus(StatusType.REPLICA_NOT_AVAILABLE);
+							} else {
+								outMsg.setStatus(StatusType.GET_ERROR);
+							}
 						}
 						break;
 
