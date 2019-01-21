@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.management.ManagementFactory;
 import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +13,7 @@ import javax.net.ssl.SSLEngineResult.Status;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 
 import app.common.HashRing;
 import app.common.Node;
@@ -218,7 +220,8 @@ public class KVClient {
 	 *                     behaves accordingly.
 	 */
 	public static void main(String[] args) throws IOException {
-		
+        
+		MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
 		Node[] metaData;
 		HashRing hashRing= new HashRing();
 		BufferedReader cons = new BufferedReader(new InputStreamReader(System.in));

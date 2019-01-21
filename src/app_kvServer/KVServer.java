@@ -1,6 +1,7 @@
 package app_kvServer;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -9,6 +10,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 
 import app.common.HashRing;
 import common.messages.KVMessage;
@@ -82,6 +84,7 @@ public class KVServer {
     
 	public static void main(String[] args) throws IOException
 	{
+        MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
 		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5]); 
 	}
     

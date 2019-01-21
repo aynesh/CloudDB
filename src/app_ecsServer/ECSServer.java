@@ -1,5 +1,6 @@
 package app_ecsServer;
 
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 
 import app.common.HashRing;
 import app.common.Node;
@@ -136,6 +138,7 @@ public class ECSServer {
 	}
 
 	public static void main(String[] args) {
+        MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
 		String ecsConfigFileName= (args.length > 0) ? args[0]: "ecs.config";
 		
 		ECSServer ecsServer = new ECSServer();
