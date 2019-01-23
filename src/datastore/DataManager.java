@@ -3,9 +3,14 @@ package datastore;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -22,11 +27,60 @@ public class DataManager {
 	
     /**
      * @param key
+     * @return
+     * @throws Exception
+    */
+	public static void saveTimeStamp(String key, LocalDateTime timeStamp) throws IOException {
+		
+		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
+        FileWriter fileWriter;
+        File file = new File(fileTimeStampName);
+        fileWriter = new FileWriter(fileTimeStampName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(timeStamp.toString());
+	    bufferedWriter.close();
+        
+	}
+	
+    /**
+     * @param key
+     * @return
+     * @throws Exception
+    */
+	public static LocalDateTime getTimeStamp(String key) throws IOException {
+		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
+        FileWriter fileWriter;
+    	FileReader fileReader = new FileReader(fileTimeStampName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+    	String value = bufferedReader.readLine();
+    	bufferedReader.close();
+        return LocalDateTime.parse(value);
+	}
+	
+	
+    /**
+     * @param key
+     * @return
+     * @throws FileNotFoundException 
+     * @throws Exception
+    */
+	public static void deleteTimestamp(String key) throws FileNotFoundException {
+		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
+    	File file = new File(fileTimeStampName);
+    	if(!file.delete()) 
+        { 
+    		logger.error("Delete Exception ");
+            throw new FileNotFoundException();
+        } 
+	}
+	
+    /**
+     * @param key
      * @param value
      * @return
      * @throws Exception
      */
-    public static StatusType put(String key, String value) throws Exception {
+    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws Exception {
         String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
@@ -34,11 +88,16 @@ public class DataManager {
         if (file.exists()){
         	type = StatusType.PUT_UPDATE;
         }
-			fileWriter = new FileWriter(fileName);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-	        bufferedWriter.write(value);
-	        bufferedWriter.close();
-		    cache.add(key, value);
+		fileWriter = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(value);
+	    bufferedWriter.close();
+	    if(autoUpdateTimestamp) {
+	    	DataManager.saveTimeStamp(key, LocalDateTime.now());	
+	    }
+		cache.add(key, value);
+		//Adding timeStamp
+		
         return type;
     }
     
@@ -81,6 +140,7 @@ public class DataManager {
     		logger.error("Delete Exception ");
             throw new Exception();
         } 
+    	deleteTimestamp(key);
     	if(cache.contains(key)) {
     		cache.delete(key);
     	}

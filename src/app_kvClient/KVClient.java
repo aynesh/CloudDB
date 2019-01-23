@@ -64,6 +64,7 @@ public class KVClient {
 	
 	public static void printGetOutut(KVMessage recd) {
 		if (recd.getStatus() == StatusType.GET_SUCCESS) {
+			System.out.println("Server> Last Modifed: " + recd.getTimestamp());
 			System.out.println("Server> " + recd.getValue());
 		} else {
 			KVClient.printError(recd);

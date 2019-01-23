@@ -1,17 +1,19 @@
 package common.messages.impl;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import app.common.Node;
 import common.messages.KVMessage;
 
 public class KVMessageImpl implements KVMessage,Serializable {
 
-	String key;
-	String value;
-	Node[] metaData;
-	StatusType type;
-	DataType dataType;
+	private String key;
+	private String value;
+	private Node[] metaData;
+	private StatusType type;
+	private DataType dataType;
+	private LocalDateTime timestamp;
 	
 	public DataType getDataType() {
 		return dataType;
@@ -78,6 +80,17 @@ public class KVMessageImpl implements KVMessage,Serializable {
 	@Override
 	public void setMetaData(Node[] nodes) {
 		this.metaData = nodes;
+		
+	}
+
+	@Override
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	@Override
+	public void setTimestamp(LocalDateTime date) {
+		timestamp = date;
 		
 	}
 	

@@ -52,7 +52,7 @@ public class KVServerThread extends Thread {
 		return KVServer.metaData.getNode(key).getName().equals(this.nodeName) ? true : false;
 	}
 	
-	public void queueReplication(KVMessage inMessage, StatusType operationResult) {
+	public void queueReplication(KVMessage inMessage, StatusType operationResult) throws IOException {
 		KVMessage outMessage = new KVMessageImpl();
 		outMessage.setKey(inMessage.getKey());
 		switch(operationResult) {
@@ -63,6 +63,7 @@ public class KVServerThread extends Thread {
 			case PUT_UPDATE:
 				outMessage.setStatus(StatusType.COPY);
 				outMessage.setValue(inMessage.getValue());
+				outMessage.setTimestamp(DataManager.getTimeStamp(inMessage.getKey()));
 				break;
 			default: return;
 		}
@@ -118,7 +119,7 @@ public class KVServerThread extends Thread {
 								outMsg.setValue(DataManager.get(inpMsg.getKey()));
 								outMsg.setStatus(StatusType.GET_SUCCESS);
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
-
+								outMsg.setTimestamp(DataManager.getTimeStamp(inpMsg.getKey()));
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
@@ -139,7 +140,7 @@ public class KVServerThread extends Thread {
 							if(KVServer.writeLock) {
 								outMsg.setStatus(StatusType.SERVER_WRITE_LOCK);
 							} else if (this.checkIfServerResponsible(inpMsg.getKey())) {
-								StatusType operationStatus = DataManager.put(inpMsg.getKey(), inpMsg.getValue());
+								StatusType operationStatus = DataManager.put(inpMsg.getKey(), inpMsg.getValue(), true);
 								outMsg.setStatus(operationStatus);
 								outMsg.setValue(inpMsg.getValue());
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
@@ -158,7 +159,8 @@ public class KVServerThread extends Thread {
 					case COPY:
 						try {
 							outMsg.setStatus(StatusType.COPY_SUCCESS);
-							DataManager.put(inpMsg.getKey(), inpMsg.getValue());
+							DataManager.put(inpMsg.getKey(), inpMsg.getValue(), false);
+							DataManager.saveTimeStamp(inpMsg.getKey(), inpMsg.getTimestamp());
 						} catch(Exception ex) {
 							outMsg.setStatus(StatusType.COPY_ERROR);
 							logger.error("Transfer Error: "+ex.toString());
@@ -170,7 +172,7 @@ public class KVServerThread extends Thread {
 							DataManager.delete(inpMsg.getKey());
 						} catch(Exception ex) {
 							outMsg.setStatus(StatusType.DELETE_REPLICA_COPY_ERROR);
-							logger.error("Dekete Replica Copy Error: "+ex.toString());
+							logger.error("Delete Replica Copy Error: "+ex.toString());
 						}
 						break;
 					default:

@@ -1,5 +1,7 @@
 package common.messages;
 
+import java.time.LocalDateTime;
+
 import app.common.Node;
 
 public interface KVMessage {
@@ -50,6 +52,8 @@ public interface KVMessage {
      */
     public StatusType getStatus();
     
+    public LocalDateTime getTimestamp();
+    
     public Node[] getMetaData();
     
     public void setMetaData(Node nodes[]);
@@ -63,6 +67,8 @@ public interface KVMessage {
 	public DataType getDataType();
 	
 	public void setDataType(DataType dataType);
+	
+	public void setTimestamp(LocalDateTime date);
 
 }
 
