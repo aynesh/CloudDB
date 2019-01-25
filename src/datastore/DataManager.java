@@ -31,10 +31,12 @@ public class DataManager {
      * @throws Exception
     */
 	public static void saveTimeStamp(String key, LocalDateTime timeStamp) throws IOException {
-		
+		if(timeStamp==null) {
+			logger.error("timestamp is null.");
+			return;
+		}
 		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
         FileWriter fileWriter;
-        File file = new File(fileTimeStampName);
         fileWriter = new FileWriter(fileTimeStampName);
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 	    bufferedWriter.write(timeStamp.toString());
@@ -49,7 +51,6 @@ public class DataManager {
     */
 	public static LocalDateTime getTimeStamp(String key) throws IOException {
 		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
-        FileWriter fileWriter;
     	FileReader fileReader = new FileReader(fileTimeStampName);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
@@ -78,9 +79,10 @@ public class DataManager {
      * @param key
      * @param value
      * @return
+     * @throws IOException 
      * @throws Exception
      */
-    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws Exception {
+    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws IOException {
         String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
@@ -108,7 +110,7 @@ public class DataManager {
         return dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".txt");
+                return name.toLowerCase().endsWith(".txt") && !name.toLowerCase().endsWith("timestamp.txt");
             }
         });
     }

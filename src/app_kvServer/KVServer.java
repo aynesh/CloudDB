@@ -36,6 +36,8 @@ public class KVServer {
 	
 	private final ScheduledExecutorService scheduler;
 	
+	public static volatile int  replicationFactor=2;
+	
     /**
      * Start KV Server at given port
      * @param nodeName: Node identifier
@@ -49,11 +51,15 @@ public class KVServer {
      *                  currently not contained in the cache. Options are "FIFO", "LRU",
      *                  and "LFU".
      */
-    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path) {
+    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path, int repFactor) {
     	
     	logger.info("Starting KV Server: "+nodeName);
     	
     	KVServer.storagePath = path;
+    	
+    	KVServer.replicationFactor = repFactor;
+    	
+    	logger.info("Replication Factor : "+ replicationFactor);
     	
 		new KVServerAdmin(adminPort, nodeName).start();
     	
@@ -85,7 +91,7 @@ public class KVServer {
 	public static void main(String[] args) throws IOException
 	{
         MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
-		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5]); 
+		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5], Integer.parseInt(args[6])); 
 	}
     
     

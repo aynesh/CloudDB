@@ -27,6 +27,8 @@ public class ECSServer {
 	
 	public static Map<String, Node> serverConfig;
 	
+	public static volatile int replicationFactor=2;
+	
 	public static int port;
 
 	public static String ip;
@@ -45,7 +47,7 @@ public class ECSServer {
 	public static void help() {
 		System.out.println("Intended usage of available commands:");
 		System.out.println(
-				"initService <number of nodes> <Cache Size> <Cache Strategy> - Initialize n number of servers");
+				"initService <number of nodes> <Cache Size> <Cache Strategy> <Replication Factor>- Initialize n number of servers");
 		System.out.println("start - Start Receiving client calls");
 		System.out.println("stop - Stop receiving client calls");
 		System.out.println("shutdown - Shutdown all servers");
@@ -68,8 +70,9 @@ public class ECSServer {
 			if (Integer.parseInt(tokens[1]) > serverConfig.size()) {
 				System.out.println("Server> Error --- Not that many Servers available");
 			} else {
+				ECSServer.replicationFactor =  Integer.parseInt(tokens[4]) > serverConfig.size() ? serverConfig.size() - 1 : Integer.parseInt(tokens[4]);
 				ECSServerLibrary.launchServers(serverConfig, Integer.parseInt(tokens[2]), tokens[3],
-						Integer.parseInt(tokens[1]), activeServers);
+						Integer.parseInt(tokens[1]), activeServers, Integer.parseInt(tokens[4]));
 				System.out.println("Server> Initialized");
 				HashRing.printMetaData(activeServers.getMetaData());
 				
@@ -226,7 +229,7 @@ public class ECSServer {
 				}
 
 				catch (Exception e) {
-					System.out.println("Error.");
+					System.out.println("Error." + e.getMessage());
 				}
 
 			} else if (tokens[0].equals("metaData")) {
@@ -253,7 +256,7 @@ public class ECSServer {
 	}
 
 	public void initializeActiveServers() {
-		this.activeServers =  new HashRing();
+		this.activeServers =  new HashRing(ECSServer.replicationFactor);
 	}
 
 	public Map<String, Node> getServerConfig() {

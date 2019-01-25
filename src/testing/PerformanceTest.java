@@ -9,13 +9,19 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import app.common.HashRing;
+import app.common.Node;
 import app_ecsServer.ECSServer;
-import app_kvClient.KVClient;
+import client.KVStore;
+import common.messages.KVMessage;
 import junit.framework.TestCase;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,23 +31,8 @@ public class PerformanceTest extends TestCase {
 	public static volatile long totalPutCount=0;
 	public static volatile long totalGetTime=0;
 	public static volatile long totalGetCount=0;
-	
-	public long runGet(KVClient kvClient, String key) throws Exception {
-		Instant start = Instant.now();
-		kvClient.Get(key);
-		Instant end = Instant.now();
-		Duration timeElapsed = Duration.between(start, end);
-		return timeElapsed.toMillis();
-	}
+    public static final ConcurrentMap<String, AtomicLong> map = new ConcurrentHashMap<String, AtomicLong>();
 
-	public long runPut(KVClient kvClient, String key, String value) throws Exception {
-		Instant start = Instant.now();
-		kvClient.Put(key, value);
-		Instant end = Instant.now();
-		Duration timeElapsed = Duration.between(start, end);
-		return timeElapsed.toMillis();
-	}
-	
 	public File[] returnSetOfFiles() {
     	File dir = new File("/home/aynesh/data_set");
         return dir.listFiles(new FilenameFilter() {
@@ -56,6 +47,10 @@ public class PerformanceTest extends TestCase {
 	
 	class SimulatedClient extends Thread 
 	{ 
+		private HashRing metaData;
+		SimulatedClient(HashRing ring) {
+			metaData = ring;
+		}
 		
 		public List<File> listOfFiles=new ArrayList<File>();
 	    public void run() 
@@ -63,22 +58,39 @@ public class PerformanceTest extends TestCase {
 	        try
 	        { 
 	        	for(File currentFile:listOfFiles) {
-					KVClient kvClient=new KVClient();
-					String kvCommand="connect 127.0.0.1 50003";
-					kvClient.Connect(kvCommand.split(" "));
-					String fileText = new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8);
-					totalPutTime+=runPut(kvClient, currentFile.getName(), fileText);
+
+					Node targetNode = metaData.getNode(currentFile.getName());
+	        		KVStore kvStore = new KVStore(targetNode.getIpAddress(), Integer.parseInt(targetNode.getPort()));
+	        		kvStore.connect();
+	        		
+	        		Instant start = Instant.now();
+	        		//KVMessage responsePut = kvStore.put(currentFile.getName(),"TEST_STRING");
+	        		KVMessage responsePut = kvStore.put(currentFile.getName(), new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8));
+	        		Instant end = Instant.now();
+	        		Duration timeElapsed = Duration.between(start, end);
+	        		totalPutTime+=timeElapsed.toMillis();
 					totalPutCount++;
-					kvClient.Disconnect();
-					kvClient.Connect(kvCommand.split(" "));
-					totalGetTime+=runGet(kvClient, currentFile.getName());
-					kvClient.Disconnect();
-					totalGetCount++;
+	        		
+					start = Instant.now();
+					KVMessage responseGet =  kvStore.get(currentFile.getName());
+	        		end = Instant.now();
+	        		timeElapsed = Duration.between(start, end);
+	        		totalGetTime+=timeElapsed.toMillis();
+	        		totalGetCount++;
+	        		
+	        		kvStore.disconnect();
+	        	    
+	        		map.putIfAbsent(responsePut.getStatus().name(), new AtomicLong(0));
+	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
+	        	    map.get(responsePut.getStatus().name()).incrementAndGet();
+	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
 	        	}
 	        } 
 	        catch (Exception e) 
 	        { 
 	            // Throwing an exception 
+	        	map.putIfAbsent("Exception", new AtomicLong(0));
+	        	map.get("Exception").incrementAndGet();
 	            System.out.println ("Exception is caught"); 
 	        } 
 	    } 
@@ -90,17 +102,17 @@ public class PerformanceTest extends TestCase {
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig("ecs.config");
 		int numberOfServers=5;
-		String command="initService "+numberOfServers+" 10 LFU";
+		String command="initService "+numberOfServers+" 10 LFU 3";
 		ecsServer.initService(command.split(" "));
 		Thread.sleep(5000);
 		ecsServer.start();
 		Thread.sleep(5000);
-		int noOfClients = 1;
+		int noOfClients = 25;
 		SimulatedClient[] simulatedClients = new SimulatedClient[noOfClients];
 		
 		int i=0;
 		for(i=0; i<noOfClients; i++) {
-			simulatedClients[i] = new SimulatedClient();
+			simulatedClients[i] = new SimulatedClient(ecsServer.getActiveServers());
 		}
 			
 
@@ -112,7 +124,7 @@ public class PerformanceTest extends TestCase {
 			simulatedClients[i].start();
 		}
 		
-
+		//ecsServer.removeNode();
 		for(i=0; i<noOfClients; i++) {
 			simulatedClients[i].join();
 		}
@@ -127,6 +139,7 @@ public class PerformanceTest extends TestCase {
 		
 		System.out.println("Total Get Time in ms: "+(totalGetTime));
 		System.out.println("Total Get Count: "+(totalGetCount));
+		System.out.println(map.toString());
 	}
 	
 
