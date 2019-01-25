@@ -1,6 +1,7 @@
 package app_kvServer;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -37,35 +38,34 @@ public class KVServerReplicationScheduler extends Thread {
 	public synchronized void run() {
 		logger.info("Started Replication Schedule: "+LocalDateTime.now());
 		logger.info("Staring. Items in Queue "+ KVServer.queue.size());
-		Node transferNode1 = KVServer.metaData.getNextNode(this.nodeName);
-		Node transferNode2 = null;
-		if(transferNode1 != null) {
-			transferNode2 = KVServer.metaData.getNextNode(transferNode1);
-		}
-		
-		
-		for(KVMessage kvMessage: KVServer.queue) {
-			
-			if(transferNode1!=null) {
+		Node[] nextNodes = KVServer.metaData.getNextNodes(KVServer.metaData.getNodeObject(this.nodeName), KVServer.replicationFactor);
+		ArrayList<KVMessage> keysToRemove = new ArrayList<KVMessage>();
+
+		for (KVMessage kvMessage : KVServer.queue) {
+
+			for (int i = 0; i < KVServer.replicationFactor; i++) {
 				try {
-					if(this.transferData(transferNode1, kvMessage)) {
-						if(this.transferData(transferNode2, kvMessage)) {
-							KVServer.queue.remove(kvMessage);
-							logger.info("replicated/updated Key: "+kvMessage.getKey());
-						}
+					if (!nextNodes[i].getName().equals(nodeName)) {
+						this.transferData(nextNodes[i], kvMessage);
 					}
-				} catch(Exception ex) {
+				} catch (Exception ex) {
 					logger.error(ex);
+					logger.error("Incomplete Replication for key: " + kvMessage.getKey());
+
 				}
-				
-				
-				
 			}
-			
-			
-			//At The end remove from the queue
-			
+			keysToRemove.add(kvMessage);
+
+			// At The end remove from the queue
+
 		}
+		
+		for(KVMessage kvMessage: keysToRemove) {
+			KVServer.queue.remove(kvMessage);
+			logger.info("Removed key from queue: "+kvMessage.getKey());
+		}
+		
+		
 		logger.info("Completed. Items Left in Queue "+ KVServer.queue.size());
 	}
 	

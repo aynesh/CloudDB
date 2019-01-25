@@ -1,5 +1,7 @@
 package client;
 
+import java.time.LocalDateTime;
+
 import common.messages.KVMessage;
 
 public interface KVCommInterface {
@@ -28,7 +30,7 @@ public interface KVCommInterface {
     public KVMessage put(String key, String value) throws Exception;
     
     
-    public KVMessage transfer(String key, String value) throws Exception;
+    public KVMessage transfer(String key, String value, LocalDateTime timestamp, boolean copyAndReplicate) throws Exception;
 
     /**
      * Retrieves the value for a given key from the KVServer.

@@ -31,10 +31,12 @@ public class DataManager {
      * @throws Exception
     */
 	public static void saveTimeStamp(String key, LocalDateTime timeStamp) throws IOException {
-		
+		if(timeStamp==null) {
+			logger.error("timestamp is null.");
+			return;
+		}
 		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
         FileWriter fileWriter;
-        File file = new File(fileTimeStampName);
         fileWriter = new FileWriter(fileTimeStampName);
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 	    bufferedWriter.write(timeStamp.toString());
@@ -108,7 +110,7 @@ public class DataManager {
         return dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".txt");
+                return name.toLowerCase().endsWith(".txt") && !name.toLowerCase().endsWith("timestamp.txt");
             }
         });
     }

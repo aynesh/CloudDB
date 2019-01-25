@@ -10,11 +10,23 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.apache.log4j.Logger;
 
+import app_kvServer.KVServer;
+
 public class HashRing {
 	
 	private Map<BigInteger, Node> map = new TreeMap<BigInteger, Node>();
 	
+	private int replicationFactor=0;
+	
 	static Logger logger = Logger.getLogger(HashRing.class);
+	
+	public HashRing(int replicationFactor) {
+		this.replicationFactor = replicationFactor;
+	}
+	
+	public HashRing() {
+		
+	}
 	
 	/**
 	 * @param node - New Node to be added
@@ -28,6 +40,15 @@ public class HashRing {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Node getNodeObject(String nodeName) {
+		for(Map.Entry<BigInteger, Node> entry : map.entrySet()) {
+			if(entry.getValue().getName().equals(nodeName)) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -112,6 +133,24 @@ public class HashRing {
 		return prevNode; 
 	}
 	
+	
+	/**
+	 * @param node The node for which previous nodes to be found.
+	 * @return
+	 */
+	public Node[] getPrevNodes(Node node, int size) {
+		if(size>=map.size()) {
+			return null;
+		}
+		Node[] prevNodes= new Node[size];
+		Node prevNode = this.getPrevNode(node);
+		for(int i=0;i<size;i++) {
+			prevNodes[i] = prevNode;
+			prevNode = this.getPrevNode(prevNode);
+		}
+		return prevNodes; 
+	}
+	
 	/**
 	 * @param node The node for which previous node to be found.
 	 * @return
@@ -130,6 +169,9 @@ public class HashRing {
 	}
 	
 	public Node getNextNode(Node node) {
+		if(node==null) {
+			return null;
+		}
 		return this.getNextNode(node.getName());
 	}
 	
@@ -155,6 +197,24 @@ public class HashRing {
 		}
 		return nextNode;
 	}
+	
+	/**
+	 * @param node The node for which previous nodes to be found.
+	 * @return
+	 */
+	public Node[] getNextNodes(Node node, int size) {
+		if(size>=map.size()) {
+			return null;
+		}
+		Node[] nextNodes= new Node[size];
+		Node nextNode = this.getNextNode(node);
+		for(int i=0;i<size;i++) {
+			nextNodes[i] = nextNode;
+			nextNode = this.getNextNode(nextNode);
+		}
+		return nextNodes; 
+	}
+		
 	
 	/**
 	 * @param key 
@@ -207,7 +267,7 @@ public class HashRing {
 		}
 		// Set read range + 2 nodes
 		for(i=0;i<nodes.length;i++) {
-			nodes[i].setStartReadRange(nodes[(i-2 >= 0 ? i-2 : (nodes.length + (i-2)) )%nodes.length].getStartWriteRange());
+			nodes[i].setStartReadRange(nodes[(i-replicationFactor >= 0 ? i-replicationFactor : (nodes.length + (i-replicationFactor)) )%nodes.length].getStartWriteRange());
 		}
 		return nodes;
 	}
@@ -242,4 +302,15 @@ public class HashRing {
 		return myHash;
 	}
 
+	public boolean checkIfReplica(String key, Node node, int replicationFactor) throws NoSuchAlgorithmException {
+		Node[] prevNodes = this.getPrevNodes(node, replicationFactor);
+		for(int i=0; i<prevNodes.length ; i++) {
+			if(prevNodes[i] != null && this.getNode(key).getName().equals(prevNodes[i].getName())) {
+				return true; 
+			}
+		}
+	
+		return false;
+	}
+	
 }

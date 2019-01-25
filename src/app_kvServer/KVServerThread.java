@@ -34,19 +34,9 @@ public class KVServerThread extends Thread {
 	}
 	
 	public boolean checkIfReplica(String key) throws NoSuchAlgorithmException {
-		Node prevNode = KVServer.metaData.getPrevNode(this.nodeName);
-		Node prevNode2 = null;
-		if(prevNode != null) {
-			prevNode2 = KVServer.metaData.getPrevNode(prevNode);
-		}
-		if(prevNode != null && KVServer.metaData.getNode(key).getName().equals(prevNode.getName())) {
-			return true; 
-		}
-		if(prevNode2 != null  && KVServer.metaData.getNode(key).getName().equals(prevNode2.getName())) {
-			return true; 
-		}
-		return false;
+		return KVServer.metaData.checkIfReplica(key, KVServer.metaData.getNodeObject(this.nodeName), KVServer.replicationFactor);
 	}
+
 
 	public boolean checkIfServerResponsible(String key) throws NoSuchAlgorithmException {
 		return KVServer.metaData.getNode(key).getName().equals(this.nodeName) ? true : false;
@@ -90,7 +80,10 @@ public class KVServerThread extends Thread {
 				KVMessage inpMsg = KVMessageManager.receiveKVMessage(inp);
 				KVMessage outMsg = new KVMessageImpl();
 				outMsg.setKey(inpMsg.getKey());
-				if (!KVServer.serveClients && (inpMsg.getStatus() != StatusType.COPY)) {
+				if (!KVServer.serveClients && (inpMsg.getStatus() != StatusType.COPY 
+						&& inpMsg.getStatus() != StatusType.COPY_AND_REPLICATE
+						&& inpMsg.getStatus() != StatusType.DELETE_REPLICA_COPY
+						)) {
 					outMsg.setStatus(StatusType.SERVER_STOPPED);
 				} else {
 					switch (inpMsg.getStatus()) {
@@ -156,11 +149,25 @@ public class KVServerThread extends Thread {
 							outMsg.setStatus(StatusType.PUT_ERROR);
 						}
 						break;
+						
+					case COPY_AND_REPLICATE:
 					case COPY:
 						try {
-							outMsg.setStatus(StatusType.COPY_SUCCESS);
-							DataManager.put(inpMsg.getKey(), inpMsg.getValue(), false);
-							DataManager.saveTimeStamp(inpMsg.getKey(), inpMsg.getTimestamp());
+							logger.info("isReplica: "+this.checkIfReplica(inpMsg.getKey()));
+							logger.info("isResponsible: "+this.checkIfServerResponsible(inpMsg.getKey()));
+							if(this.checkIfReplica(inpMsg.getKey()) || this.checkIfServerResponsible(inpMsg.getKey())) {
+								outMsg.setStatus(StatusType.COPY_SUCCESS);
+								DataManager.put(inpMsg.getKey(), inpMsg.getValue(), false);
+								DataManager.saveTimeStamp(inpMsg.getKey(), inpMsg.getTimestamp());
+								if(inpMsg.getStatus()== StatusType.COPY_AND_REPLICATE) {
+									queueReplication(inpMsg,StatusType.PUT_SUCCESS);
+								}
+							} else {
+								outMsg.setStatus(StatusType.COPY_ERROR);
+								logger.info("transfer: Cannot accept. Neither replica nor responsible server.");
+							}
+
+
 						} catch(Exception ex) {
 							outMsg.setStatus(StatusType.COPY_ERROR);
 							logger.error("Transfer Error: "+ex.toString());

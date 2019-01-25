@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -98,15 +99,15 @@ public class KVStore implements KVCommInterface {
     
     
     @Override
-    public KVMessage transfer(String key, String value) throws Exception {
+    public KVMessage transfer(String key, String value, LocalDateTime timestamp, boolean copyAndReplicate) throws Exception {
     	if (sock == null || sock.isClosed()) {
 			logger.warn("Attempting to connect via closed socket.");
 			throw new IOException("No open connection to server.");
 		} else {
 			KVMessage msg;
-			msg = new KVMessageImpl(key,value,StatusType.COPY);
-			logger.info("Attempting to transgfer: " + key+" : "+value);
-			System.out.println("Attempting to transgfer: " + key+" : "+value);
+			msg = new KVMessageImpl(key,value, copyAndReplicate? StatusType.COPY_AND_REPLICATE :StatusType.COPY);
+			msg.setTimestamp(timestamp);
+			logger.info("Attempting to transfer: " + key+" : "+value);
 			KVMessageManager.sendKVMessage(msg,out);
 			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
 			logger.info("Server response: " + recvdMsg.toString());
@@ -121,7 +122,7 @@ public class KVStore implements KVCommInterface {
 			logger.warn("Attempting to connect via closed socket.");
 			throw new IOException("No open connection to server.");
 		} else {
-			logger.info("Attempting to transgfer: "+ msg);
+			logger.info("Attempting to replicate: "+ msg);
 			KVMessageManager.sendKVMessage(msg,out);
 			KVMessage recvdMsg = KVMessageManager.receiveKVMessage(in);
 			logger.info("Server response: " + recvdMsg.toString());

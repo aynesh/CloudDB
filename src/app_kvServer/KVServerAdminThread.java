@@ -11,6 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,9 +87,9 @@ public class KVServerAdminThread extends Thread {
 	 */
 	public static synchronized void transferData(String nodeName, Node toNode, HashRing metaData, boolean shutdownFlag, boolean replicationTransfer) {
 		File files[] = DataManager.getAllTextFiles();
-		List<String> keysToBeDeleted=new ArrayList<>();
-		logger.info("Starting KV Server transfer-------");
-
+		List<String> keysToBeDeleted=new ArrayList<String>();
+		logger.info("Starting KV Server -------" + (replicationTransfer ? "Replication" : "FileTransfer"));
+		logger.info("Transfer targeNode: node: "+toNode.getName()+" " + toNode.getIpAndPort());
 		for(File file: files) {
 			String name = file.getName();
 
@@ -96,14 +97,16 @@ public class KVServerAdminThread extends Thread {
 			logger.info("key: "+key+" Filename>"+name);
 			
 			try {
+				logger.info("Key `"+key+"` ownwer: "+metaData.getNode(key).getName());
 				if(metaData.getNode(key).getName().equals(toNode.getName()) || (replicationTransfer && isReplica(key, nodeName, toNode, metaData))) {
 					logger.info("Transfering Key: "+metaData.getNode(key).getName()+" fromNode: "+nodeName+" toNode: "+toNode.getName() + " replication: "+ replicationTransfer);
 					
 					try {
 						String data=DataManager.get(key);
+						LocalDateTime timestamp = DataManager.getTimeStamp(key);
 						KVStore kvClient = new KVStore(toNode.getIpAddress(), Integer.parseInt(toNode.getPort()));
 						kvClient.connect();
-						KVMessage msg = kvClient.transfer(key, data);
+						KVMessage msg = kvClient.transfer(key, data, timestamp, replicationTransfer? false : true);
 						if(msg.getStatus()==StatusType.COPY_SUCCESS && !replicationTransfer) {
 							keysToBeDeleted.add(key);
 							logger.info("Transfered: "+key);
@@ -122,11 +125,12 @@ public class KVServerAdminThread extends Thread {
 		}
 
 		if(!replicationTransfer) {
-			logger.info("Delete Started....");
-			for(String key: keysToBeDeleted) {
+			logger.info("Delete Started size: "+keysToBeDeleted.size());
+			logger.info("Keys: "+keysToBeDeleted.toString());
+			for(String deleteKey: keysToBeDeleted) {
 				try {
-					DataManager.delete(key);
-					logger.debug("Deleted key:"+key);
+					DataManager.delete(deleteKey);
+					logger.info("Deleted key:"+deleteKey);
 				} catch (Exception e) {
 					logger.error("Delete failed");
 				}
@@ -136,6 +140,15 @@ public class KVServerAdminThread extends Thread {
 
 		logger.info("Ending KV Server transfer-------");
 		if(shutdownFlag) {
+			logger.info("Shutdown intitated.");
+//			logger.info("Deleting all the files in: " + KVServer.storagePath);
+//			File dir= new File(KVServer.storagePath);
+//			for(File file: dir.listFiles()) {
+//				if (!file.isDirectory()) {
+//			        file.delete();					
+//				}
+//			}
+			    
 			System.exit(0);
 		}
 	}
