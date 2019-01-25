@@ -64,8 +64,8 @@ public class PerformanceTest extends TestCase {
 	        		kvStore.connect();
 	        		
 	        		Instant start = Instant.now();
-	        		KVMessage responsePut = kvStore.put(currentFile.getName(),"TEST_STRING");
-	        		//KVMessage responsePut = kvStore.put(currentFile.getName(), new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8));
+	        		//KVMessage responsePut = kvStore.put(currentFile.getName(),"TEST_STRING");
+	        		KVMessage responsePut = kvStore.put(currentFile.getName(), new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8));
 	        		Instant end = Instant.now();
 	        		Duration timeElapsed = Duration.between(start, end);
 	        		totalPutTime+=timeElapsed.toMillis();
@@ -102,12 +102,12 @@ public class PerformanceTest extends TestCase {
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig("ecs.config");
 		int numberOfServers=5;
-		String command="initService "+numberOfServers+" 10 LFU 2";
+		String command="initService "+numberOfServers+" 10 LFU 3";
 		ecsServer.initService(command.split(" "));
 		Thread.sleep(5000);
 		ecsServer.start();
 		Thread.sleep(5000);
-		int noOfClients = 3;
+		int noOfClients = 25;
 		SimulatedClient[] simulatedClients = new SimulatedClient[noOfClients];
 		
 		int i=0;

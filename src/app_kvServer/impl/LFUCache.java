@@ -22,7 +22,7 @@ public class LFUCache implements Cache {
 	}
 
 	@Override
-	public boolean contains(String key) {
+	public synchronized boolean contains(String key) {
 		if(cacheItems.containsKey(key)) {
 			return true;
 		}
@@ -31,7 +31,7 @@ public class LFUCache implements Cache {
 	}
 	
 	@Override
-	public String get(String key) {
+	public synchronized String get(String key) {
 		if(ordering.contains(key)) {
 			reorder(key);
 		}
@@ -39,7 +39,7 @@ public class LFUCache implements Cache {
 	}
 
 	@Override
-	public void add(String key, String value) {
+	public synchronized void add(String key, String value) {
 		cacheItems.put(key, value);
 		if(!ordering.contains(key)) {
 			if(totalSize == ordering.size()) {
@@ -56,7 +56,7 @@ public class LFUCache implements Cache {
 	}
 	
 	@Override
-	public void delete(String key) {
+	public synchronized void delete(String key) {
 		cacheItems.remove(key);
 		if(ordering.contains(key)) {
 			int index = ordering.indexOf(key);
@@ -65,7 +65,7 @@ public class LFUCache implements Cache {
 		}
 	}
 	
-	public void reorder(String key){
+	public synchronized void reorder(String key){
 		int index = ordering.indexOf(key);
 		int curr = frequency.get(index);
 		curr = curr+1;

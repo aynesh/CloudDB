@@ -72,6 +72,7 @@ public class KVServerThread extends Thread {
 			brinp = new BufferedReader(new InputStreamReader(inp));
 			out = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
+			logger.info("IOException1: "+e.getMessage());
 			return;
 		}
 
@@ -100,6 +101,7 @@ public class KVServerThread extends Thread {
 							}
 
 						} catch (Exception e) {
+							logger.info("DELETE_ERROR: "+e.getClass()+" "+e.getMessage());
 							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setStatus(StatusType.DELETE_ERROR);
 
@@ -118,6 +120,8 @@ public class KVServerThread extends Thread {
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
 							}
 						} catch (Exception e) {
+							logger.warn("GET_ERROR_WARN", e);
+							logger.info("GET_ERROR: "+e.getClass()+" "+e.getMessage());
 							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setValue(e.getMessage());
 							if( (e instanceof FileNotFoundException) && this.checkIfReplica(inpMsg.getKey())) {
@@ -144,6 +148,7 @@ public class KVServerThread extends Thread {
 							}
 
 						} catch (Exception e) {
+							logger.info("PUT_ERROR"+e.getClass()+" "+e.getMessage());
 							outMsg.setMetaData(KVServer.metaData.getMetaData());
 							outMsg.setValue(e.getMessage());
 							outMsg.setStatus(StatusType.PUT_ERROR);
@@ -169,8 +174,8 @@ public class KVServerThread extends Thread {
 
 
 						} catch(Exception ex) {
+							logger.info("COPY_ERROR: "+ex.getClass()+" "+ex.getMessage());
 							outMsg.setStatus(StatusType.COPY_ERROR);
-							logger.error("Transfer Error: "+ex.toString());
 						}
 						break;
 					case DELETE_REPLICA_COPY:
@@ -178,8 +183,8 @@ public class KVServerThread extends Thread {
 							outMsg.setStatus(StatusType.DELETE_REPLICA_COPY_SUCCESS);
 							DataManager.delete(inpMsg.getKey());
 						} catch(Exception ex) {
+							logger.info("DELETE_REPLICA_COPY_ERROR: "+ex.getClass()+" "+ex.getMessage());
 							outMsg.setStatus(StatusType.DELETE_REPLICA_COPY_ERROR);
-							logger.error("Delete Replica Copy Error: "+ex.toString());
 						}
 						break;
 					default:
@@ -190,7 +195,6 @@ public class KVServerThread extends Thread {
 				KVMessageManager.sendKVMessage(outMsg, out);
 
 			} catch (Exception e) {
-
 				return;
 			}
 		}

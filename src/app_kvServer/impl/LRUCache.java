@@ -19,7 +19,7 @@ public class LRUCache implements Cache {
 	}
 
 	@Override
-	public boolean contains(String key) {
+	public synchronized boolean contains(String key) {
 		if(cacheItems.containsKey(key)) {
 			return true;
 		}
@@ -27,7 +27,7 @@ public class LRUCache implements Cache {
 	}
 	
 	@Override
-	public String get(String key) {
+	public synchronized String get(String key) {
 		if(ordering.contains(key)) {
 			ordering.remove(key);
 			ordering.add(key);
@@ -36,7 +36,7 @@ public class LRUCache implements Cache {
 	}
 
 	@Override
-	public void add(String key, String value) {
+	public synchronized void add(String key, String value) {
 		cacheItems.put(key, value);
 		if(!ordering.contains(key)) {
 			ordering.add(key);
@@ -53,7 +53,7 @@ public class LRUCache implements Cache {
 	}
 	
 	@Override
-	public void delete(String key) {
+	public synchronized void delete(String key) {
 		cacheItems.remove(key);
 		if(ordering.contains(key)) {
 			ordering.remove(key);

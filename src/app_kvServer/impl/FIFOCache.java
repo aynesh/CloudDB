@@ -2,24 +2,24 @@ package app_kvServer.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.concurrent.ConcurrentHashMap;
 
 import app_kvServer.Cache;
 
 public class FIFOCache implements Cache {
 	
-	private HashMap<String,String> cacheItems;
+	private ConcurrentHashMap<String,String> cacheItems;
 	private ArrayList<String> ordering;
 	int totalSize = 0;
 	
 	public FIFOCache(int size) {
-		cacheItems = new HashMap<String,String>();
+		cacheItems = new ConcurrentHashMap<String,String>();
 		ordering = new ArrayList<String>();
 		totalSize = size;
 	}
 
 	@Override
-	public boolean contains(String key) {
+	public synchronized boolean contains(String key) {
 		if(cacheItems.containsKey(key)) {
 			return true;
 		}
@@ -27,12 +27,12 @@ public class FIFOCache implements Cache {
 	}
 	
 	@Override
-	public String get(String key) {
+	public synchronized String get(String key) {
 		return cacheItems.get(key);
 	}
 
 	@Override
-	public void add(String key, String value) {
+	public synchronized void add(String key, String value) {
 		cacheItems.put(key, value);
 		if(!ordering.contains(key)) {
 			ordering.add(key);
@@ -45,7 +45,7 @@ public class FIFOCache implements Cache {
 	}
 	
 	@Override
-	public void delete(String key) {
+	public synchronized void delete(String key) {
 		cacheItems.remove(key);
 		if(ordering.contains(key)) {
 			ordering.remove(key);

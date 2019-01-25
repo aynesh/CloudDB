@@ -51,7 +51,6 @@ public class DataManager {
     */
 	public static LocalDateTime getTimeStamp(String key) throws IOException {
 		String fileTimeStampName = KVServer.storagePath+key+"-timestamp.txt";
-        FileWriter fileWriter;
     	FileReader fileReader = new FileReader(fileTimeStampName);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
     	String value = bufferedReader.readLine();
@@ -80,9 +79,10 @@ public class DataManager {
      * @param key
      * @param value
      * @return
+     * @throws IOException 
      * @throws Exception
      */
-    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws Exception {
+    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws IOException {
         String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
