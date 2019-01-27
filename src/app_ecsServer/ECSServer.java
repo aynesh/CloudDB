@@ -81,7 +81,7 @@ public class ECSServer {
 				     });
 				scheduler.scheduleWithFixedDelay(new Runnable() {
 				       public void run() { FailureDetector.detectFailure(); }
-				     }, 20, 20, TimeUnit.SECONDS);
+				     }, 2, 2, TimeUnit.MINUTES);
 				     
 			}
 

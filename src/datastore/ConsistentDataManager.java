@@ -20,29 +20,36 @@ import common.messages.impl.KVAdminMessageImpl;
 
 public class ConsistentDataManager {
 
-	static Logger logger = Logger.getLogger(DataManager.class);
+	static Logger logger = Logger.getLogger(ConsistentDataManager.class);
 	
 	public static String get(String key) throws Exception {
 		
 		
 		Node[] nodes = KVServer.metaData.getNodesOfKey(key);		
 		int i=0;
+		
 		for(;i<=KVServer.replicationFactor;i++) {
-			if(nodes[i].getName()==KVServer.nodeName)
+			if(nodes[i].getName().equals(KVServer.nodeName))
 				break;
 		}
-		
+		for(Node node: nodes) {
+		logger.info(node.toString());
+		}
 		String value = DataManager.get(key);
 		LocalDateTime latest = DataManager.getTimeStamp(key);
 		i++;
+		logger.info(KVServer.nodeName+"  "+Integer.toString(i));
 		int j = KVServer.readConsistencyLevel-1;
 		
 		while(j>0) {
 			KVAdminMessage msg = readReplica(nodes[i], key);
 			
+			if(msg.getCommand()==Command.GET_SUCCESS) {
+			
 			if(msg.getTimestamp().isAfter(latest)) {
 				value = msg.getValue();
 				latest = msg.getTimestamp();
+				}
 			}
 			
 			i = i<KVServer.replicationFactor?i+1:0;
@@ -128,7 +135,7 @@ public class ConsistentDataManager {
 			KVAdminMessageManager.sendKVAdminMessage(msg, out);
 			logger.info("Waiting for response message from "+toNode.getName());
 			inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
-			
+			logger.info("Received msg "+inMsg.toString());
 			sock.close();
 			
 			return inMsg; 

@@ -84,16 +84,17 @@ import datastore.DataManager;
 	}
 	
 	private void writeToFile(int readStats, int writeStats) throws IOException {
-		String fileName = LocalDateTime.now()+".txt";
+		String fileName = "stats.txt";
         
         FileWriter fileWriter;
         File file = new File(fileName);
         
-		fileWriter = new FileWriter(fileName);
+		fileWriter = new FileWriter(fileName, true);
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-	    bufferedWriter.write(readStats);
-	    bufferedWriter.write("\n");
+	    bufferedWriter.write(Integer.toString(readStats));
+	    bufferedWriter.write("\t");
 	    bufferedWriter.write(writeStats);
+	    bufferedWriter.write("\n");
 	    bufferedWriter.close();
 	   
 	}

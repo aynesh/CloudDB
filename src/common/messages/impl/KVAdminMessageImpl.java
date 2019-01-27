@@ -24,6 +24,7 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private LocalDateTime timestamp;
 	private int readStats;
 	private int writeStats;
+	private String key;
 	
 	public int getReadStats() {
 		return readStats;
@@ -97,11 +98,16 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	public void setMetaData(Node[] metaData) {
 		this.metaData = metaData;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "KVAdminMessageImpl [command=" + command + ", numberOfNodes=" + numberOfNodes + ", cacheSize="
 				+ cacheSize + ", cacheType=" + cacheType + ", server=" + server + ", metaData="
-				+ Arrays.toString(metaData) + "]";
+				+ Arrays.toString(metaData) + ", transferStartKey=" + transferStartKey + ", transferEndKey="
+				+ transferEndKey + ", transferServer=" + transferServer + ", ECSIP=" + ECSIP + ", port=" + port
+				+ ", value=" + value + ", timestamp=" + timestamp + ", readStats=" + readStats + ", writeStats="
+				+ writeStats + "]";
 	}
 	public String getTransferStartKey() {
 		return transferStartKey;
@@ -123,13 +129,11 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	}
 	@Override
 	public void setKey(String key) {
-		// TODO Auto-generated method stub
-		
+		this.key = key;
 	}
 	@Override
 	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return key;
 	}
 
 
