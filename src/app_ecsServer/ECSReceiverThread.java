@@ -93,7 +93,7 @@ import datastore.DataManager;
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 	    bufferedWriter.write(Integer.toString(readStats));
 	    bufferedWriter.write("\t");
-	    bufferedWriter.write(writeStats);
+	    bufferedWriter.write(Integer.toString(writeStats));
 	    bufferedWriter.write("\n");
 	    bufferedWriter.close();
 	   
