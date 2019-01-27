@@ -60,10 +60,11 @@ import datastore.DataManager;
 					case PING_FAILURE:
 						Node nextNode = ECSServer.activeServers.getNextNode(inpMsg.getServer());
 						FailureDetector.fixAndReplaceFailedNode(inpMsg.getServer());
-						FailureDetector.startForwardPing(nextNode);
+						FailureDetector.startForwardPing(nextNode, inpMsg.getReadStats(), inpMsg.getWriteStats());
 						break;	
 					case PING_SUCCESS:
 						logger.info(inpMsg.getServer().getName()+" is Alive - circle completed!");
+						writeToFile(inpMsg.getReadStats(),inpMsg.getWriteStats());
 						break;
 					default:
 						
@@ -76,6 +77,10 @@ import datastore.DataManager;
 				return;
 			}
 		}
+	}
+	
+	private void writeToFile(int readStats, int writeStats) {
+		
 	}
 
 }

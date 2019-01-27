@@ -82,7 +82,7 @@ public class DataManager {
      * @throws IOException 
      * @throws Exception
      */
-    public static StatusType put(String key, String value, boolean autoUpdateTimestamp) throws IOException {
+    public static StatusType put(String key, String value, boolean autoUpdateTimestamp, LocalDateTime timestamp) throws IOException {
         String fileName = KVServer.storagePath+key+".txt";
         StatusType type = StatusType.PUT_SUCCESS;
         FileWriter fileWriter;
@@ -95,7 +95,7 @@ public class DataManager {
 	    bufferedWriter.write(value);
 	    bufferedWriter.close();
 	    if(autoUpdateTimestamp) {
-	    	DataManager.saveTimeStamp(key, LocalDateTime.now());	
+	    	DataManager.saveTimeStamp(key, timestamp);	
 	    }
 		cache.add(key, value);
 		//Adding timeStamp

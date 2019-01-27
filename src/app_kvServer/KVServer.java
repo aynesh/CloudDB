@@ -34,9 +34,19 @@ public class KVServer {
 
 	public static int ECSPort = 40000;
 	
+	public static int readConsistencyLevel;
+	
+	public static int writeConsistencyLevel;
+	
 	private final ScheduledExecutorService scheduler;
 	
 	public static volatile int  replicationFactor=2;
+	
+	public static String nodeName;
+
+	public static int readStats = 0;
+
+	public static int writeStats = 0;
 	
     /**
      * Start KV Server at given port
@@ -51,9 +61,16 @@ public class KVServer {
      *                  currently not contained in the cache. Options are "FIFO", "LRU",
      *                  and "LFU".
      */
-    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path, int repFactor) {
+    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path, int repFactor, int readConsistencyLevel, int writeConsistencyLevel) {
+    	
     	
     	logger.info("Starting KV Server: "+nodeName);
+    	
+    	this.nodeName = nodeName;
+    	
+    	KVServer.readConsistencyLevel = readConsistencyLevel;
+    	
+    	KVServer.writeConsistencyLevel = writeConsistencyLevel;
     	
     	KVServer.storagePath = path;
     	
@@ -88,6 +105,12 @@ public class KVServer {
         }
     }
     
+    public KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path, int repFactor) {
+    	this(nodeName, port, adminPort, cacheSize, strategy, path, repFactor, 2, 2);
+    	    
+    }
+    
+
 	public static void main(String[] args) throws IOException
 	{
         MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);

@@ -1,6 +1,7 @@
 package common.messages.impl;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import app.common.Node;
@@ -19,7 +20,35 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private Node transferServer;
 	private String ECSIP;
 	private int port;
+	private String value;
+	private LocalDateTime timestamp;
+	private int readStats;
+	private int writeStats;
 	
+	public int getReadStats() {
+		return readStats;
+	}
+	public void setReadStats(int readStats) {
+		this.readStats = readStats;
+	}
+	public int getWriteStats() {
+		return writeStats;
+	}
+	public void setWriteStats(int writeStats) {
+		this.writeStats = writeStats;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
 	public String getECSIP() {
 		return ECSIP;
 	}
@@ -91,6 +120,16 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	}
 	public void setTransferServer(Node transferServer) {
 		this.transferServer = transferServer;
+	}
+	@Override
+	public void setKey(String key) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -20,11 +20,11 @@ public class FailureDetector {
 		int i=0;
 		Node nodes[] = ECSServer.activeServers.getMetaData();
 		logger.info( "Active servers " + HashRing.toString(ECSServer.activeServers.getMetaData()));
-		startForwardPing(nodes[0]);
+		startForwardPing(nodes[0],0,0);
 		
 		}
 	
-	public static void startForwardPing(Node node) {
+	public static void startForwardPing(Node node, int readStats, int writeStats) {
 	
 		try {
 			String ipAddress = node.getIpAddress();
@@ -35,7 +35,8 @@ public class FailureDetector {
 			KVAdminMessage msg = new KVAdminMessageImpl();
 			msg.setCommand(Command.PING_FORWARD);
 			msg.setServer(node);
-			
+			msg.setReadStats(readStats);
+			msg.setWriteStats(writeStats);
 			KVAdminMessage recd = client.sendMessage(msg);
 			logger.info("Status from KV Server: " + recd.getCommand());
 			if(recd.getCommand()!=Command.PING_SUCCESS) {
