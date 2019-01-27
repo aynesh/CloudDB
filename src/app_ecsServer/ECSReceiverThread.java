@@ -1,12 +1,16 @@
 package app_ecsServer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 
 import org.apache.log4j.Logger;
 
@@ -79,8 +83,19 @@ import datastore.DataManager;
 		}
 	}
 	
-	private void writeToFile(int readStats, int writeStats) {
-		
+	private void writeToFile(int readStats, int writeStats) throws IOException {
+		String fileName = LocalDateTime.now()+".txt";
+        
+        FileWriter fileWriter;
+        File file = new File(fileName);
+        
+		fileWriter = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(readStats);
+	    bufferedWriter.write("\n");
+	    bufferedWriter.write(writeStats);
+	    bufferedWriter.close();
+	   
 	}
 
 }

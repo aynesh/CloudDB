@@ -66,6 +66,7 @@ public class ConsistentDataManager {
 		StatusType retType = DataManager.put(key, value, true, now);
 		int j = KVServer.writeConsistencyLevel-1;
 		int msgCount = 0;
+		i++;
 		
 		while(j>0) {
 			KVAdminMessage msg = writeToReplica(nodes[i], key, value, now);
@@ -122,6 +123,8 @@ public class ConsistentDataManager {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();
 			logger.info("Send consistency "+msg.getCommand()+" message to "+toNode.getName());
+			logger.info("Sending msg "+msg.toString());
+			
 			KVAdminMessageManager.sendKVAdminMessage(msg, out);
 			logger.info("Waiting for response message from "+toNode.getName());
 			inMsg = KVAdminMessageManager.receiveKVAdminMessage(in);
