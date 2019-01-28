@@ -107,7 +107,7 @@ public class ConsistentDataManager {
 		
 		int i=0;
 		for(;i<=KVServer.replicationFactor;i++) {
-			if(nodes[i].getName()==KVServer.nodeName)
+			if(nodes[i].getName().equals(KVServer.nodeName))
 				break;
 		}
 		i = i<KVServer.replicationFactor?i+1:0;
@@ -230,7 +230,7 @@ public class ConsistentDataManager {
 		logger.info("Adjusting consistency messages of "+key);
 		int i=0;
 		for(;i<=KVServer.replicationFactor;i++) {
-			if(nodes[i].getName()==KVServer.nodeName)
+			if(nodes[i].getName().equals(KVServer.nodeName))
 				break;
 		}
 		for(int j=0; j<KVServer.writeConsistencyLevel;j++)
