@@ -1,6 +1,7 @@
 package common.messages.impl;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import app.common.Node;
@@ -19,7 +20,36 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private Node transferServer;
 	private String ECSIP;
 	private int port;
+	private String value;
+	private LocalDateTime timestamp;
+	private int readStats;
+	private int writeStats;
+	private String key;
 	
+	public int getReadStats() {
+		return readStats;
+	}
+	public void setReadStats(int readStats) {
+		this.readStats = readStats;
+	}
+	public int getWriteStats() {
+		return writeStats;
+	}
+	public void setWriteStats(int writeStats) {
+		this.writeStats = writeStats;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
 	public String getECSIP() {
 		return ECSIP;
 	}
@@ -68,11 +98,16 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	public void setMetaData(Node[] metaData) {
 		this.metaData = metaData;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "KVAdminMessageImpl [command=" + command + ", numberOfNodes=" + numberOfNodes + ", cacheSize="
 				+ cacheSize + ", cacheType=" + cacheType + ", server=" + server + ", metaData="
-				+ Arrays.toString(metaData) + "]";
+				+ Arrays.toString(metaData) + ", transferStartKey=" + transferStartKey + ", transferEndKey="
+				+ transferEndKey + ", transferServer=" + transferServer + ", ECSIP=" + ECSIP + ", port=" + port
+				+ ", value=" + value + ", timestamp=" + timestamp + ", readStats=" + readStats + ", writeStats="
+				+ writeStats + "]";
 	}
 	public String getTransferStartKey() {
 		return transferStartKey;
@@ -91,6 +126,14 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	}
 	public void setTransferServer(Node transferServer) {
 		this.transferServer = transferServer;
+	}
+	@Override
+	public void setKey(String key) {
+		this.key = key;
+	}
+	@Override
+	public String getKey() {
+		return key;
 	}
 
 

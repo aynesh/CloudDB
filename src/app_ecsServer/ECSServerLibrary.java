@@ -58,9 +58,9 @@ public class ECSServerLibrary {
 			String command;
 
 			command = "java -jar " + location + " " + nodeIdentifier + " " + port + " " + adminPort + " " + cacheSize
-					+ " " + cacheStrategy + " " + storagePath+" "+replicationFactor;
+					+ " " + cacheStrategy + " " + storagePath+" "+replicationFactor+" "+readValue("read_consistency.config")+" "+readValue("write_consistency.config");
 
-			logger.info( command);
+			logger.info("Command is:"+ command);
 
 			Channel channel = session.openChannel("exec");
 			((ChannelExec) channel).setCommand(command);
@@ -76,7 +76,7 @@ public class ECSServerLibrary {
 					int i = in.read(tmp, 0, 1024);
 					if (i < 0)
 						break;
-					logger.info( new String(tmp, 0, i));
+					logger.info("From exec stream"+ new String(tmp, 0, i));
 				}
 				if (channel.isClosed()) {
 					if (in.available() > 0)
@@ -124,6 +124,28 @@ public class ECSServerLibrary {
 		return serverConfig;
 	}
 
+	public static String readValue(String filename) {
+
+		FileReader fileReader;
+		int value = 2;
+		String readLine = null;
+		try {
+			fileReader = new FileReader(filename);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			 readLine = bufferedReader.readLine();
+			
+//			value = Integer.parseInt(readLine);
+
+			bufferedReader.close();
+
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return readLine;
+	}
+	
 	public static KVAdminMessage sendMessage(KVAdminMessage msg, String ipAddress, int port) {
 		try {
 			logger.info( "Sending admin message: " + ipAddress + ":" + port);

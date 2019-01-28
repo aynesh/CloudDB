@@ -1,12 +1,16 @@
 package app_ecsServer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 
 import org.apache.log4j.Logger;
 
@@ -60,10 +64,11 @@ import datastore.DataManager;
 					case PING_FAILURE:
 						Node nextNode = ECSServer.activeServers.getNextNode(inpMsg.getServer());
 						FailureDetector.fixAndReplaceFailedNode(inpMsg.getServer());
-						FailureDetector.startForwardPing(nextNode);
+						FailureDetector.startForwardPing(nextNode, inpMsg.getReadStats(), inpMsg.getWriteStats());
 						break;	
 					case PING_SUCCESS:
 						logger.info(inpMsg.getServer().getName()+" is Alive - circle completed!");
+						writeToFile(inpMsg.getReadStats(),inpMsg.getWriteStats());
 						break;
 					default:
 						
@@ -76,6 +81,22 @@ import datastore.DataManager;
 				return;
 			}
 		}
+	}
+	
+	private void writeToFile(int readStats, int writeStats) throws IOException {
+		String fileName = "stats.txt";
+        
+        FileWriter fileWriter;
+        File file = new File(fileName);
+        
+		fileWriter = new FileWriter(fileName, true);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(Integer.toString(readStats));
+	    bufferedWriter.write("\t");
+	    bufferedWriter.write(Integer.toString(writeStats));
+	    bufferedWriter.write("\n");
+	    bufferedWriter.close();
+	   
 	}
 
 }

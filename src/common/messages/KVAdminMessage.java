@@ -1,5 +1,6 @@
 package common.messages;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import app.common.Node;
@@ -37,7 +38,7 @@ public interface KVAdminMessage {
         REPLICATE,
         REPLICATE_SUCCESS,
         DELETE_REPLICATED_FILES,
-        DELETE_REPLICATED_FILES_SUCCESS,
+        DELETE_REPLICATED_FILES_SUCCESS, GET, PUT, GET_SUCCESS, SERVER_NOT_RESPONSIBLE, PUT_SUCCESS,
     }
     
     public int getNumberOfNodes();
@@ -48,8 +49,10 @@ public interface KVAdminMessage {
     
     public Node getTransferServer();
     
-   
-    
+    public String getValue();
+    public void setValue(String s);
+    public void setTimestamp(LocalDateTime t);
+    public LocalDateTime getTimestamp();
     public Command getCommand();
     public void setCommand(Command cmd);
     
@@ -76,4 +79,17 @@ public interface KVAdminMessage {
 	public String getTransferEndKey() ;
 	public void setTransferEndKey(String transferEndKey);
 	public void setTransferServer(Node transferServer);
+
+	public void setKey(String key);
+
+	public String getKey();
+
+	public int getReadStats();
+
+	public int getWriteStats();
+
+	public void setReadStats(int readStats);
+
+	public void setWriteStats(int writeStats);
+
 }

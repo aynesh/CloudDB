@@ -3,6 +3,7 @@ package app_kvServer;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,6 +27,7 @@ import common.messages.KVAdminMessageManager;
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;
 import common.messages.impl.KVAdminMessageImpl;
+import datastore.ConsistentDataManager;
 import datastore.DataManager;
 
 public class KVServerAdminThread extends Thread {
@@ -184,7 +186,7 @@ public class KVServerAdminThread extends Thread {
 			while (true) {
 				try {
 					KVAdminMessage inpMsg = KVAdminMessageManager.receiveKVAdminMessage(inp);
-					KVAdminMessageImpl outMsg = new KVAdminMessageImpl();
+					KVAdminMessage outMsg = new KVAdminMessageImpl();
 					logger.debug("Received Admin Command: "+inpMsg.toString());
 					switch (inpMsg.getCommand()) {
 					case PING_FORWARD:
@@ -283,6 +285,45 @@ public class KVServerAdminThread extends Thread {
 						KVServer.metaData.clearAndSetMetaData(inpMsg.getMetaData());
 						outMsg.setCommand(Command.META_DATA_UPDATE_SUCCESS);
 						break;
+						
+					case GET:
+						try {
+								String responseValue = DataManager.get(inpMsg.getKey());
+								outMsg.setValue(responseValue);
+								outMsg.setCommand(Command.GET_SUCCESS);
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
+								outMsg.setTimestamp(DataManager.getTimeStamp(inpMsg.getKey()));
+							
+						} catch (Exception e) {
+							logger.warn("GET_ERROR_WARN", e);
+							logger.info("GET_ERROR: "+e.getClass()+" "+e.getMessage());
+							outMsg.setMetaData(KVServer.metaData.getMetaData());
+							outMsg.setValue(e.getMessage());
+							
+						}
+						break;
+					
+					case PUT:
+						try {
+							if(KVServer.writeLock) {
+								outMsg.setCommand(Command.SERVER_WRITE_LOCK); 
+							} else {
+								StatusType operationStatus = DataManager.put(inpMsg.getKey(), inpMsg.getValue(), true, inpMsg.getTimestamp());
+								outMsg.setCommand(Command.PUT_SUCCESS);
+								outMsg.setValue(inpMsg.getValue());
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
+								//queueReplication(inpMsg,operationStatus);
+								outMsg.setMetaData(KVServer.metaData.getMetaData());
+								
+							}
+
+						} catch (Exception e) {
+							logger.info("PUT_ERROR"+e.getClass()+" "+e.getMessage());
+							outMsg.setMetaData(KVServer.metaData.getMetaData());
+							outMsg.setValue(e.getMessage());
+							outMsg.setCommand(Command.SERVER_NOT_RESPONSIBLE);
+						}
+						break;
 					default:
 						break;
 					}
@@ -295,14 +336,19 @@ public class KVServerAdminThread extends Thread {
 					if(inpMsg.getCommand()==Command.PING_FORWARD) {
 						logger.info("next->node "+KVServer.metaData.getNextNode(inpMsg.getServer()).getName()+" first node-> "+KVServer.metaData.getMetaData()[0].getName());
 						Node nextNode = KVServer.metaData.getNextNode(inpMsg.getServer());
+						int rs = inpMsg.getReadStats()+KVServer.readStats;
+						int ws = inpMsg.getWriteStats()+KVServer.writeStats;
+						KVServer.readStats=0;
+						KVServer.writeStats=0;
 						if(nextNode.getName()==KVServer.metaData.getMetaData()[0].getName())
 						{
-							sendToECS(inpMsg.getServer(),Command.PING_SUCCESS);
+							sendToECS(inpMsg.getServer(),Command.PING_SUCCESS,rs,ws);
 						}
 						else {
-							if(!pingForward(nextNode)) {
+							
+							if(!pingForward(nextNode, rs, ws)) {
 								logger.info(nextNode.getName()+" is down!");
-								reportFailure(nextNode);
+								reportFailure(nextNode,rs,ws);
 							}
 						}
 							
@@ -314,7 +360,7 @@ public class KVServerAdminThread extends Thread {
 
 		}
 
-	private boolean pingForward(Node toNode) {
+	private boolean pingForward(Node toNode, int readStats, int writeStats) {
 		String ip = toNode.getIpAddress();
 		int port = Integer.parseInt(toNode.getAdminPort());
 		Socket sock;
@@ -329,6 +375,8 @@ public class KVServerAdminThread extends Thread {
 		
 		KVAdminMessage outMsg = new KVAdminMessageImpl();
 		outMsg.setCommand(Command.PING_FORWARD);
+		outMsg.setReadStats(readStats);
+		outMsg.setWriteStats(writeStats);
 		outMsg.setServer(toNode);
 		
 		try {
@@ -345,8 +393,7 @@ public class KVServerAdminThread extends Thread {
 				return true;
 			}
 		} catch (IOException|ClassNotFoundException e) {
-		
-			
+					
 		}
 		
 		return false;
@@ -354,11 +401,11 @@ public class KVServerAdminThread extends Thread {
 	}
 	
 	
-	private void reportFailure(Node toNode) {
-		sendToECS(toNode, Command.PING_FAILURE);
+	private void reportFailure(Node toNode, int rs, int ws) {
+		sendToECS(toNode, Command.PING_FAILURE,rs,ws);
 	}
 	
-	private void sendToECS(Node toNode, Command cmd) {
+	private void sendToECS(Node toNode, Command cmd, int rs, int ws) {
 		String ip = KVServer.ECSIP;
 		int port = KVServer.ECSPort;
 		Socket sock;
@@ -376,6 +423,8 @@ public class KVServerAdminThread extends Thread {
 		KVAdminMessage outMsg = new KVAdminMessageImpl();
 		outMsg.setCommand(cmd);
 		outMsg.setServer(toNode);
+		outMsg.setReadStats(rs);
+		outMsg.setWriteStats(ws);
 		try {
 			InputStream in = sock.getInputStream();
 			OutputStream out = sock.getOutputStream();

@@ -201,7 +201,7 @@ public class HashRing {
 	/**
 	 * @param node The node for which previous nodes to be found.
 	 * @return
-	 */
+	 **/
 	public Node[] getNextNodes(Node node, int size) {
 		if(size>=map.size()) {
 			return null;
@@ -214,11 +214,30 @@ public class HashRing {
 		}
 		return nextNodes; 
 	}
+	
+	
+	
+	public Node[] getNodesOfKey(String key) throws NoSuchAlgorithmException {
+		
+		int size = KVServer.replicationFactor+1;
+		
+		if(size>=map.size()) {
+			return null;
+		}
+		Node[] nextNodes= new Node[size];
+		
+		Node nextNode = getNode(key);
+		for(int i=0;i<size;i++) {
+			nextNodes[i] = nextNode;
+			nextNode = this.getNextNode(nextNode);
+		}
+		return nextNodes; 
+	}
 		
 	
 	/**
 	 * @param key 
-	 * @return The node reponible for the given the key.|
+	 * @return The node responsible for the given the key.|
 	 * @throws NoSuchAlgorithmException
 	 */
 	/**
