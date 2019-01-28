@@ -1,5 +1,6 @@
 package app_kvServer;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -38,12 +39,18 @@ public class KVServerReplicationScheduler extends Thread {
 	public synchronized void run() {
 		logger.info("Started Replication Schedule: "+LocalDateTime.now());
 		logger.info("Staring. Items in Queue "+ KVServer.queue.size());
-		Node[] nextNodes = KVServer.metaData.getNextNodes(KVServer.metaData.getNodeObject(this.nodeName), KVServer.replicationFactor);
+		
 		ArrayList<KVMessage> keysToRemove = new ArrayList<KVMessage>();
 
 		for (KVMessage kvMessage : KVServer.queue) {
-
-			for (int i = 0; i < KVServer.replicationFactor; i++) {
+			Node[] nextNodes;
+			try {
+				nextNodes = KVServer.metaData.getNodesOfKey(kvMessage.getKey());
+			} catch (NoSuchAlgorithmException e) {
+				logger.info("Cannot continue replication nexNodes not found");;
+				break;
+			}
+			for (int i = 0; i < nextNodes.length; i++) {
 				try {
 					if (!nextNodes[i].getName().equals(nodeName)) {
 						this.transferData(nextNodes[i], kvMessage);

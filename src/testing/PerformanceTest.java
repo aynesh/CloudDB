@@ -63,11 +63,14 @@ public class PerformanceTest extends TestCase {
 	        		KVStore kvStore = new KVStore(targetNode.getIpAddress(), Integer.parseInt(targetNode.getPort()));
 	        		kvStore.connect();
 	        		
-	        		Instant start = Instant.now();
+	        		Instant start;
+	        		Instant end;
+	        		Duration timeElapsed;
+	        		start = Instant.now();
 	        		//KVMessage responsePut = kvStore.put(currentFile.getName(),"TEST_STRING");
 	        		KVMessage responsePut = kvStore.put(currentFile.getName(), new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8));
-	        		Instant end = Instant.now();
-	        		Duration timeElapsed = Duration.between(start, end);
+	        		end = Instant.now();
+	        		timeElapsed = Duration.between(start, end);
 	        		totalPutTime+=timeElapsed.toMillis();
 					totalPutCount++;
 	        		
@@ -79,10 +82,11 @@ public class PerformanceTest extends TestCase {
 	        		totalGetCount++;
 	        		
 	        		kvStore.disconnect();
-	        	    
+//	        	    
 	        		map.putIfAbsent(responsePut.getStatus().name(), new AtomicLong(0));
-	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
 	        	    map.get(responsePut.getStatus().name()).incrementAndGet();
+//	        	    
+	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
 	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
 	        	}
 	        } 
@@ -102,12 +106,12 @@ public class PerformanceTest extends TestCase {
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig("ecs.config");
 		int numberOfServers=5;
-		String command="initService "+numberOfServers+" 10 LFU 3";
+		String command="initService "+numberOfServers+" 10 LFU 2";
 		ecsServer.initService(command.split(" "));
 		Thread.sleep(5000);
 		ecsServer.start();
 		Thread.sleep(5000);
-		int noOfClients = 25;
+		int noOfClients = 1;
 		SimulatedClient[] simulatedClients = new SimulatedClient[noOfClients];
 		
 		int i=0;
@@ -128,7 +132,7 @@ public class PerformanceTest extends TestCase {
 		for(i=0; i<noOfClients; i++) {
 			simulatedClients[i].join();
 		}
-		Thread.sleep(70000);
+		//Thread.sleep(70000);
 		
 		ecsServer.shutdown("ecs.config");
 		System.out.println("Reached here.... ");

@@ -68,9 +68,9 @@ public class KVServer {
     	
     	this.nodeName = nodeName;
     	
-    	KVServer.readConsistencyLevel = readConsistencyLevel;
+    	KVServer.readConsistencyLevel = readConsistencyLevel > repFactor + 1 ? repFactor + 1 : readConsistencyLevel;
     	
-    	KVServer.writeConsistencyLevel = writeConsistencyLevel;
+    	KVServer.writeConsistencyLevel = writeConsistencyLevel > repFactor + 1 ? repFactor + 1 : writeConsistencyLevel;
     	
     	KVServer.storagePath = path;
     	
@@ -91,8 +91,11 @@ public class KVServer {
             e.printStackTrace();
 
         }
-        //scheduler = Executors.newScheduledThreadPool(1);
-        //scheduler.scheduleAtFixedRate(new KVServerReplicationScheduler(nodeName), 1, 1, TimeUnit.MINUTES);
+        if(replicationFactor > 0) {
+            scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.scheduleAtFixedRate(new KVServerReplicationScheduler(nodeName), 1, 1, TimeUnit.MINUTES);        	
+        }
+
         
         while (true) {
             try {
@@ -104,12 +107,13 @@ public class KVServer {
             new KVServerThread(socket, nodeName).start();
         }
     }
-    
 
 	public static void main(String[] args) throws IOException
 	{
         MDC.put("process_id", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
-		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5], Integer.parseInt(args[6]),Integer.parseInt(args[7]),Integer.parseInt(args[8])); 
+
+		new KVServer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]),  Integer.parseInt(args[3]), args[4], args[5], Integer.parseInt(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8])); 
+
 	}
     
     
