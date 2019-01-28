@@ -29,7 +29,7 @@ public class ECSServerCommunicatorTest
 			{
 //				KVServer(String nodeName, int port, int adminPort, int cacheSize, String strategy, String path);
 				String path = "D:\\TUM\\3rd Semester\\3. Lab Course - Cloud DB [IN0012, IN2106, IN4163]\\LatestVersion\\gr6\\path";
-				KVServer newServer = new KVServer("newNode", 50001, 30000, 3, "FIFO", path, 0);
+				KVServer newServer = new KVServer("newNode", 50001, 30000, 3, "FIFO", path, 0,1,1);
 			}
 		}).start();
 
