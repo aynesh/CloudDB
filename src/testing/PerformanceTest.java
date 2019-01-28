@@ -63,27 +63,31 @@ public class PerformanceTest extends TestCase {
 	        		KVStore kvStore = new KVStore(targetNode.getIpAddress(), Integer.parseInt(targetNode.getPort()));
 	        		kvStore.connect();
 	        		
-	        		Instant start = Instant.now();
+	        		Instant start;
+	        		Instant end;
+	        		Duration timeElapsed;
+	        		start = Instant.now();
 	        		//KVMessage responsePut = kvStore.put(currentFile.getName(),"TEST_STRING");
 	        		KVMessage responsePut = kvStore.put(currentFile.getName(), new String(Files.readAllBytes(Paths.get(currentFile.getAbsolutePath())), StandardCharsets.UTF_8));
-	        		Instant end = Instant.now();
-	        		Duration timeElapsed = Duration.between(start, end);
+	        		end = Instant.now();
+	        		timeElapsed = Duration.between(start, end);
 	        		totalPutTime+=timeElapsed.toMillis();
 					totalPutCount++;
 	        		
-					start = Instant.now();
-					KVMessage responseGet =  kvStore.get(currentFile.getName());
-	        		end = Instant.now();
-	        		timeElapsed = Duration.between(start, end);
-	        		totalGetTime+=timeElapsed.toMillis();
-	        		totalGetCount++;
+//					start = Instant.now();
+//					KVMessage responseGet =  kvStore.get(currentFile.getName());
+//	        		end = Instant.now();
+//	        		timeElapsed = Duration.between(start, end);
+//	        		totalGetTime+=timeElapsed.toMillis();
+//	        		totalGetCount++;
 	        		
 	        		kvStore.disconnect();
-	        	    
+//	        	    
 	        		map.putIfAbsent(responsePut.getStatus().name(), new AtomicLong(0));
-	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
 	        	    map.get(responsePut.getStatus().name()).incrementAndGet();
-	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
+//	        	    
+//	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
+//	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
 	        	}
 	        } 
 	        catch (Exception e) 
