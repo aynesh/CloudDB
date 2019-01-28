@@ -74,20 +74,20 @@ public class PerformanceTest extends TestCase {
 	        		totalPutTime+=timeElapsed.toMillis();
 					totalPutCount++;
 	        		
-//					start = Instant.now();
-//					KVMessage responseGet =  kvStore.get(currentFile.getName());
-//	        		end = Instant.now();
-//	        		timeElapsed = Duration.between(start, end);
-//	        		totalGetTime+=timeElapsed.toMillis();
-//	        		totalGetCount++;
+					start = Instant.now();
+					KVMessage responseGet =  kvStore.get(currentFile.getName());
+	        		end = Instant.now();
+	        		timeElapsed = Duration.between(start, end);
+	        		totalGetTime+=timeElapsed.toMillis();
+	        		totalGetCount++;
 	        		
 	        		kvStore.disconnect();
 //	        	    
 	        		map.putIfAbsent(responsePut.getStatus().name(), new AtomicLong(0));
 	        	    map.get(responsePut.getStatus().name()).incrementAndGet();
 //	        	    
-//	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
-//	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
+	        		map.putIfAbsent(responseGet.getStatus().name(), new AtomicLong(0));
+	        	    map.get(responseGet.getStatus().name()).incrementAndGet();
 	        	}
 	        } 
 	        catch (Exception e) 
@@ -106,12 +106,12 @@ public class PerformanceTest extends TestCase {
 		ecsServer.initializeActiveServers();
 		ecsServer.initializeServerConfig("ecs.config");
 		int numberOfServers=5;
-		String command="initService "+numberOfServers+" 10 LFU 3";
+		String command="initService "+numberOfServers+" 10 LFU 2";
 		ecsServer.initService(command.split(" "));
 		Thread.sleep(5000);
 		ecsServer.start();
 		Thread.sleep(5000);
-		int noOfClients = 25;
+		int noOfClients = 1;
 		SimulatedClient[] simulatedClients = new SimulatedClient[noOfClients];
 		
 		int i=0;

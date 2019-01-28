@@ -68,9 +68,9 @@ public class KVServer {
     	
     	this.nodeName = nodeName;
     	
-    	KVServer.readConsistencyLevel = readConsistencyLevel;
+    	KVServer.readConsistencyLevel = readConsistencyLevel > repFactor + 1 ? repFactor + 1 : readConsistencyLevel;
     	
-    	KVServer.writeConsistencyLevel = writeConsistencyLevel;
+    	KVServer.writeConsistencyLevel = writeConsistencyLevel > repFactor + 1 ? repFactor + 1 : writeConsistencyLevel;
     	
     	KVServer.storagePath = path;
     	
