@@ -1,8 +1,11 @@
 package app_ecsServer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.UnknownHostException;
@@ -467,6 +470,33 @@ public class ECSServerLibrary {
 	 */
 	public static void notifySingleServer(KVAdminMessage msg, Node node) {
 		ECSServerLibrary.sendMessage(msg, node.getIpAddress(), Integer.parseInt(node.getAdminPort()));
+	}
+
+	public static void updateConsistency(int readStats, int writeStats) throws IOException {
+		KVAdminMessage msg = new KVAdminMessageImpl();
+		msg.setCommand(Command.CHANGE_CONSISTENCY_LEVELS);
+		int total = readStats+writeStats;
+		int totalReplicas = ECSServer.replicationFactor+1;
+		int wcl = (readStats*totalReplicas)/total;
+		wcl = wcl>0?wcl:1;
+		int rcl = totalReplicas + 1 - wcl;
+		msg.setReadConsistencyLevel(rcl);
+		msg.setWriteConsistencyLevel(wcl);
+		notifyAllServers(msg,ECSServer.activeServers);
+		writeToFile("read_consistency.config",rcl);
+		writeToFile("write_consistency.config",wcl);
+	}
+	
+	private static void writeToFile(String fileName, int value) throws IOException {
+		
+        FileWriter fileWriter;
+        File file = new File(fileName);
+        
+		fileWriter = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(Integer.toString(value));
+	    bufferedWriter.close();
+	   
 	}
 
 }

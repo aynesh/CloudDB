@@ -38,7 +38,7 @@ public interface KVAdminMessage {
         REPLICATE,
         REPLICATE_SUCCESS,
         DELETE_REPLICATED_FILES,
-        DELETE_REPLICATED_FILES_SUCCESS, GET, PUT, GET_SUCCESS, SERVER_NOT_RESPONSIBLE, PUT_SUCCESS,
+        DELETE_REPLICATED_FILES_SUCCESS, GET, PUT, GET_SUCCESS, SERVER_NOT_RESPONSIBLE, PUT_SUCCESS, CHANGE_CONSISTENCY_LEVELS,
     }
     
     public int getNumberOfNodes();
@@ -91,5 +91,13 @@ public interface KVAdminMessage {
 	public void setReadStats(int readStats);
 
 	public void setWriteStats(int writeStats);
+
+	public void setReadConsistencyLevel(int rcl);
+
+	public void setWriteConsistencyLevel(int wcl);
+
+	public int getReadConsistencyLevel();
+
+	public int getWriteConsistencyLevel();
 
 }

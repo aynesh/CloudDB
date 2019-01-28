@@ -25,7 +25,21 @@ public class KVAdminMessageImpl implements KVAdminMessage, Serializable {
 	private int readStats;
 	private int writeStats;
 	private String key;
+	private int readConsistencyLevel;
+	private int writeConsistencyLevel;
 	
+	public int getReadConsistencyLevel() {
+		return readConsistencyLevel;
+	}
+	public void setReadConsistencyLevel(int readConsistencyLevel) {
+		this.readConsistencyLevel = readConsistencyLevel;
+	}
+	public int getWriteConsistencyLevel() {
+		return writeConsistencyLevel;
+	}
+	public void setWriteConsistencyLevel(int writeConsistencyLevel) {
+		this.writeConsistencyLevel = writeConsistencyLevel;
+	}
 	public int getReadStats() {
 		return readStats;
 	}
