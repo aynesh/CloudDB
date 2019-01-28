@@ -91,8 +91,11 @@ public class KVServer {
             e.printStackTrace();
 
         }
-        //scheduler = Executors.newScheduledThreadPool(1);
-        //scheduler.scheduleAtFixedRate(new KVServerReplicationScheduler(nodeName), 1, 1, TimeUnit.MINUTES);
+        if(replicationFactor > 0) {
+            scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.scheduleAtFixedRate(new KVServerReplicationScheduler(nodeName), 1, 1, TimeUnit.MINUTES);        	
+        }
+
         
         while (true) {
             try {

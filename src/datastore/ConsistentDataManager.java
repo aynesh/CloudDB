@@ -5,22 +5,62 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 import org.apache.log4j.Logger;
 
 import app.common.Node;
 import app_kvServer.KVServer;
+import client.KVStore;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessageManager;
 import common.messages.KVMessage;
 import common.messages.KVMessage.StatusType;
 import common.messages.KVAdminMessage.Command;
 import common.messages.impl.KVAdminMessageImpl;
+import common.messages.impl.KVMessageImpl;
 
 public class ConsistentDataManager {
 
 	static Logger logger = Logger.getLogger(ConsistentDataManager.class);
+	
+	
+	
+	public static void delete(String key) throws Exception {
+		Node[] nodes = KVServer.metaData.getNodesOfKey(key);
+		int i=0,msgCount=0;
+		for(;i<=KVServer.replicationFactor;i++ ) {
+			if(nodes[i].getName().equals(KVServer.nodeName))
+				break;
+		}
+		
+		DataManager.delete(key);
+		
+		int j = KVServer.writeConsistencyLevel-1;
+		
+		KVMessage kvMessage = new KVMessageImpl();
+		kvMessage.setStatus(StatusType.DELETE_REPLICA_COPY);
+		kvMessage.setKey(key);
+		kvMessage.setTimestamp(LocalDateTime.now());
+		
+		while(j>0) {
+			Node targetNode = nodes[i];
+			
+			KVStore kvStore= new KVStore(targetNode.getIpAddress(), Integer.parseInt(targetNode.getPort()));
+			kvStore.connect();
+			KVMessage response = kvStore.replicate(kvMessage);
+			kvStore.disconnect();
+			
+			i = i<KVServer.replicationFactor?i+1:0;
+			msgCount++;
+			
+			if(response.getStatus() !=StatusType.DELETE_REPLICA_COPY_SUCCESS && msgCount<=KVServer.replicationFactor)
+				continue;
+			j--;
+		} 		
+		
+	}
 	
 	public static String get(String key) throws Exception {
 		

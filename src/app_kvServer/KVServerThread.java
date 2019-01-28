@@ -92,11 +92,14 @@ public class KVServerThread extends Thread {
 					switch (inpMsg.getStatus()) {
 					case DELETE:
 						try {
-							if (this.checkIfServerResponsible(inpMsg.getKey())) {
-								DataManager.delete(inpMsg.getKey());
+							if (this.checkIfServerResponsible(inpMsg.getKey()) || this.checkIfReplica(inpMsg.getKey())) {
+								ConsistentDataManager.delete(inpMsg.getKey());
 								outMsg.setStatus(StatusType.DELETE_SUCCESS);
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
-								queueReplication(inpMsg,StatusType.DELETE_SUCCESS);
+								if(KVServer.replicationFactor > 0) {
+									queueReplication(inpMsg,StatusType.DELETE_SUCCESS);
+								}
+								
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);
@@ -146,7 +149,10 @@ public class KVServerThread extends Thread {
 								outMsg.setStatus(operationStatus);
 								outMsg.setValue(inpMsg.getValue());
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
-								queueReplication(inpMsg,operationStatus);
+								if(KVServer.replicationFactor > 0) {
+									queueReplication(inpMsg,operationStatus);
+								}
+								
 							} else {
 								outMsg.setMetaData(KVServer.metaData.getMetaData());
 								outMsg.setStatus(StatusType.SERVER_NOT_RESPONSIBLE);

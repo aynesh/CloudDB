@@ -128,7 +128,7 @@ public class PerformanceTest extends TestCase {
 		for(i=0; i<noOfClients; i++) {
 			simulatedClients[i].join();
 		}
-		Thread.sleep(70000);
+		//Thread.sleep(70000);
 		
 		ecsServer.shutdown("ecs.config");
 		System.out.println("Reached here.... ");
