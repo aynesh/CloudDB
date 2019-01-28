@@ -144,7 +144,7 @@ public class KVServerThread extends Thread {
 						try {
 							if(KVServer.writeLock) {
 								outMsg.setStatus(StatusType.SERVER_WRITE_LOCK);
-							} else if (this.checkIfServerResponsible(inpMsg.getKey())) {
+							} else if (this.checkIfServerResponsible(inpMsg.getKey()) || this.checkIfReplica(inpMsg.getKey())) {
 								StatusType operationStatus = ConsistentDataManager.put(inpMsg.getKey(), inpMsg.getValue());
 								outMsg.setStatus(operationStatus);
 								outMsg.setValue(inpMsg.getValue());
