@@ -1,5 +1,8 @@
 package datastore;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,6 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -99,18 +103,57 @@ public class ConsistentDataManager {
 		return value;
 	}
 	
+	public static boolean isLastUpdate(String key) throws Exception {
+		
+		
+		Node[] nodes = KVServer.metaData.getNodesOfKey(key);		
+		int i=0;
+		
+		for(;i<=KVServer.replicationFactor;i++) {
+			if(nodes[i].getName().equals(KVServer.nodeName))
+				break;
+		}
+		for(Node node: nodes) {
+		logger.info(node.toString());
+		}
+		String value = DataManager.get(key);
+		LocalDateTime latest = DataManager.getTimeStamp(key);
+		LocalDateTime myLatest = DataManager.getTimeStamp(key);
+		i++;
+		logger.info(KVServer.nodeName+"  "+Integer.toString(i));
+		int j = KVServer.readConsistencyLevel-1;
+		
+		while(j>0) {
+			KVAdminMessage msg = readReplica(nodes[i], key);
+			
+			if(msg.getCommand()==Command.GET_SUCCESS) {
+			
+			if(msg.getTimestamp().isAfter(latest)) {
+				value = msg.getValue();
+				latest = msg.getTimestamp();
+				}
+			}
+			
+			i = i<KVServer.replicationFactor?i+1:0;
+			j--;
+		}
+			
+		return myLatest.isBefore(latest)?false:true;
+	}
+	
 	public static StatusType put(String key, String value) throws Exception {
 		
 		Node[] nodes = KVServer.metaData.getNodesOfKey(key);	
 		
 		int i=0;
 		for(;i<=KVServer.replicationFactor;i++) {
-			if(nodes[i].getName()==KVServer.nodeName)
+			if(nodes[i].getName().equals(KVServer.nodeName))
 				break;
 		}
 		i = i<KVServer.replicationFactor?i+1:0;
 		LocalDateTime now=LocalDateTime.now();
 		StatusType retType = DataManager.put(key, value, true, now);
+		storeAuthor(key,now);
 		int j = KVServer.writeConsistencyLevel-1;
 		int msgCount = 0;
 		i++;
@@ -125,11 +168,47 @@ public class ConsistentDataManager {
 			j--;
 		} 		
 		
-		
 		return retType;
 	}
 
 	
+	private static void storeAuthor(String key, LocalDateTime now) throws IOException {
+	
+		String directoryName = KVServer.storagePath.concat("owner/");
+	    
+	    File directory = new File(directoryName);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	        
+	    }
+
+		String fileName = directoryName+""+key+"";
+        
+        FileWriter fileWriter;
+		fileWriter = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	    bufferedWriter.write(now.toString());
+	    bufferedWriter.close();
+	    
+		
+	}
+	
+	public static ArrayList<String> getAuthoredKeys() {
+		File folder = new File(KVServer.storagePath.concat("owner/"));
+		File[] listOfFiles = folder.listFiles();
+		
+		ArrayList<String> list = new ArrayList<String>();
+		if(!folder.exists())
+			return list;
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        list.add(file.getName());
+		    }
+		}
+		
+		return list;
+	}
+
 	private static KVAdminMessage readReplica(Node toNode, String key) {
 				
 		KVAdminMessage outMsg = new KVAdminMessageImpl();	
@@ -184,5 +263,38 @@ public class ConsistentDataManager {
 			return null;
 		}
 	}
+
+	public static void addKeyToNodes(int newReadLevel, String key) throws IOException, Exception {
+		
+		Node[] nodes = KVServer.metaData.getNodesOfKey(key);	
+		logger.info("Adjusting consistency messages of "+key);
+		int i=0;
+		for(;i<=KVServer.replicationFactor;i++) {
+			if(nodes[i].getName().equals(KVServer.nodeName))
+				break;
+		}
+		for(int j=0; j<KVServer.writeConsistencyLevel;j++)
+			i = i<KVServer.replicationFactor?i+1:0;
+		
+		
+		int j = KVServer.readConsistencyLevel-newReadLevel;
+		int msgCount = 0;
+		
+		while(j>0) {
+			logger.info("Sending consistency adjust messages to"+nodes[i].getName());
+			KVAdminMessage msg = writeToReplica(nodes[i], key, DataManager.get(key), DataManager.getTimeStamp(key));
+			i = i<KVServer.replicationFactor?i+1:0;
+			msgCount++;
+			
+			if(msg.getCommand()!=Command.PUT_SUCCESS && msgCount<KVServer.replicationFactor)
+				continue;
+			j--;
+		} 		
+		
+		
+		
+	}
+	
+	
 
 }

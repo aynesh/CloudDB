@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 
 import app.common.HashRing;
 import app.common.Node;
+import app_ecsServer.ECSServerLibrary;
 import client.KVStore;
 import common.messages.KVAdminMessage;
 import common.messages.KVAdminMessage.Command;
@@ -324,6 +325,20 @@ public class KVServerAdminThread extends Thread {
 							outMsg.setCommand(Command.SERVER_NOT_RESPONSIBLE);
 						}
 						break;
+						
+					case CHANGE_CONSISTENCY_LEVELS:
+						if(KVServer.readConsistencyLevel> inpMsg.getReadConsistencyLevel()) {
+							
+						upgradeConsistency(inpMsg.getReadConsistencyLevel());
+						}
+								
+						KVServer.readConsistencyLevel = inpMsg.getReadConsistencyLevel();
+						KVServer.writeConsistencyLevel = inpMsg.getWriteConsistencyLevel();
+						logger.info(KVServer.nodeName+"'s new consistency values"+KVServer.readConsistencyLevel+" "+KVServer.writeConsistencyLevel);
+						
+						outMsg.setCommand(Command.CHANGE_CONSISTENCY_LEVELS);
+
+						break;
 					default:
 						break;
 					}
@@ -359,6 +374,23 @@ public class KVServerAdminThread extends Thread {
 			}
 
 		}
+
+	private void upgradeConsistency(int newReadLevel) {
+		ArrayList<String> list = ConsistentDataManager.getAuthoredKeys();
+		logger.info("Upgrading consistency for"+KVServer.nodeName);
+		for(String key : list) {
+			try {
+				if(ConsistentDataManager.isLastUpdate(key)) {
+					logger.info("Key "+key+" was last updated by "+KVServer.nodeName);
+					ConsistentDataManager.addKeyToNodes(newReadLevel,key);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 	private boolean pingForward(Node toNode, int readStats, int writeStats) {
 		String ip = toNode.getIpAddress();

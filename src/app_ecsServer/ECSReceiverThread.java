@@ -69,6 +69,7 @@ import datastore.DataManager;
 					case PING_SUCCESS:
 						logger.info(inpMsg.getServer().getName()+" is Alive - circle completed!");
 						writeToFile(inpMsg.getReadStats(),inpMsg.getWriteStats());
+						ECSServerLibrary.updateConsistency(inpMsg.getReadStats(),inpMsg.getWriteStats());
 						break;
 					default:
 						
