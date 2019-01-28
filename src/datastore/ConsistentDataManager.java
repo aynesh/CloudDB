@@ -158,6 +158,8 @@ public class ConsistentDataManager {
 		File[] listOfFiles = folder.listFiles();
 		
 		ArrayList<String> list = new ArrayList<String>();
+		if(!folder.exists())
+			return list;
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
 		        list.add(file.getName());
